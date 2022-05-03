@@ -23,6 +23,9 @@ if(file_exists('views/'.$lien.'.php')){
 
 }elseif(file_exists('views/auth/'.$lien.'.php')){
     require_once 'views/auth/'.$lien.'.php';
+
+}elseif(file_exists('views/article/'.$lien.'.php')){
+    require_once 'views/article/'.$lien.'.php';
 }
 else{
     header('location:'.$domaine.'/error');

@@ -27,11 +27,11 @@ $_SESSION['myformkey'] = $token;
                                 <input class="input100 border-start-0 form-control ms-0" type="email" name="email" placeholder="Email" required>
                                 <input type="hidden" class="form-control" name="formkey" value="<?=$token?>">
                             </div>
-                            <div class="wrap-input100 validate-input input-group" id="Password-toggle">
+                            <div class="wrap-input100 validate-input input-group pt-3" id="Password-toggle">
                                 <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                     <i class="zmdi zmdi-eye text-muted" aria-hidden="true"></i>
                                 </a>
-                                <input class="input100 border-start-0 form-control ms-0" type="password" name="password" placeholder="Password" required>
+                                <input class="input100 border-start-0 form-control ms-0" type="password" name="password" placeholder="Mot de passe" required>
                             </div>
                             <div class="text-end pt-4">
                                 <p class="mb-0"><a href="<?=$domaine_admin?>/forgot" class="text-orange ms-1">Mot de passe oublié</a></p>

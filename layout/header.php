@@ -20,14 +20,84 @@
     <!-- <link href="<?=$asset?>/css/transparent-style.css" rel="stylesheet"> -->
     <link href="<?=$asset?>/css/skin-modes.css" rel="stylesheet" />
     <link href="<?=$asset?>/css/icons.css" rel="stylesheet" />
+    <link href="<?=$asset?>/plugins/sweetalert/sweet-alert.css" rel="stylesheet" />
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
 
+    <style>
+
+        button.confirm {
+
+            background-color: rgb(221, 107, 85)  !important;
+            box-shadow: rgb(221 107 85 / 80%) 0px 0px 2px, rgb(0 0 0 / 5%) 0px 0px 0px 1px inset  !important;
+        }
+        button.cancel {
+
+            background-color:#3d38a2 !important;
+        }
+        table thead tr:first-child th, table thead tr:first-child td {
+            text-transform: inherit !important;
+        }
+        .required:before {
+            content: "*";
+            color: red;
+        }
+        .text-left{
+          text-align: left !important;
+        }
+        .btn-transparence-orange {
+            background: #ff46003b !important;
+            color: #ff4600 !important;
+        }
+        .btn-green-transparent{
+            background: #00a6504a !important;
+            color: #0ba053 !important;
+            border: none !important;
+        }
+        .btn-green-transparent:hover{
+            background: #00a65085 !important;
+            color: #FFFFFF !important;
+            border: none !important;
+        }
+        .btn-red-transparent{
+            background: #f900243d !important;
+            color: #f90024 !important;
+            border: none !important;
+        }
+        .btn-red-transparent:hover{
+            background: #f90024 !important;
+            color: #FFFFFF !important;
+            border: none !important;
+        }
+        table tr:hover{
+            background: #f0f0f5 !important;
+        }
+        .table td {
+            padding: 7px !important;
+        }
+        .side-menu .side-menu__icon {
+            color: #ff7729 !important;
+        }
+
+        a:hover {
+            color: #ff7729 !important;
+        }
+        .side-menu__item:hover .side-menu__icon, .side-menu__item:hover .side-menu__label, .side-menu__item:focus .side-menu__icon, .side-menu__item:focus .side-menu__label {
+            color: #fc825f !important;
+        }
+        a:focus, a:active {
+            background: #ff772921  !important;
+            color: #ff7729  !important;
+        }
+
+
+
+    </style>
 </head>
 
 <body class="app sidebar-mini ltr light-mode">
 
 <div id="global-loader">
-    <img src="<?=$asset?>/images/loader.svg" class="loader-img" alt="Loader">
+    <img src="<?=$asset?>/media/loader.svg" class="loader-img" width="100px" alt="Loader">
 </div>
 <div class="page">
 <div class="page-main">

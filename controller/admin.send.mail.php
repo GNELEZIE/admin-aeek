@@ -2,8 +2,8 @@
 session_start();
 if(isset($_SESSION['_valid'])){
     error_reporting(E_ALL ^ E_NOTICE);
-    $domaine_admin = 'https://africawidehelp.org';
     include_once "../assets/function/function.php";
+    include_once "../assets/function/domaine.php";
     include_once "../assets/function/mailing.php";
 
     $email = $_SESSION['_valid']['email'];

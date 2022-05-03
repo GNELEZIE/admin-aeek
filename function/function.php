@@ -2,7 +2,7 @@
 
 
 // page active
-
+$dateGmt = gmdate('Y-m-d H:i');
 if(!function_exists('page_active')){
     function page_active($file){
         $page = array_pop(explode('/',$_SERVER['SCRIPT_NAME']));

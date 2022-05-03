@@ -1,4 +1,13 @@
 <?php
+if(isset($doc[1])){
+    $return = $doc[0]."/".$doc[1];
+}else{
+    $return = $doc[0];
+}
+if(!isset($_SESSION['useraeek'])){
+    header('location:'.$domaine_admin.'/login');
+    exit();
+}
 require_once 'layout/header.php';
 ?>
 
@@ -11,8 +20,8 @@ require_once 'layout/header.php';
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="mt-2">
-                                    <h6 class="">Total Users</h6>
-                                    <h2 class="mb-0 number-font">44,278</h2>
+                                    <h6 class="">Visiteurs</h6>
+                                    <h2 class="mb-0 number-font">278</h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -31,8 +40,8 @@ require_once 'layout/header.php';
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="mt-2">
-                                    <h6 class="">Total Profit</h6>
-                                    <h2 class="mb-0 number-font">67,987</h2>
+                                    <h6 class="">Articles</h6>
+                                    <h2 class="mb-0 number-font">987</h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -50,8 +59,8 @@ require_once 'layout/header.php';
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="mt-2">
-                                    <h6 class="">Total Expenses</h6>
-                                    <h2 class="mb-0 number-font">$76,965</h2>
+                                    <h6 class="">Commentaires</h6>
+                                    <h2 class="mb-0 number-font">150</h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -70,8 +79,8 @@ require_once 'layout/header.php';
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="mt-2">
-                                    <h6 class="">Total Cost</h6>
-                                    <h2 class="mb-0 number-font">$59,765</h2>
+                                    <h6 class="">Catégories</h6>
+                                    <h2 class="mb-0 number-font">765</h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">

@@ -14,6 +14,7 @@ include_once 'model/Connexion.class.php';
 
 // appelle des class
 include_once 'model/Admin.class.php';
+include_once 'model/Categorie.class.php';
 
 
 
