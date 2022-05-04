@@ -8,6 +8,8 @@ if(!isset($_SESSION['useraeek'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
+$listeCat = $categorie->getAllCategorie();
+
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
@@ -25,18 +27,22 @@ require_once 'layout/header.php';
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Titre de l'article :</label>
                             <div class="">
-                                <input type="text" class="form-control" name="titre" id="titre" required>
-                                <input type="hidden" class="form-control" name="formkey" value="<?= $token ?>">
+                                <input type="text" class="form-control input-style" name="titre" id="titre" placeholder="Titre de l'article" required>
+                                <input type="hidden" class="form-control " name="formkey" value="<?= $token ?>">
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Categories :</label>
                             <div class="">
-                                <select name="categorie" id="categorie" class="form-control form-select select2" data-bs-placeholder="Select Country">
-                                    <option value="1">Technology</option>
-                                    <option value="2">Travel</option>
-                                    <option value="3">Food</option>
-                                    <option value="4">Fashion</option>
+                                <select name="categorie" id="categorie" class="form-control form-select select2 input-style" data-bs-placeholder="Select Country">
+                                    <?php
+                                    while($cat = $listeCat->fetch()) {
+
+                                        ?>
+                                        <option value="<?=$cat['slug']?>"><?=$cat['nom']?></option>
+                                    <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -45,19 +51,26 @@ require_once 'layout/header.php';
                         <div class="row">
                             <label class="col-md-3 form-label mb-4">Description :</label>
                             <div class="mb-4">
-                                <textarea class="content" name="summernote" id="summernote"></textarea>
+                                <textarea class="content input-style" name="summernote" id="summernote" placeholder="Description"></textarea>
                             </div>
                         </div>
                         <!--End Row-->
 
-                        <div class="form-group mb-0">
-                            <label class="col-md-3 form-label mb-4">Couverture:</label>
-                            <input id="demo" type="file" name="couverture" accept=".jpg, .png, jpeg">
+                        <div class="form-group">
+                            <div class="py-3">
+                                <p>Photo de couverture (format accepté: jpg, png, jpeg) <i class="required"></i></p>
+                            </div>
+                            <div class="form-label-group couverture" id="test">
+                                    <span class="file-msg">
+                                      <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>
+                                        Cliquez ou glissez déposez la photo de couverture
+                                          </span>
+                                <input type="file" class="file-input input-couverture" name="couverture" id="couverture" accept=".png, .jpg, .jpeg" required>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <button href="javascript:void(0)" class="btn btn-primary">Publier</button>
-                        <a href="javascript:void(0)" class="btn btn-default float-end">Discard</a>
+                    <div class="card-footer text-center">
+                        <button  class="btn btn-primary"> <i class="loader"></i> Publier l'article maintenant</button>
                     </div>
                 </form>
 
@@ -143,11 +156,17 @@ require_once 'layout/footer.php';
 ?>
 
 <script>
+    $(document).ready(function() {
+        $('#summernote').summernote({
+            placeholder: 'Hello Bootstrap 4'
+        });
+    });
+
     $('#addArticleForm').submit(function(e){
         e.preventDefault();
         var value = document.getElementById('addArticleForm');
         var form = new FormData(value);
-
+        $('.loader').html(' <i class="loader-btn text-white"></i> ');
         $.ajax({
             method: 'post',
             url: '<?=$domaine_admin?>/controller/article.save.php',
@@ -157,14 +176,24 @@ require_once 'layout/footer.php';
             processData:false,
             dataType: 'json',
             success: function(data){
-                alert(data.data_info);
+//                alert(data.data_info);
                 if(data.data_info == "ok"){
+                    $('.loader').html('');
                     swal("Opération effectuée avec succès!","", "success");
-//                    $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Catégorie modifiée avec succès !</div>');
+//                    $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Catégorie modifiée avec succès !</div>');  couvertureInput.val('');
+                    $('#summernote').val('');
+                    $('#titre').val('');
+                    $('#categorie').val('');
+                    couvertureInput.attr('src', '');
+                    $('.file-msg').html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
+
+
                 }else if(data.data_info == '1'){
+                    $('.loader').html('');
                     swal("Impossible de publier l'article!", "Une erreur s'est produite lors du traitement des données.", "error");
                 }
                 else {
+                    $('.loader').html('');
                     swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
 //                    $('.updError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification de la catégorie</div>');
                 }
@@ -174,4 +203,55 @@ require_once 'layout/footer.php';
             }
         });
     });
+
+
+    var couverture = $('.couverture');
+    var inputCouverture = $('.input-couverture');
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            var fileType = input.files[0]['type'];
+            var valideImage = ["image/jpg","image/jpeg","image/png"];
+
+            reader.onload = function (e) {
+                if($.inArray(fileType, valideImage) < 0){
+                    $('.file-msg').html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
+                    inputCouverture.val('');
+                    inputCouverture.attr('src', '');
+                    swal("Oups format non autorisé !","Les formats acceptés sont : jpg, jpeg et png !","error");
+                }else{
+                    couverture.css('background-image', 'url('+e.target.result+')');
+                }
+
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    inputCouverture.on('dragenter focus click', function() {
+        couverture.addClass('is-active');
+    });
+
+    inputCouverture.on('dragleave blur drop', function() {
+        couverture.removeClass('is-active');
+    });
+
+    inputCouverture.on('change', function() {
+
+        var filesCount = $(this)[0].files.length;
+        var textContainer = $(this).prev();
+        if (filesCount === 1) {
+            var fileName = $(this).val().split('\\').pop();
+            textContainer.text(fileName);
+        } else {
+            textContainer.html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
+        }
+        readURL(this);
+    });
+
+
+
+
 </script>

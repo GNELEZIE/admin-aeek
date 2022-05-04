@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="keywords" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="<?=$asset?>/images/brand/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="<?=$asset?>/media/logoAEEK.png" />
 
     <title>Dasboard – AEEK </title>
 
@@ -24,6 +24,46 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
 
     <style>
+        .input-style{
+            border: 2px solid #ced4da;
+            border-radius: 6px !important;
+        }
+        .couverture {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 25px;
+            border: 2px dashed #888ea8;
+            border-radius: 6px;
+            transition: 0.2s;
+            min-height: 200px;
+            background: no-repeat center;
+            background-size: contain;
+        }
+        .couverture.is-active {
+            background-color: #eff7fa;
+        }
+
+        .file-msg {
+            text-align: center;
+            font-size: small;
+            font-weight: 300;
+            line-height: 1.4;
+        }
+
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            cursor: pointer;
+            opacity: 0;
+        }
+        .file-input:focus {
+            outline: none;
+        }
 
         button.confirm {
 
@@ -107,10 +147,9 @@
 <div class="d-flex">
 <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
 
-<a class="logo-horizontal " href="index.html">
+<a class="logo-horizontal " href="<?=$domaine_admin?>">
     <img src="<?=$asset?>/media/logoAEEK.png" class="header-brand-img desktop-logo" alt="logo">
-    <img src="<?=$asset?>/media/logoAEEK.png" class="header-brand-img light-logo1"
-         alt="logo">
+    <img src="<?=$asset?>/media/logoAEEK.png" class="header-brand-img light-logo1" alt="logo">
 </a>
 
 <div class="d-flex order-lg-2 ms-auto header-right-icons">

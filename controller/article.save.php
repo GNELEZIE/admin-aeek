@@ -1,7 +1,7 @@
 <?php
 session_start();
 $info ='';
-if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['categorie']) and isset($_SESSION['myformkey']) and isset($_POST['formkey']) and $_SESSION['myformkey'] == $_POST['formkey']){
+if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['categorie']) and isset($_POST['summernote']) and isset($_SESSION['myformkey']) and isset($_POST['formkey']) and $_SESSION['myformkey'] == $_POST['formkey']){
 
 // include function
 
@@ -14,8 +14,10 @@ if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['cat
     include_once "../model/Categorie.class.php";
     include_once "../model/Article.class.php";
     $slug = create_slug($_POST['titre']);
+    $summernote = filter_var(htmlentities($_POST['summernote']),FILTER_SANITIZE_STRING);
     extract($_POST);
     $titre = htmlentities(trim(addslashes($titre)));
+//    $summernote = htmlentities(($summernote));
     $categorie = htmlentities(trim(addslashes($categorie)));
     $titre = htmlentities(trim(addslashes($titre)));
     $titre = htmlentities(trim(addslashes($titre)));
@@ -32,10 +34,9 @@ if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['cat
         $extensionValide = array('jpeg', 'jpg', 'png');
         $photo_ext = explode('.', $_FILES['couverture']['name']);
         $photo_ext = strtolower(end($photo_ext));
-        $info = 'ok';
         if (in_array($photo_ext, $extensionValide)) {
             $photo = uniqid() . '.' . $photo_ext;
-            $destination = '../fichiers/' . $photo;
+            $destination = '../uploads/' . $photo;
             $tmp_name = $_FILES['couverture']['tmp_name'];
             move_uploaded_file($tmp_name, $destination);
         } else {
@@ -44,11 +45,10 @@ if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['cat
 
     }
 
-
-//    $save= $article->addArticle($dateGmt,$titre,$categorie,$description,$photo,$slug,$_SESSION['useraeek']['id_admin']);
-//    if($save > 0){
-//        $info = 'ok';
-//    }
+    $save= $article->addArticle($dateGmt,$titre,$categorie,$summernote,$photo,$slug,$_SESSION['useraeek']['id_admin']);
+    if($save > 0){
+        $info = 'ok';
+    }
 
 }
 

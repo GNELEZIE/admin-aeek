@@ -17,6 +17,7 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
 
     $listeArticle= $article->getAllArticle();
     while($data = $listeArticle->fetch()) {
+        $cat = $categorie->getCategorieBySlug($data['id_article'])->fetch();
         if($data['statut'] == 0){
             $statut ='<span class="tag tag-radus tag-round tag-outline-success">En ligne</span>';
             $upd ='<a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-green-transparent" onclick="bloquer('.$data['id_article'].')">
@@ -41,7 +42,7 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
         $arr_list['data'][] = array(
             date_fr($data['date_article']),
             html_entity_decode(stripslashes($data['titre'])),
-            html_entity_decode(stripslashes($data['categorie'])),
+            html_entity_decode(stripslashes($cat['nom'])),
             html_entity_decode(stripslashes($data['description'])),
             $statut,
             $action

@@ -8,7 +8,7 @@ class Article{
     // Create
 
     public function addArticle($dateArticle,$titre,$categorie_id,$description,$couverture,$slug,$userId){
-        $query = "INSERT INTO article(date_article,titre,categorie_id,description,couverture,slug,user_id)
+        $query = "INSERT INTO article(date_article,titre,categorie,description,couverture,slug,user_id)
             VALUES (:dateArticle,:titre,:categorie_id,:description,:couverture,:slug,:userId)";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(

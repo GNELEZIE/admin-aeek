@@ -34,6 +34,15 @@ class Categorie{
         return $rs;
     }
 
+    public function getCategorieBySlug($id){
+        $query = "SELECT * FROM categorie
+        WHERE id_categorie = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+        return $rs;
+    }
 
     //Update
 
