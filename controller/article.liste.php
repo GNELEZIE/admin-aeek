@@ -5,6 +5,7 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
 // include function
 
     include_once "../function/function.php";
+    include_once "../function/domaine.php";
 
 //Include Connexion
     include_once '../model/Connexion.class.php';
@@ -17,17 +18,23 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
 
     $listeArticle= $article->getAllArticle();
     while($data = $listeArticle->fetch()) {
-        $cat = $categorie->getCategorieBySlug($data['id_article'])->fetch();
+        $cat = $categorie->getCategorieBySlug($data['categorie'])->fetch();
         if($data['statut'] == 0){
             $statut ='<span class="tag tag-radus tag-round tag-outline-success">En ligne</span>';
             $upd ='<a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-green-transparent" onclick="bloquer('.$data['id_article'].')">
                                             <span class="fa fa-bell-o"> </span>
+                                        </a>
+                                        <a href="'.$domaine_admin.'/blog/'.$data['slug'].'" id="bEdit"  class="btn btn-sm bg-warning text-white">
+                                            <span class="fe fe-edit"> </span>
                                         </a>';
 
         }else{
             $statut ='<span class="tag tag-radus tag-round tag-outline-danger">Hors ligne</span>';
             $upd ='<a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-green-transparent" onclick="valider('.$data['id_article'].')">
                                             <span class="fa fa-bell-o"> </span>
+                                        </a>
+                                          <a href="'.$domaine_admin.'/blog/'.$data['slug'].'" id="bEdit"  class="btn btn-sm bg-warning text-white">
+                                            <span class="fe fe-edit"> </span>
                                         </a>';
 
 

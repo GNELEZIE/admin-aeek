@@ -24,6 +24,9 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
 
     <style>
+        .sidebar-mini footer.footer {
+            padding: 10px !important;
+        }
         .input-style{
             border: 2px solid #ced4da;
             border-radius: 6px !important;

@@ -7,14 +7,14 @@ class Article{
 
     // Create
 
-    public function addArticle($dateArticle,$titre,$categorie_id,$description,$couverture,$slug,$userId){
+    public function addArticle($dateArticle,$titre,$categorie_slug,$description,$couverture,$slug,$userId){
         $query = "INSERT INTO article(date_article,titre,categorie,description,couverture,slug,user_id)
-            VALUES (:dateArticle,:titre,:categorie_id,:description,:couverture,:slug,:userId)";
+            VALUES (:dateArticle,:titre,:categorie_slug,:description,:couverture,:slug,:userId)";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "dateArticle" => $dateArticle,
             "titre" => $titre,
-            "categorie_id" => $categorie_id,
+            "categorie_slug" => $categorie_slug,
             "description" => $description,
             "couverture" => $couverture,
             "slug" => $slug,
@@ -34,6 +34,16 @@ class Article{
         $query = "SELECT * FROM article
           ORDER BY id_article DESC ";
         $rs = $this->bdd->query($query);
+        return $rs;
+    }
+
+    public function getArticleBySlug($slug){
+        $query = "SELECT * FROM article
+        WHERE slug = :slug";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "slug" => $slug
+        ));
         return $rs;
     }
 

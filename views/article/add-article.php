@@ -9,10 +9,11 @@ if(!isset($_SESSION['useraeek'])){
     exit();
 }
 $listeCat = $categorie->getAllCategorie();
-
+require_once 'controller/article.save.php';
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
+
 require_once 'layout/header.php';
 ?>
 
@@ -24,6 +25,20 @@ require_once 'layout/header.php';
                 </div>
                 <form method="post" id="addArticleForm" enctype="multipart/form-data">
                     <div class="card-body">
+                        <?php if (!empty($success)) { ?>
+                            <div class="alert alert-success" style="font-size: 14px" role="alert">
+                                <?php foreach ($success as $succ) { ?>
+                                    <?php echo $succ ?>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+                        <?php if (!empty($errors)) { ?>
+                            <div class="alert alert-danger" style="font-size: 14px" role="alert">
+                                <?php foreach ($errors as $error) { ?>
+                                    <?php echo $error ?>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Titre de l'article :</label>
                             <div class="">
@@ -163,46 +178,50 @@ require_once 'layout/footer.php';
     });
 
     $('#addArticleForm').submit(function(e){
-        e.preventDefault();
-        var value = document.getElementById('addArticleForm');
-        var form = new FormData(value);
         $('.loader').html(' <i class="loader-btn text-white"></i> ');
-        $.ajax({
-            method: 'post',
-            url: '<?=$domaine_admin?>/controller/article.save.php',
-            data: form,
-            contentType:false,
-            cache:false,
-            processData:false,
-            dataType: 'json',
-            success: function(data){
-//                alert(data.data_info);
-                if(data.data_info == "ok"){
-                    $('.loader').html('');
-                    swal("Opération effectuée avec succès!","", "success");
-//                    $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Catégorie modifiée avec succès !</div>');  couvertureInput.val('');
-                    $('#summernote').val('');
-                    $('#titre').val('');
-                    $('#categorie').val('');
-                    couvertureInput.attr('src', '');
-                    $('.file-msg').html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
-
-
-                }else if(data.data_info == '1'){
-                    $('.loader').html('');
-                    swal("Impossible de publier l'article!", "Une erreur s'est produite lors du traitement des données.", "error");
-                }
-                else {
-                    $('.loader').html('');
-                    swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
-//                    $('.updError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification de la catégorie</div>');
-                }
-            },
-            error: function (error, ajaxOptions, thrownError) {
-                alert(error.responseText);
-            }
-        });
     });
+
+//    $('#addArticleForm').submit(function(e){
+//        e.preventDefault();
+//        var value = document.getElementById('addArticleForm');
+//        var form = new FormData(value);
+//        $('.loader').html(' <i class="loader-btn text-white"></i> ');
+//        $.ajax({
+//            method: 'post',
+//            url: '<?//=$domaine_admin?>///controller/article.save.php',
+//            data: form,
+//            contentType:false,
+//            cache:false,
+//            processData:false,
+//            dataType: 'json',
+//            success: function(data){
+////                alert(data.data_info);
+//                if(data.data_info == "ok"){
+//                    $('.loader').html('');
+//                    swal("Opération effectuée avec succès!","", "success");
+////                    $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Catégorie modifiée avec succès !</div>');  couvertureInput.val('');
+//                    $('#summernote').val('');
+//                    $('#titre').val('');
+//                    $('#categorie').val('');
+//                    couvertureInput.attr('src', '');
+//                    $('.file-msg').html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
+//
+//
+//                }else if(data.data_info == '1'){
+//                    $('.loader').html('');
+//                    swal("Impossible de publier l'article!", "Une erreur s'est produite lors du traitement des données.", "error");
+//                }
+//                else {
+//                    $('.loader').html('');
+//                    swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
+////                    $('.updError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification de la catégorie</div>');
+//                }
+//            },
+//            error: function (error, ajaxOptions, thrownError) {
+//                alert(error.responseText);
+//            }
+//        });
+//    });
 
 
     var couverture = $('.couverture');

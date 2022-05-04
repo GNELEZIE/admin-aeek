@@ -34,12 +34,12 @@ class Categorie{
         return $rs;
     }
 
-    public function getCategorieBySlug($id){
+    public function getCategorieBySlug($slug){
         $query = "SELECT * FROM categorie
-        WHERE id_categorie = :id";
+        WHERE slug = :slug";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
-            "id" => $id
+            "slug" => $slug
         ));
         return $rs;
     }
