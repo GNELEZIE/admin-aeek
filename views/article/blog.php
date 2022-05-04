@@ -22,7 +22,7 @@ require_once 'layout/header.php';
                     <h3 class="card-title">Les articles</h3>
                 </div>
                 <div class="card-btn pl-3" style="border-bottom: 0 !important; padding-left: 20px;">
-                    <a href="<?=$domaine_admin?>/add-blog" class="btn-transparence-orange" style="padding: 7px 15px; border-radius: 3px;"> <i class="fa fa-plus"></i> Ajouter un article</a>
+                    <a href="<?=$domaine_admin?>/add-article" class="btn-transparence-orange" style="padding: 7px 15px; border-radius: 3px;"> <i class="fa fa-plus"></i> Ajouter un article</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
