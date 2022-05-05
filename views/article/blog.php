@@ -9,23 +9,31 @@ if(!isset($_SESSION['useraeek'])){
     exit();
 }
 
-$listeCat = $categorie->getAllCategorie();
-require_once 'controller/article.save.php';
-$token = openssl_random_pseudo_bytes(16);
-$token = bin2hex($token);
-$_SESSION['myformkey'] = $token;
+
+
+
+
+
+//require_once 'controller/article.save.php';
+
+
 
 if(isset($doc[1]) and !isset($doc[2])) {
+
     $liste = $article->getArticleBySlug($doc[1]);
 
     if ($articleData = $liste->fetch()) {
 
-        $catData = $categorie->getCategorieBySlug($articleData['categorie'])->fetch();
+        $catData = $categorie->getCategorieById($articleData['categorie_id'])->fetch();
     } else {
         header('location:' . $domaine_admin . '/error');
         exit();
     }
 }
+require_once 'controller/article.update.php';
+$token = openssl_random_pseudo_bytes(16);
+$token = bin2hex($token);
+$_SESSION['myformkey'] = $token;
 require_once 'layout/header.php';
     ?>
 
@@ -63,18 +71,20 @@ require_once 'layout/header.php';
                             <div class="">
                                 <input type="text" class="form-control input-style" name="titre" id="titre" placeholder="Titre de l'article" value="<?= html_entity_decode(stripslashes($articleData['titre']))?>" required>
                                 <input type="hidden" class="form-control " name="formkey" value="<?= $token ?>">
+                                <input type="hidden" class="form-control " name="artIds" value="<?= $articleData['id_article'] ?>">
                             </div>
                         </div>
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Categories :</label>
                             <div class="">
                                 <select name="categorie" id="categorie" class="form-control form-select select2 input-style" data-bs-placeholder="Select Country">
-                                    <option value="<?=$catData['slug']?>"><?=html_entity_decode(stripslashes($catData['nom']))?></option>
+                                    <option value="<?=$catData['id_categorie']?>"><?=html_entity_decode(stripslashes($catData['nom']))?></option>
                                     <?php
+                                    $listeCat = $categorie->getAllCategorie();
                                     while($cat = $listeCat->fetch()) {
 
                                         ?>
-                                        <option value="<?=$cat['slug']?>"><?=$cat['nom']?></option>
+                                        <option value="<?=$cat['id_categorie']?>"><?=$cat['nom']?></option>
                                     <?php
                                     }
                                     ?>
@@ -102,12 +112,16 @@ require_once 'layout/header.php';
         <div class="col-md-3">
             <div class="card" style="height: 368px;">
                 <div class="card-body m-0 p-0">
-                    <div class="couv mb-5">
-                        <img src="<?=$domaine_admin?>/uploads/<?=$articleData['couverture']?>" class="img-couv" alt="" style="border-radius: 7px 7px 0 0;"/>
-                    </div>
-                    <div class="card-btn pl-3 text-center" style="border-bottom: 0 !important;">
-                        <a href="<?=$domaine_admin?>/add-article" class="btn-transparence-orange" style="padding: 7px 15px; border-radius: 3px;"> <span class="fe fe-edit"> </span> Modifier la photo couverture</a>
-                    </div>
+                    <form method="post" id="userImgForm" enctype="multipart/form-data">
+                        <div class="couv mb-5">
+                            <img src="<?=$domaine_admin?>/uploads/<?php if($articleData['couverture'] != ''){echo $articleData['couverture'];}else{echo 'user.png';}?>" class="img-couv" id="imguser" alt="" style="border-radius: 7px 7px 0 0;"/>
+                            <input type="file" name="userImg" id="userImg" style="display: none"/>
+                            <input type="hidden" class="form-control " name="artId" value="<?= $articleData['id_article'] ?>">
+                        </div>
+                        <div class="card-btn pl-3 text-center" style="border-bottom: 0 !important;">
+                            <a href="javascript:void(0);" class="btn-transparence-orange" id="btn-img" style="padding: 7px 15px; border-radius: 3px;"> <span class="fe fe-edit"> </span> Modifier la photo couverture</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -261,8 +275,47 @@ require_once 'layout/footer.php';
         }
     }
 
+    $('#btn-img').click(function(e){
+        e.preventDefault();
+        $('#userImg').trigger('click');
+    });
 
+    //fonction vue image télécharger
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
+            reader.onload = function (e) {
+                $('#imguser').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $('#userImg').change(function(e){
+        e.preventDefault();
+        readURL(this);
+        var value = document.getElementById('userImgForm');
+        var form = new FormData(value);
+
+        $.ajax({
+            method: 'post',
+            url: '<?=$domaine_admin?>/controller/photo.save.php',
+            data: form,
+            contentType:false,
+            cache:false,
+            processData:false,
+            dataType: 'json',
+            success: function(data){
+                if(data.data_info == "ok"){
+                    $('#imguser').attr('src', data.data_photo);
+                }else {
+                    swal("Action Impossible !", "Une erreur s\'est produite lors du traitement des données !", "error");
+                }
+            }
+        });
+
+    });
 
 
 </script>

@@ -54,7 +54,7 @@ require_once 'layout/header.php';
                                     while($cat = $listeCat->fetch()) {
 
                                         ?>
-                                        <option value="<?=$cat['slug']?>"><?=$cat['nom']?></option>
+                                        <option value="<?=$cat['id_categorie']?>"><?=$cat['nom']?></option>
                                     <?php
                                     }
                                     ?>
