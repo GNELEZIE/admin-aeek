@@ -14,22 +14,27 @@ require_once 'controller/article.save.php';
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
-require_once 'layout/header.php';
-if(isset($doc[1]) and !isset($doc[2])){
+
+if(isset($doc[1]) and !isset($doc[2])) {
     $liste = $article->getArticleBySlug($doc[1]);
 
-    if($articleData = $liste->fetch()) {
+    if ($articleData = $liste->fetch()) {
 
         $catData = $categorie->getCategorieBySlug($articleData['categorie'])->fetch();
-    }else{
-        header('location:'.$domaine_admin.'/error');
+    } else {
+        header('location:' . $domaine_admin . '/error');
         exit();
     }
+}
+require_once 'layout/header.php';
     ?>
 
+    <?php
+    if(isset($doc[1]) and !isset($doc[2])){
+    ?>
     <!--Article editor-->
     <div class="row mt-5 pt-5">
-        <div class="col-xl-8">
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">Modifier l'article</div>
@@ -87,24 +92,21 @@ if(isset($doc[1]) and !isset($doc[2])){
                         <!--End Row-->
                     </div>
                     <div class="card-footer text-center">
-                        <button  class="btn btn-transparence-orange"> <i class="loader"></i> Modifier l'article maintenant</button>
+                        <button  class="btn btn-green-transparent"> <i class="loader"></i> <span class="fe fe-edit"> </span> Modifier l'article maintenant</button>
                     </div>
                 </form>
 
 
             </div>
         </div>
-        <div class="col-xl-4">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Article recents</div>
-                </div>
-                <div class="card-body">
+        <div class="col-md-3">
+            <div class="card" style="height: 368px;">
+                <div class="card-body m-0 p-0">
                     <div class="couv mb-5">
-                        <img src="<?=$domaine_admin?>/uploads/<?=$articleData['couverture']?>" width="250px" alt=""/>
+                        <img src="<?=$domaine_admin?>/uploads/<?=$articleData['couverture']?>" class="img-couv" alt="" style="border-radius: 7px 7px 0 0;"/>
                     </div>
-                    <div class="card-btn pl-3" style="border-bottom: 0 !important; padding-left: 20px;">
-                        <a href="<?=$domaine_admin?>/add-article" class="btn-transparence-orange" style="padding: 7px 15px; border-radius: 3px;"> <i class="fa fa-plus"></i> Modifier la couverture</a>
+                    <div class="card-btn pl-3 text-center" style="border-bottom: 0 !important;">
+                        <a href="<?=$domaine_admin?>/add-article" class="btn-transparence-orange" style="padding: 7px 15px; border-radius: 3px;"> <span class="fe fe-edit"> </span> Modifier la photo couverture</a>
                     </div>
                 </div>
             </div>

@@ -24,6 +24,11 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
 
     <style>
+        .img-couv{
+            object-fit: cover;
+            width: 100%;
+            height: 300px;
+        }
         .sidebar-mini footer.footer {
             padding: 10px !important;
         }

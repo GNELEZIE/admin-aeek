@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="keywords" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="<?=$asset?>/images/brand/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="<?=$asset?>/media/logoAEEK.png"/>
 
     <title>Dasboard – AEEK </title>
 
