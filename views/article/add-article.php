@@ -85,7 +85,7 @@ require_once 'layout/header.php';
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <button  class="btn btn-primary"> <i class="loader"></i> Publier l'article maintenant</button>
+                        <button  class="btn btn-transparence-orange"> <i class="loader"></i> Publier l'article maintenant</button>
                     </div>
                 </form>
 

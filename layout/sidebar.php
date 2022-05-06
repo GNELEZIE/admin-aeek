@@ -17,21 +17,21 @@
                 </svg></div>
             <ul class="side-menu">
                 <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="<?=$domaine_admin?>/home">
+                    <a class="slide-item" href="<?=$domaine_admin?>/home">
                         <i class="side-menu__icon fe fe-home"></i>
                         <span class="side-menu__label">Dashboard</span>
                     </a>
                 </li>
-                <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="<?=$domaine_admin?>/add-categorie">
+                <li >
+                    <a class="slide-item" href="<?=$domaine_admin?>/add-categorie">
                         <i class="side-menu__icon fe fe-home"></i>
-                        <span class="side-menu__label">Catégorie</span>
+                       Catégorie
                     </a>
                 </li>
-                <li class="slide">
-                    <a class="side-menu__item" data-bs-toggle="slide" href="<?=$domaine_admin?>/Blog">
+                <li class="is-expanded">
+                    <a class="slide-item" href="<?=$domaine_admin?>/Blog">
                         <i class="side-menu__icon fe fe-home"></i>
-                        <span class="side-menu__label">Blog</span>
+                        Blog
                     </a>
                 </li>
 

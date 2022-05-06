@@ -28,7 +28,7 @@ if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['cat
         $photo_ext = strtolower(end($photo_ext));
         if (in_array($photo_ext, $extensionValide)) {
             $photo = uniqid() . '.' . $photo_ext;
-            $destination = 'uploads/' . $photo;
+            $destination = $_SERVER['DOCUMENT_ROOT'].'/www/aeek-kassre/uploads/' . $photo;
             $tmp_name = $_FILES['couverture']['tmp_name'];
             move_uploaded_file($tmp_name, $destination);
         } else {

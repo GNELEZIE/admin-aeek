@@ -24,6 +24,11 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
 
     <style>
+        .slide-item.active, .slide-item:hover, .slide-item:focus{
+            background: #ff772921 !important;
+            color: #ff7729 !important;
+        }
+
         .img-couv{
             object-fit: cover;
             width: 100%;
@@ -126,16 +131,16 @@
             color: #ff7729 !important;
         }
 
-        a:hover {
-            color: #ff7729 !important;
-        }
-        .side-menu__item:hover .side-menu__icon, .side-menu__item:hover .side-menu__label, .side-menu__item:focus .side-menu__icon, .side-menu__item:focus .side-menu__label {
-            color: #fc825f !important;
-        }
-        a:focus, a:active {
-            background: #ff772921  !important;
-            color: #ff7729  !important;
-        }
+        /*a:hover {*/
+            /*color: #ff7729 !important;*/
+        /*}*/
+        /*.side-menu__item:hover .side-menu__icon, .side-menu__item:hover .side-menu__label, .side-menu__item:focus .side-menu__icon, .side-menu__item:focus .side-menu__label {*/
+            /*color: #fc825f !important;*/
+        /*}*/
+        /*a:focus, a:active {*/
+            /*background: #ff772921  !important;*/
+            /*color: #ff7729  !important;*/
+        /*}*/
 
 
 

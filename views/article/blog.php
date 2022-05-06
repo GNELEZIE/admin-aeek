@@ -16,7 +16,7 @@ if(!isset($_SESSION['useraeek'])){
 
 //require_once 'controller/article.save.php';
 
-
+require_once 'controller/article.update.php';
 
 if(isset($doc[1]) and !isset($doc[2])) {
 
@@ -30,7 +30,8 @@ if(isset($doc[1]) and !isset($doc[2])) {
         exit();
     }
 }
-require_once 'controller/article.update.php';
+
+//$listeCat = $categorie->getAllCategorie();
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
@@ -80,14 +81,14 @@ require_once 'layout/header.php';
                                 <select name="categorie" id="categorie" class="form-control form-select select2 input-style" data-bs-placeholder="Select Country">
                                     <option value="<?=$catData['id_categorie']?>"><?=html_entity_decode(stripslashes($catData['nom']))?></option>
                                     <?php
-                                    $listeCat = $categorie->getAllCategorie();
-                                    while($cat = $listeCat->fetch()) {
-
-                                        ?>
-                                        <option value="<?=$cat['id_categorie']?>"><?=$cat['nom']?></option>
-                                    <?php
-                                    }
-                                    ?>
+//
+//                                    while($cat = $listeCat->fetch()) {
+//
+//                                        ?>
+<!--                                        <option value="--><?//=$cat['id_categorie']?><!--">--><?//=$cat['nom']?><!--</option>-->
+<!--                                    --><?php
+//                                    }
+//                                    ?>
                                 </select>
                             </div>
                         </div>
@@ -149,7 +150,6 @@ require_once 'layout/header.php';
                                     <th class="wd-15p">Date</th>
                                     <th class="wd-15p">Titre</th>
                                     <th class="wd-15p">Catégorie</th>
-                                    <th class="wd-15p">Description</th>
                                     <th class="wd-15p">Statut</th>
                                     <th class="text-center">Actions</th>
                                 </tr>

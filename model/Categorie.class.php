@@ -26,6 +26,15 @@ class Categorie{
 
 
 // Read
+    public function getCategorieById($id){
+        $query = "SELECT * FROM categorie
+        WHERE id_categorie = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+        return $rs;
+    }
 
     public function getAllCategorie(){
         $query = "SELECT * FROM categorie
@@ -34,15 +43,7 @@ class Categorie{
         return $rs;
     }
 
-    public function getCategorieById($id){
-        $query = "SELECT * FROM categorie
-        WHERE id_categorie  = :id";
-        $rs = $this->bdd->prepare($query);
-        $rs->execute(array(
-            "id" => $id
-        ));
-        return $rs;
-    }
+
 
     public function getCategorieBySlug($slug){
         $query = "SELECT * FROM categorie
