@@ -56,6 +56,14 @@ class Article{
         return $rs;
     }
 
+    //Count
+
+    public function getAllNbrArticle(){
+        $query = "SELECT COUNT(*) as nb FROM article";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
+
 //Update
     public function updateArticle($etat,$id){
         $query = "UPDATE article

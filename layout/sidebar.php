@@ -34,6 +34,12 @@
                         Blog
                     </a>
                 </li>
+                <li class="is-expanded">
+                    <a class="slide-item" href="<?=$domaine_admin?>/commentaire">
+                        <i class="side-menu__icon fa fa-commenting"></i>
+                        Commentaires
+                    </a>
+                </li>
 
 
             </ul>

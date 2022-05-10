@@ -8,6 +8,11 @@ if(!isset($_SESSION['useraeek'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
+$list = $article->getAllArticle();
+if($data = $list->fetch()){
+    $nbs = $article->getAllNbrArticle()->fetch();
+}
+
 require_once 'layout/header.php';
 ?>
 
@@ -41,7 +46,7 @@ require_once 'layout/header.php';
                             <div class="d-flex">
                                 <div class="mt-2">
                                     <h6 class="">Articles</h6>
-                                    <h2 class="mb-0 number-font">987</h2>
+                                    <h2 class="mb-0 number-font"><?=$nbs['nb']?></h2>
                                 </div>
                                 <div class="ms-auto">
                                     <div class="chart-wrapper mt-1">
@@ -100,112 +105,107 @@ require_once 'layout/header.php';
     <div class="col-xl-6 col-md-6">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title fw-semibold">Daily Activity</h4>
+                <h4 class="card-title fw-semibold">Commentaire en attente</h4>
             </div>
             <div class="card-body pb-0">
                 <ul class="task-list">
-                    <li class="d-sm-flex">
-                        <div>
-                            <i class="task-icon bg-primary"></i>
-                            <h6 class="fw-semibold">Task Finished<span
-                                    class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span>
-                            </h6>
-                            <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)"
-                                                                                      class="fw-semibold"> Project Management</a></p>
-                        </div>
-                        <div class="ms-auto d-md-flex">
-                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"
-                               data-bs-placement="top" title="Edit" aria-label="Edit"><span
-                                    class="fe fe-edit"></span></a>
-                            <a href="javascript:void(0)" class="text-muted"><span
-                                    class="fe fe-trash-2"></span></a>
-                        </div>
-                    </li>
-                    <li class="d-sm-flex">
-                        <div>
-                            <i class="task-icon bg-secondary"></i>
-                            <h6 class="fw-semibold">New Comment<span
-                                    class="text-muted fs-11 mx-2 fw-normal">05 July 2021</span>
-                            </h6>
-                            <p class="text-muted fs-12">Victoria commented on Project <a
-                                    href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a></p>
-                        </div>
-                        <div class="ms-auto d-md-flex">
-                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"
-                               data-bs-placement="top" title="Edit" aria-label="Edit"><span
-                                    class="fe fe-edit"></span></a>
-                            <a href="javascript:void(0)" class="text-muted"><span
-                                    class="fe fe-trash-2"></span></a>
-                        </div>
-                    </li>
-                    <li class="d-sm-flex">
-                        <div>
-                            <i class="task-icon bg-success"></i>
-                            <h6 class="fw-semibold">New Comment<span
-                                    class="text-muted fs-11 mx-2 fw-normal">25 June 2021</span>
-                            </h6>
-                            <p class="text-muted fs-12">Victoria commented on Project <a
-                                    href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a></p>
-                        </div>
-                        <div class="ms-auto d-md-flex">
-                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"
-                               data-bs-placement="top" title="Edit" aria-label="Edit"><span
-                                    class="fe fe-edit"></span></a>
-                            <a href="javascript:void(0)" class="text-muted"><span
-                                    class="fe fe-trash-2"></span></a>
-                        </div>
-                    </li>
-                    <li class="d-sm-flex">
-                        <div>
-                            <i class="task-icon bg-warning"></i>
-                            <h6 class="fw-semibold">Task Overdue<span
-                                    class="text-muted fs-11 mx-2 fw-normal">14 June 2021</span>
-                            </h6>
-                            <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a
-                                    href="javascript:void(0)" class="fw-semibold"> Integrated management</a></p>
-                        </div>
-                        <div class="ms-auto d-md-flex">
-                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"
-                               data-bs-placement="top" title="Edit" aria-label="Edit"><span
-                                    class="fe fe-edit"></span></a>
-                            <a href="javascript:void(0)" class="text-muted"><span
-                                    class="fe fe-trash-2"></span></a>
-                        </div>
-                    </li>
-                    <li class="d-sm-flex">
-                        <div>
-                            <i class="task-icon bg-danger"></i>
-                            <h6 class="fw-semibold">Task Overdue<span
-                                    class="text-muted fs-11 mx-2 fw-normal">29 June 2021</span>
-                            </h6>
-                            <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a
-                                    href="javascript:void(0)" class="fw-semibold"> Integrated management</a></p>
-                        </div>
-                        <div class="ms-auto d-md-flex">
-                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"
-                               data-bs-placement="top" title="Edit" aria-label="Edit"><span
-                                    class="fe fe-edit"></span></a>
-                            <a href="javascript:void(0)" class="text-muted"><span
-                                    class="fe fe-trash-2"></span></a>
-                        </div>
-                    </li>
-                    <li class="d-sm-flex">
-                        <div>
-                            <i class="task-icon bg-info"></i>
-                            <h6 class="fw-semibold">Task Finished<span
-                                    class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span>
-                            </h6>
-                            <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)"
-                                                                                      class="fw-semibold"> Project Management</a></p>
-                        </div>
-                        <div class="ms-auto d-md-flex">
-                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"
-                               data-bs-placement="top" title="Edit" aria-label="Edit"><span
-                                    class="fe fe-edit"></span></a>
-                            <a href="javascript:void(0)" class="text-muted"><span
-                                    class="fe fe-trash-2"></span></a>
-                        </div>
-                    </li>
+                    <?php
+                    $com = $comment->getAllCommentCinq();
+                    while($comments = $com->fetch()){
+                        ?>
+
+                        <li class="d-sm-flex">
+                            <div>
+                                <i class="task-icon bg-warning"></i>
+                                <h6 class="fw-semibold"><?=$comments['nom']?><span
+                                        class="text-muted fs-11 mx-2 fw-normal"><?=date_lettre($comments['date_comment'])?></span>
+                                </h6>
+                                <p class="text-muted fs-12"><?=reduit_text(html_entity_decode(stripslashes($comments['message'])),'40')?> <a
+                                        href="javascript:void(0)" class="fw-semibold"> Voir l'article</a></p>
+                            </div>
+                            <div class="ms-auto d-md-flex">
+                                <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"
+                                   data-bs-placement="top" title="Edit" aria-label="Edit"><span
+                                        class="fe fe-edit"></span></a>
+                                <a href="javascript:void(0)" class="text-muted"><span
+                                        class="fe fe-trash-2"></span></a>
+                            </div>
+                        </li>
+                    <?php
+                    }
+                    ?>
+
+
+
+
+<!--                    <li class="d-sm-flex">-->
+<!--                        <div>-->
+<!--                            <i class="task-icon bg-success"></i>-->
+<!--                            <h6 class="fw-semibold">New Comment<span-->
+<!--                                    class="text-muted fs-11 mx-2 fw-normal">25 June 2021</span>-->
+<!--                            </h6>-->
+<!--                            <p class="text-muted fs-12">Victoria commented on Project <a-->
+<!--                                    href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a></p>-->
+<!--                        </div>-->
+<!--                        <div class="ms-auto d-md-flex">-->
+<!--                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"-->
+<!--                               data-bs-placement="top" title="Edit" aria-label="Edit"><span-->
+<!--                                    class="fe fe-edit"></span></a>-->
+<!--                            <a href="javascript:void(0)" class="text-muted"><span-->
+<!--                                    class="fe fe-trash-2"></span></a>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li class="d-sm-flex">-->
+<!--                        <div>-->
+<!--                            <i class="task-icon bg-warning"></i>-->
+<!--                            <h6 class="fw-semibold">Task Overdue<span-->
+<!--                                    class="text-muted fs-11 mx-2 fw-normal">14 June 2021</span>-->
+<!--                            </h6>-->
+<!--                            <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a-->
+<!--                                    href="javascript:void(0)" class="fw-semibold"> Integrated management</a></p>-->
+<!--                        </div>-->
+<!--                        <div class="ms-auto d-md-flex">-->
+<!--                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"-->
+<!--                               data-bs-placement="top" title="Edit" aria-label="Edit"><span-->
+<!--                                    class="fe fe-edit"></span></a>-->
+<!--                            <a href="javascript:void(0)" class="text-muted"><span-->
+<!--                                    class="fe fe-trash-2"></span></a>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li class="d-sm-flex">-->
+<!--                        <div>-->
+<!--                            <i class="task-icon bg-danger"></i>-->
+<!--                            <h6 class="fw-semibold">Task Overdue<span-->
+<!--                                    class="text-muted fs-11 mx-2 fw-normal">29 June 2021</span>-->
+<!--                            </h6>-->
+<!--                            <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a-->
+<!--                                    href="javascript:void(0)" class="fw-semibold"> Integrated management</a></p>-->
+<!--                        </div>-->
+<!--                        <div class="ms-auto d-md-flex">-->
+<!--                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"-->
+<!--                               data-bs-placement="top" title="Edit" aria-label="Edit"><span-->
+<!--                                    class="fe fe-edit"></span></a>-->
+<!--                            <a href="javascript:void(0)" class="text-muted"><span-->
+<!--                                    class="fe fe-trash-2"></span></a>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                    <li class="d-sm-flex">-->
+<!--                        <div>-->
+<!--                            <i class="task-icon bg-info"></i>-->
+<!--                            <h6 class="fw-semibold">Task Finished<span-->
+<!--                                    class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span>-->
+<!--                            </h6>-->
+<!--                            <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)"-->
+<!--                                                                                      class="fw-semibold"> Project Management</a></p>-->
+<!--                        </div>-->
+<!--                        <div class="ms-auto d-md-flex">-->
+<!--                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"-->
+<!--                               data-bs-placement="top" title="Edit" aria-label="Edit"><span-->
+<!--                                    class="fe fe-edit"></span></a>-->
+<!--                            <a href="javascript:void(0)" class="text-muted"><span-->
+<!--                                    class="fe fe-trash-2"></span></a>-->
+<!--                        </div>-->
+<!--                    </li>-->
                 </ul>
             </div>
         </div>

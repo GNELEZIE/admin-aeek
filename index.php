@@ -26,6 +26,8 @@ if(file_exists('views/'.$lien.'.php')){
 
 }elseif(file_exists('views/article/'.$lien.'.php')){
     require_once 'views/article/'.$lien.'.php';
+}elseif(file_exists('views/commentaire/'.$lien.'.php')){
+    require_once 'views/commentaire/'.$lien.'.php';
 }
 else{
     header('location:'.$domaine.'/error');
