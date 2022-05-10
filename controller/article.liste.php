@@ -48,7 +48,7 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
 
         $arr_list['data'][] = array(
             date_fr($data['date_article']),
-            html_entity_decode(stripslashes($data['titre'])),
+            reduit_text(html_entity_decode(stripslashes($data['titre'])), '30'),
             html_entity_decode(stripslashes($cat['nom'])),
             $statut,
             $action
