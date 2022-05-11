@@ -13,12 +13,17 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
     include_once "../model/Article.class.php";
     include_once "../model/Categorie.class.php";
     include_once "../model/Comment.class.php";
+    include_once "../model/Reponse.class.php";
 
 
 
     $listeCom= $comment->getAllComment();
     while($data = $listeCom->fetch()) {
-
+        $nbs = $reponse->nbReponses($data['id_comment'])->fetch();
+        $status = '<span class="tag tag-radus tag-round tag-outline-success">En ligne</span>';
+        $auth = '<a href="#" class="text-noir">'.html_entity_decode(stripslashes($data['nom'])).'<br> <small>'.html_entity_decode(stripslashes($data['email'])).'</small></a>';
+        $des = '<a href="#" class="text-noir">'.reduit_text(html_entity_decode(stripslashes($data['message'])),'30').'</a>';
+   $rsp = '<button type="button" class="btn btn-warning btn-sm d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'.$nbs['nb'].'</font></font></button>';
         $action = '<div class="btn-list text-center">
                                         <a href="#modalUpdCat" id="bEdit" type="button" class="btn btn-sm btn-green-transparent" data-bs-toggle="modal" data-id="'.$data['id_comment'].'" data-name="'. html_entity_decode(stripslashes($data['nom'])).'" data-target="#modalUpdCat">
                                             <span class="fe fe-edit"> </span>
@@ -30,11 +35,11 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
 
         $arr_list['data'][] = array(
             date_fr($data['date_comment']),
-            reduit_text(html_entity_decode(stripslashes($data['message'])),'70'),
-            html_entity_decode(stripslashes($data['nom'])),
+            $auth,
+            $des,
+            $rsp,
+            $status,
             $action
-
-
         );
     }
 }

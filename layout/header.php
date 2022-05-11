@@ -24,6 +24,9 @@
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
 
     <style>
+        .text-noir{
+            color: #000000 !important;
+        }
         .slide-item.active, .slide-item:hover, .slide-item:focus{
             background: #ff772921 !important;
             color: #ff7729 !important;

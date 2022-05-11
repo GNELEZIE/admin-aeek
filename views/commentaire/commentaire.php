@@ -21,6 +21,92 @@ require_once 'layout/header.php';
 
 
 <div class="container pt-5 mt-5">
+    <div class="row">
+
+        <!-- COL END -->
+
+        <!-- COL END -->
+
+        <!-- COL END -->
+        
+        <!-- COL END -->
+        <div class="col-sm-6 col-lg-6 col-md-12 col-xl-3">
+            <div class="card">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="circle-icon bg-primary text-center align-self-center box-primary-shadow bradius">
+                            <img src="<?=$asset?>/images/svgs/circle.svg" alt="img" class="card-img-absolute">
+                            <i class="lnr lnr-user fs-30  text-white mt-4"></i>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body p-4">
+                            <h2 class="mb-2 fw-normal mt-2">9,678</h2>
+                            <h5 class="fw-normal mb-0">Total Requests</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- COL END -->
+        <div class="col-sm-6 col-lg-6 col-md-12 col-xl-3">
+            <div class="card">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card-img-absolute circle-icon bg-secondary align-items-center text-center box-secondary-shadow bradius">
+                            <img src="<?=$asset?>/images/svgs/circle.svg" alt="img" class="card-img-absolute">
+                            <i class="lnr lnr-briefcase fs-30 text-white mt-4"></i>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body p-4">
+                            <h2 class="mb-2 fw-normal mt-2">10,257</h2>
+                            <h5 class="fw-normal mb-0">Total Revenue</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- COL END -->
+        <div class="col-sm-6 col-lg-6 col-md-12 col-xl-3">
+            <div class="card">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card-img-absolute  circle-icon bg-success align-items-center text-center box-success-shadow bradius">
+                            <img src="<?=$asset?>/images/svgs/circle.svg" alt="img" class="card-img-absolute">
+                            <i class="lnr lnr-gift fs-30 text-white mt-4"></i>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body p-4">
+                            <h2 class="mb-2 fw-normal mt-2">$67,953</h2>
+                            <h5 class="fw-normal mb-0">Total Profit</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- COL END -->
+        <div class="col-sm-6 col-lg-6 col-md-12 col-xl-3">
+            <div class="card">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="card-img-absolute circle-icon bg-danger align-items-center text-center box-danger-shadow bradius">
+                            <img src="<?=$asset?>/images/svgs/circle.svg" alt="img" class="card-img-absolute">
+                            <i class=" lnr lnr-cart fs-30 text-white mt-4"></i>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="card-body p-4">
+                            <h2 class="mb-2 fw-normal mt-2">7,632</h2>
+                            <h5 class="fw-normal mb-0">Total Sales</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- COL END -->
+    </div>
     <div class="row pt-5 mt-5">
         <div class="col-lg-12">
             <div class="card">
@@ -34,8 +120,10 @@ require_once 'layout/header.php';
                             <thead>
                             <tr class="border-bottom">
                                 <th class="wd-15p">Date de création</th>
+                                <th class="wd-15p">Auteur</th>
                                 <th class="wd-15p">Message</th>
-                                <th class="wd-15p">Nom</th>
+                                <th class="wd-15p">Réponse</th>
+                                <th class="wd-15p">Statut</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                             </thead>
