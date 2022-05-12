@@ -44,15 +44,14 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
                                         <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="supprimer('.$data['id_article'].')">
                                             <span class="fe fe-trash-2"> </span>
                                         </a>
+                                          <a href="'.$domaine.'/show/'.$data['slug'].'" id="bDel" class="btn  btn-sm btn-info" target="_blank">
+                                            <span class="fe fe-eye"> </span>
+                                        </a>
                                     </div>';
 
         $arr_list['data'][] = array(
             date_fr($data['date_article']),
-<<<<<<< HEAD
             reduit_text(html_entity_decode(stripslashes($data['titre'])), '30'),
-=======
-            reduit_text(html_entity_decode(stripslashes($data['titre'])),'50'),
->>>>>>> d2ef97a2c4c8ff5c3d252d567edd325282164b4c
             html_entity_decode(stripslashes($cat['nom'])),
             $statut,
             $action

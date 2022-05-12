@@ -74,7 +74,19 @@ class Reponse{
 //    }
 //Update
 
+    public function deleteReponse($id){
 
+        $query = "DELETE  FROM reponse WHERE comment_id   = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
 
 
 

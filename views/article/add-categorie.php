@@ -226,7 +226,7 @@ require_once 'layout/footer.php';
         if(id){
             swal({
                     title: "Voulez vous supprimer la catégorie ?",
-                    text: "L'action va supprimer le catégorie sélectionné",
+                    text: "L'action va supprimer la catégorie sélectionné",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",

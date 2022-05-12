@@ -20,18 +20,42 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
     $listeCom= $comment->getAllComment();
     while($data = $listeCom->fetch()) {
         $nbs = $reponse->nbReponses($data['id_comment'])->fetch();
-        $status = '<span class="tag tag-radus tag-round tag-outline-success">En ligne</span>';
+
+
         $auth = '<a href="#" class="text-noir">'.html_entity_decode(stripslashes($data['nom'])).'<br> <small>'.html_entity_decode(stripslashes($data['email'])).'</small></a>';
+
         $des = '<a href="#" class="text-noir">'.reduit_text(html_entity_decode(stripslashes($data['message'])),'30').'</a>';
-   $rsp = '<button type="button" class="btn btn-warning btn-sm d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'.$nbs['nb'].'</font></font></button>';
-        $action = '<div class="btn-list text-center">
-                                        <a href="#modalUpdCat" id="bEdit" type="button" class="btn btn-sm btn-green-transparent" data-bs-toggle="modal" data-id="'.$data['id_comment'].'" data-name="'. html_entity_decode(stripslashes($data['nom'])).'" data-target="#modalUpdCat">
-                                            <span class="fe fe-edit"> </span>
+
+        $rsp = '<button type="button" class="btn btn-warning btn-sm d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'.$nbs['nb'].'</font></font></button>';
+
+         if($data['statut'] == 0){
+             $status = '<span class="tag tag-radus tag-round tag-warning">En attente</span>';
+             $action = '<div class="btn-list text-center">
+
+                                          <a href="#modalUpdComment" id="bEdit" type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-id="'.$data['id_comment'].'"  data-name="'. html_entity_decode(stripslashes($data['nom'])).'" data-message="'. html_entity_decode(stripslashes($data['message'])).'" data-target="#modalUpdComment">
+                                            <span class="fe fe-eye"> </span>
+                                        </a>
+                                         <a href="#" id="bEdit" type="button" class="btn btn-sm btn-green-transparent" onclick="valider('.$data['id_comment'].')">
+                                            <span class="fa fa-bell-o"> </span>
                                         </a>
                                         <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="supprimer('.$data['id_comment'].')">
                                             <span class="fe fe-trash-2"> </span>
                                         </a>
                                     </div>';
+         }else{
+             $status = '<span class="tag tag-radus tag-round tag-success">En ligne</span>';
+             $action = '<div class="btn-list text-center">
+
+                                          <a href="#modalUpdComment" id="bEdit" type="button" class="btn btn-sm btn-info" data-bs-toggle="modal" data-id="'.$data['id_comment'].'"  data-name="'. html_entity_decode(stripslashes($data['nom'])).'" data-message="'. html_entity_decode(stripslashes($data['message'])).'" data-target="#modalUpdComment">
+                                            <span class="fe fe-eye"> </span>
+                                        </a>
+                                        <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="supprimer('.$data['id_comment'].')">
+                                            <span class="fe fe-trash-2"> </span>
+                                        </a>
+                                    </div>';
+         }
+
+
 
         $arr_list['data'][] = array(
             date_fr($data['date_comment']),

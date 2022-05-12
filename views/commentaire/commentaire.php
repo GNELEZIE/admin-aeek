@@ -116,7 +116,7 @@ require_once 'layout/header.php';
 
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-nowrap border-bottom" id="tableCat">
+                        <table class="table text-nowrap border-bottom" id="tableComment">
                             <thead>
                             <tr class="border-bottom">
                                 <th class="wd-15p">Date de création</th>
@@ -142,27 +142,27 @@ require_once 'layout/header.php';
 
 <!--// Modal-->
 
-<div class="modal fade" id="modalUpdCat">
+<div class="modal fade" id="modalUpdComment">
     <div class="modal-dialog modal-dialog-centered text-center" role="document">
         <div class="modal-content modal-content-demo p-5">
             <div class="modal-header" style="border-bottom: 0 !important;">
-                <h3 class="modal-title">Modifier la catégorie</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Commentaire de : <span id="nom"></span> </h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
-            <form method="post" id="catUpdForm">
+            <form method="post" id="comentUpdForm">
                 <div class="modal-body">
                     <div class="updSucces"></div>
                     <div class="updError"></div>
                 </div>
                 <div class="row row-sm">
                     <div class="form-group text-left pl-2">
-                        <label for="cat">Catégorie <i class="required"></i> </label>
-                        <input class="form-control" placeholder="Nom de la catégorie" type="text" name="udpCat" id="udpCat" required>
+                        <label for="cat">Vous pouvez modifier le commentaire <i class="required"></i> </label>
+                        <textarea class="form-control" placeholder="Nom de la catégorie" rows="10" name="message" id="message" required></textarea>
                         <input type="hidden" class="form-control" name="formkeys" value="<?= $token ?>">
-                        <input type="hidden" class="form-control" name="idCat" id="idCat">
+                        <input type="hidden" class="form-control" name="idComment" id="idComment">
                     </div>
                 </div>
                 <div class="modal-footer" style="border-top: 0 !important;">
-                    <button class="btn btn-green-transparent">Ajouter une catégorie</button>
+                    <button class="btn btn-green-transparent">Valider la modification</button>
                     <a href="javascript:void(0);" class="btn btn-red-transparent" data-bs-dismiss="modal">Annuler</a>
                 </div>
             </form>
@@ -201,10 +201,10 @@ require_once 'layout/footer.php';
 ?>
 
 <script>
-    var tableCat;
+    var tableComment;
     $(document).ready(function() {
 
-        tableCat = $('#tableCat').DataTable({
+        tableComment = $('#tableComment').DataTable({
             "ajax":{
                 "type":"post",
                 "url":"<?=$domaine_admin?>/controller/commentaire.liste.php",
@@ -236,21 +236,23 @@ require_once 'layout/footer.php';
             }
         });
 
-        $('#modalUpdCat').on('show.bs.modal', function (e) {
+        $('#modalUpdComment').on('show.bs.modal', function (e) {
             var rowid = $(e.relatedTarget).data('id');
             var nom = $(e.relatedTarget).data('name');
-            $('#idCat').val(rowid);
-            $('#udpCat').val(nom);
+            var description = $(e.relatedTarget).data('message');
+            $('#idComment').val(rowid);
+            $('#nom').html(nom);
+            $('#message').val(description);
         });
 
-        $('#catUpdForm').submit(function(e){
+        $('#comentUpdForm').submit(function(e){
             e.preventDefault();
-            var value = document.getElementById('catUpdForm');
+            var value = document.getElementById('comentUpdForm');
             var form = new FormData(value);
 
             $.ajax({
                 method: 'post',
-                url: '<?=$domaine_admin?>/controller/update.categorie.php',
+                url: '<?=$domaine_admin?>/controller/update.comment.php',
                 data: form,
                 contentType:false,
                 cache:false,
@@ -259,13 +261,13 @@ require_once 'layout/footer.php';
                 success: function(data){
                     alert(data.data_info);
                     if(data.data_info == "ok"){
-                        tableCat.ajax.reload(null,false);
-                        $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Catégorie modifiée avec succès !</div>');
+                        tableComment.ajax.reload(null,false);
+                        $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Commentaire modifiée avec succès !</div>');
                     }else if(data.data_info == ''){
 
                     }
                     else {
-                        $('.updError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification de la catégorie</div>');
+                        $('.updError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification du commentaire</div>');
                     }
                 },
                 error: function (error, ajaxOptions, thrownError) {
@@ -273,6 +275,10 @@ require_once 'layout/footer.php';
                 }
             });
         });
+
+
+
+
         $('#catForm').submit(function(e){
             e.preventDefault();
             var value = document.getElementById('catForm');
@@ -289,7 +295,7 @@ require_once 'layout/footer.php';
                 success: function(data){
 //                alert(data.data_info);
                     if(data.data_info == "ok"){
-                        tableCat.ajax.reload(null,false);
+                        tableComment.ajax.reload(null,false);
                         $('#cat').val('');
                         $('.succes').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Catégorie ajoutée avec succès !</div>');
                     }else {
@@ -309,11 +315,40 @@ require_once 'layout/footer.php';
     });
 
     // supprimer
+    function valider(id = null){
+        if(id){
+            swal({
+                    title: "Voulez vous valider le commentaire ?",
+                    text: "L'action va valider le commentaire sélectionné",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Oui, Valider",
+                    cancelButtonText: "Non, annuler",
+                    closeOnConfirm: false
+                },
+
+                function(isConfirm){
+                    if (isConfirm) {
+                        $.post('<?=$domaine_admin?>/controller/valid.comment.php', {id : id}, function (data) {
+                            if(data == "ok"){
+                                swal("Opération effectuée avec succès!","", "success");
+                                tableComment.ajax.reload(null,false);
+                            }else{
+                                swal("Impossible de valder le commentaire!", "Une erreur s'est produite lors du traitement des données.", "error");
+                            }
+                        });
+                    }
+                });
+        }else{
+            alert('actualise');
+        }
+    }
     function supprimer(id = null){
         if(id){
             swal({
-                    title: "Voulez vous supprimer la catégorie ?",
-                    text: "L'action va supprimer le catégorie sélectionné",
+                    title: "Voulez vous supprimer le commentaire ?",
+                    text: "L'action va supprimer le commentaire",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -324,12 +359,12 @@ require_once 'layout/footer.php';
 
                 function(isConfirm){
                     if (isConfirm) {
-                        $.post('<?=$domaine_admin?>/controller/delete.categorie.php', {id : id}, function (data) {
+                        $.post('<?=$domaine_admin?>/controller/delete.comment.php', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Opération effectuée avec succès!","", "success");
-                                tableCat.ajax.reload(null,false);
+                                tableComment.ajax.reload(null,false);
                             }else{
-                                swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
+                                swal("Impossible de supprimer le commentaire!", "Une erreur s'est produite lors du traitement des données.", "error");
                             }
                         });
                     }

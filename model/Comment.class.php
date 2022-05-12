@@ -60,15 +60,14 @@ class Comment{
     }
 //Update
 
-
-
-    public function updateCouverturePhoto($couverture,$id){
-        $query = "UPDATE article
-            SET couverture = :couverture
-            WHERE id_article = :id ";
+    //Update
+    public function updateStatutComment($etat,$id){
+        $query = "UPDATE comment
+            SET statut = :etat
+            WHERE id_comment = :id ";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
-            "couverture" => $couverture,
+            "etat" => $etat,
             "id" => $id
         ));
 
@@ -76,6 +75,36 @@ class Comment{
         return $nb;
 
     }
+
+    public function updateComment($message,$id){
+        $query = "UPDATE comment
+                 SET message = :message
+           WHERE id_comment = :id ";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "message" => $message,
+            "id" => $id
+
+        ));
+        $nb = $rs->rowCount();
+        return $nb;
+    }
+
+    // Delete
+    public function deleteComment($id){
+
+        $query = "DELETE  FROM comment WHERE id_comment  = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
+
 
 
 }
