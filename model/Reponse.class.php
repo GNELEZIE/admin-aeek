@@ -33,6 +33,12 @@ class Reponse{
         $rs = $this->bdd->query($query);
         return $rs;
     }
+    public function getAllReponses(){
+        $query = "SELECT * FROM reponse
+          ORDER BY id_reponse DESC ";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
 
     public function getReponseByArticleId($id){
         $query = "SELECT * FROM reponse
@@ -55,6 +61,13 @@ class Reponse{
     }
 
 //Count
+    public function nbRepon(){
+
+        $query = "SELECT COUNT(*) as nb FROM reponse";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
     public function nbReponses($com_id){
         $query = "SELECT COUNT(*) as nb FROM reponse
         WHERE comment_id = :com_id ";
