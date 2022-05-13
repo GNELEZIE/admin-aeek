@@ -18,7 +18,7 @@ include_once 'model/Article.class.php';
 include_once 'model/Categorie.class.php';
 include_once 'model/Comment.class.php';
 include_once 'model/Reponse.class.php';
-
+include_once 'model/Compter.class.php';
 
 
 

@@ -8,11 +8,32 @@ if(!isset($_SESSION['useraeek'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
+$vus = $compter->SommeVus()->fetch();
 $list = $article->getAllArticle();
 if($data = $list->fetch()){
     $nbs = $article->getAllNbrArticle()->fetch();
 }
 
+$rs = $comment->getAllComment();
+$rsEnAt = $comment->getAllCommentEnAttente();
+$rsValid = $comment->getAllCommentValider();
+$rsr = $reponse->getAllReponses();
+
+if($resl = $rs->fetch()){
+    $comNb = $comment->nbComments()->fetch();
+    $nbsComt =  $comNb['nb'];
+}else{
+    $nbsComt = 0;
+}
+
+
+if($reslr = $rsr->fetch()){
+    $rpNb = $reponse->nbRepon()->fetch();
+    $nbsR =  $rpNb['nb'];
+}else{
+    $nbsR = 0;
+}
+$nbTotComment = $nbsComt + $nbsR;
 require_once 'layout/header.php';
 ?>
 
@@ -23,8 +44,8 @@ require_once 'layout/header.php';
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="text-white">
-                            <h2 class="mb-0 number-font">7,865</h2>
-                            <p class="text-white mb-0">Total Followers </p>
+                            <h2 class="mb-0 number-font"><?=$vus['nb']?></h2>
+                            <p class="text-white mb-0">Visiteurs</p>
                         </div>
                         <div class="ms-auto"> <i class="fa fa-user-o text-white fs-30 me-2 mt-2"></i> </div>
                     </div>
@@ -51,8 +72,8 @@ require_once 'layout/header.php';
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="text-white">
-                            <h2 class="mb-0 number-font">98</h2>
-                            <p class="text-white mb-0">Total Comments</p>
+                            <h2 class="mb-0 number-font"><?=$nbTotComment?></h2>
+                            <p class="text-white mb-0">Commentaires</p>
                         </div>
                         <div class="ms-auto"> <i class="fa fa-comment-o text-white fs-30 me-2 mt-2"></i> </div>
                     </div>

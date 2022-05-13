@@ -14,6 +14,18 @@ class Comment{
         $rs = $this->bdd->query($query);
         return $rs;
     }
+ public function getAllCommentEnAttente(){
+        $query = "SELECT * FROM comment
+         WHERE statut =!1  ORDER BY id_comment DESC ";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
+    public function getAllCommentValider(){
+        $query = "SELECT * FROM comment
+         WHERE statut =!0  ORDER BY id_comment DESC ";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
 
     public function getAllCommentCinq(){
         $query = "SELECT * FROM comment
@@ -49,6 +61,24 @@ class Comment{
 
         return $rs;
     }
+
+    public function nbCommentsEnAtt(){
+
+        $query = "SELECT COUNT(*) as nb FROM comment
+                  WHERE statut =!1 ";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
+    public function nbCommentsValid(){
+
+        $query = "SELECT COUNT(*) as nb FROM comment
+                  WHERE statut =!0 ";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
+
     public function nbComment($id){
         $query = "SELECT  COUNT(*) as nb FROM comment
         WHERE article_id = :id";

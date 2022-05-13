@@ -14,13 +14,30 @@ if(!isset($_SESSION['useraeek'])){
 //update.categorie
 //require_once 'controller/add.categorie.php';
 $rs = $comment->getAllComment();
+$rsEnAt = $comment->getAllCommentEnAttente();
+$rsValid = $comment->getAllCommentValider();
 $rsr = $reponse->getAllReponses();
+
+if($rsEnAts = $rsEnAt->fetch()){
+    $comNbEn = $comment->nbCommentsEnAtt()->fetch();
+    $nbsComtEnAtt =  $comNbEn['nb'];
+}else{
+    $nbsComtEnAtt = 0;
+}
+if($rsV = $rsValid->fetch()){
+    $comNbValid = $comment->nbCommentsValid()->fetch();
+    $nbsComtValider =  $comNbValid['nb'];
+}else{
+    $nbsComtValider = 0;
+}
 if($resl = $rs->fetch()){
     $comNb = $comment->nbComments()->fetch();
     $nbsComt =  $comNb['nb'];
 }else{
     $nbsComt = 0;
 }
+
+
 if($reslr = $rsr->fetch()){
     $rpNb = $reponse->nbRepon()->fetch();
     $nbsR =  $rpNb['nb'];
@@ -75,7 +92,7 @@ require_once 'layout/header.php';
                     </div>
                     <div class="col-8">
                         <div class="card-body p-4">
-                            <h2 class="mb-2 fw-normal mt-2">257</h2>
+                            <h2 class="mb-2 fw-normal mt-2"><?=$nbsComtEnAtt?></h2>
                             <h5 class="fw-normal mb-0"> En attente</h5>
                         </div>
                     </div>
@@ -94,7 +111,7 @@ require_once 'layout/header.php';
                     </div>
                     <div class="col-8">
                         <div class="card-body p-4">
-                            <h2 class="mb-2 fw-normal mt-2">953</h2>
+                            <h2 class="mb-2 fw-normal mt-2"><?=$nbsComtValider?></h2>
                             <h5 class="fw-normal mb-0">Validé</h5>
                         </div>
                     </div>
@@ -113,8 +130,8 @@ require_once 'layout/header.php';
                     </div>
                     <div class="col-8">
                         <div class="card-body p-4">
-                            <h2 class="mb-2 fw-normal mt-2">7,632</h2>
-                            <h5 class="fw-normal mb-0">Total Sales</h5>
+                            <h2 class="mb-2 fw-normal mt-2"><?=$nbsR?></h2>
+                            <h5 class="fw-normal mb-0">Réponses</h5>
                         </div>
                     </div>
                 </div>
