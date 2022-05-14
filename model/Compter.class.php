@@ -34,6 +34,15 @@ class Compter{
         ));
         return $rs;
     }
+    public function nbByDevices($devices){
+        $query = "SELECT  SUM(pages_vues) as sm FROM stats_visite
+        WHERE devices = :devices";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "devices" => $devices
+        ));
+        return $rs;
+    }
 
 }
 

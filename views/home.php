@@ -23,8 +23,12 @@ if($visAll = $allVis->fetch()){
     $nbVusEdg = $compter->nbByBrowser('Edg')->fetch();
     $nbVusSafari = $compter->nbByBrowser('Safari')->fetch();
     $nbVusOpera= $compter->nbByBrowser('opera')->fetch();
+    $nbMobile= $compter->nbByDevices('mobile')->fetch();
+    $nbDest= $compter->nbByDevices('pc')->fetch();
     $nbVisiteurs = $visit['nb'];
     $nbVu = $nVus['nb'];
+  $nbPc = pourcentage($nbVu,$nbDest['sm']);
+  $mobil = pourcentage($nbVu,$nbMobile['sm']);
   $chrome = pourcentage($nbVu,$nbVusChrome['sm']);
   $Firefox = pourcentage($nbVu,$nbVusFiref['sm']);
   $Explorer = pourcentage($nbVu,$nbVusExplorer['sm']);
@@ -33,6 +37,8 @@ if($visAll = $allVis->fetch()){
   $Opera = pourcentage($nbVu,$nbVusOpera['sm']);
 
 }else{
+    $nbPc =0;
+    $mobil =0;
     $nbVisiteurs =0;
     $nbVu = 0;
     $chrome = '0%';
@@ -371,13 +377,13 @@ require_once 'layout/header.php';
                 <div class="card-header pb-0 border-bottom-0">
                     <h3 class="card-title">Mobile</h3>
                     <div class="card-options">
-                        <a class="btn btn-sm btn-primary" href="javascript:void(0)"><i class="fa fa-mobile mb-0"></i></a>
+                        <a class="btn btn-sm btn-primary" href="javascript:void(0)"><i class="fa fa-mobile mb-0" style="font-size: 45px;"></i></a>
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <h3 class="d-inline-block mb-2">46,789</h3>
+                    <h3 class="d-inline-block mb-2"><?=$mobil?>%</h3>
                     <div class="progress h-2 mt-2 mb-2">
-                        <div class="progress-bar bg-primary" style="width: 50%;" role="progressbar"></div>
+                        <div class="progress-bar bg-primary" style="width: <?=floor($mobil)?>%;" role="progressbar"></div>
                     </div>
                     <div class="float-start">
                         <div class="mt-2">
@@ -394,13 +400,13 @@ require_once 'layout/header.php';
                 <div class="card-header pb-0 border-bottom-0">
                     <h3 class="card-title">Ordinateur</h3>
                     <div class="card-options">
-                        <a class="btn btn-sm btn-warning" href="javascript:void(0)"><i class="fa fa-desktop mb-0"></i></a>
+                        <a class="btn btn-sm btn-warning" href="javascript:void(0)"><i class="fa fa-desktop mb-0"  style="font-size: 45px;"></i></a>
                     </div>
                 </div>
                 <div class="card-body pt-0">
-                    <h3 class="d-inline-block mb-2">32,784</h3>
+                    <h3 class="d-inline-block mb-2"><?=$nbPc?>%</h3>
                     <div class="progress h-2 mt-2 mb-2">
-                        <div class="progress-bar bg-warning" style="width: 50%;" role="progressbar"></div>
+                        <div class="progress-bar bg-warning" style="width: <?=floor($nbPc)?>%;" role="progressbar"></div>
                     </div>
                     <div class="float-start">
                         <div class="mt-2">

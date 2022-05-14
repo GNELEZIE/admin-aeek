@@ -29,9 +29,15 @@
                     </a>
                 </li>
                 <li class="is-expanded">
-                    <a class="slide-item" href="<?=$domaine_admin?>/Blog">
+                    <a class="slide-item" href="<?=$domaine_admin?>/blog">
                         <i class="side-menu__icon fe fe-home"></i>
                         Blog
+                    </a>
+                </li>
+                <li class="is-expanded">
+                    <a class="slide-item" href="<?=$domaine_admin?>/banniere">
+                        <i class="side-menu__icon fe fe-home"></i>
+                        Bannière
                     </a>
                 </li>
                 <li class="is-expanded">
