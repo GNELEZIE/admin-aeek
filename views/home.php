@@ -8,7 +8,46 @@ if(!isset($_SESSION['useraeek'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
-$vus = $compter->SommeVus()->fetch();
+
+
+
+
+$allVis = $compter->getAllVus();
+
+if($visAll = $allVis->fetch()){
+    $visit = $compter->nbVisiteurs()->fetch();
+    $nVus = $compter->SommeVus()->fetch();
+    $nbVusChrome = $compter->nbByBrowser('Chrome')->fetch();
+    $nbVusFiref = $compter->nbByBrowser('Firefox')->fetch();
+    $nbVusExplorer = $compter->nbByBrowser('Explorer')->fetch();
+    $nbVusEdg = $compter->nbByBrowser('Edg')->fetch();
+    $nbVusSafari = $compter->nbByBrowser('Safari')->fetch();
+    $nbVusOpera= $compter->nbByBrowser('opera')->fetch();
+    $nbVisiteurs = $visit['nb'];
+    $nbVu = $nVus['nb'];
+  $chrome = pourcentage($nbVu,$nbVusChrome['sm']);
+  $Firefox = pourcentage($nbVu,$nbVusFiref['sm']);
+  $Explorer = pourcentage($nbVu,$nbVusExplorer['sm']);
+  $Edg = pourcentage($nbVu,$nbVusEdg['sm']);
+  $Safari = pourcentage($nbVu,$nbVusSafari['sm']);
+  $Opera = pourcentage($nbVu,$nbVusOpera['sm']);
+
+}else{
+    $nbVisiteurs =0;
+    $nbVu = 0;
+    $chrome = '0%';
+    $Firefox ='0%';
+    $Explorer = '0%';
+    $Edg ='0%';
+    $Safari ='0%';
+    $Opera = '0%';
+}
+
+
+
+
+
+
 $list = $article->getAllArticle();
 if($data = $list->fetch()){
     $nbs = $article->getAllNbrArticle()->fetch();
@@ -44,7 +83,7 @@ require_once 'layout/header.php';
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="text-white">
-                            <h2 class="mb-0 number-font"><?=$vus['nb']?></h2>
+                            <h2 class="mb-0 number-font"><?=$nbVisiteurs?></h2>
                             <p class="text-white mb-0">Visiteurs</p>
                         </div>
                         <div class="ms-auto"> <i class="fa fa-user-o text-white fs-30 me-2 mt-2"></i> </div>
@@ -58,10 +97,10 @@ require_once 'layout/header.php';
                 <div class="card-body">
                     <div class="d-flex">
                         <div class="text-white">
-                            <h2 class="mb-0 number-font">86,964</h2>
-                            <p class="text-white mb-0">Total Likes</p>
+                            <h2 class="mb-0 number-font"><?=$nbVu?></h2>
+                            <p class="text-white mb-0">Vus</p>
                         </div>
-                        <div class="ms-auto"> <i class="fa fa-heart-o text-white fs-30 me-2 mt-2"></i> </div>
+                        <div class="ms-auto"> <i class="fa fa-eye text-white fs-30 me-2 mt-2"></i> </div>
                     </div>
                 </div>
             </div>
@@ -205,10 +244,11 @@ require_once 'layout/header.php';
             </div>
         </div>
     </div>
+
     <div class="col-xl-6 col-md-6">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title fw-semibold">Browser Usage</h4>
+                <h4 class="card-title fw-semibold">Navigateur</h4>
             </div>
             <div class="card-body">
                 <div class="browser-stats">
@@ -220,13 +260,12 @@ require_once 'layout/header.php';
                         <div class="col-sm-10 col-lg-9 col-xl-9 col-xxl-10 ps-sm-0">
                             <div class="d-flex align-items-end justify-content-between mb-1">
                                 <h6 class="mb-1">Chrome</h6>
-                                <h6 class="fw-semibold mb-1">35,502 <span
+                                <h6 class="fw-semibold mb-1"><?=$chrome?>%<span
                                         class="text-success fs-11">(<i
                                             class="fe fe-arrow-up"></i>12.75%)</span></h6>
                             </div>
                             <div class="progress h-2 mb-3">
-                                <div class="progress-bar bg-primary" style="width: 70%;"
-                                     role="progressbar"></div>
+                                <div class="progress-bar bg-primary" style="width: <?=floor($chrome)?>%;" role="progressbar"></div>
                             </div>
                         </div>
                     </div>
@@ -238,12 +277,12 @@ require_once 'layout/header.php';
                         <div class="col-sm-10 col-lg-9 col-xl-9 col-xxl-10 ps-sm-0">
                             <div class="d-flex align-items-end justify-content-between mb-1">
                                 <h6 class="mb-1">Opera</h6>
-                                <h6 class="fw-semibold mb-1">12,563 <span
+                                <h6 class="fw-semibold mb-1"><?=$Opera?>% <span
                                         class="text-danger fs-11">(<i
                                             class="fe fe-arrow-down"></i>15.12%)</span></h6>
                             </div>
                             <div class="progress h-2 mb-3">
-                                <div class="progress-bar bg-secondary" style="width: 40%;"
+                                <div class="progress-bar bg-secondary" style="width: <?=floor($Opera)?>%;"
                                      role="progressbar"></div>
                             </div>
                         </div>
@@ -256,12 +295,12 @@ require_once 'layout/header.php';
                         <div class="col-sm-10 col-lg-9 col-xl-9 col-xxl-10 ps-sm-0">
                             <div class="d-flex align-items-end justify-content-between mb-1">
                                 <h6 class="mb-1">IE</h6>
-                                <h6 class="fw-semibold mb-1">25,364 <span
+                                <h6 class="fw-semibold mb-1"><?=$Explorer?>%<span
                                         class="text-success fs-11">(<i
                                             class="fe fe-arrow-down"></i>24.37%)</span></h6>
                             </div>
                             <div class="progress h-2 mb-3">
-                                <div class="progress-bar bg-success" style="width: 50%;"
+                                <div class="progress-bar bg-success" style="width: <?=floor($Explorer)?>%;"
                                      role="progressbar"></div>
                             </div>
                         </div>
@@ -274,12 +313,12 @@ require_once 'layout/header.php';
                         <div class="col-sm-10 col-lg-9 col-xl-9 col-xxl-10 ps-sm-0">
                             <div class="d-flex align-items-end justify-content-between mb-1">
                                 <h6 class="mb-1">Firefox</h6>
-                                <h6 class="fw-semibold mb-1">14,635 <span
+                                <h6 class="fw-semibold mb-1"><?=$Firefox?>%<span
                                         class="text-success fs-11">(<i
                                             class="fe fe-arrow-down"></i>15.63%)</span></h6>
                             </div>
                             <div class="progress h-2 mb-3">
-                                <div class="progress-bar bg-danger" style="width: 50%;"
+                                <div class="progress-bar bg-danger" style="width: <?=floor($Firefox)?>%;"
                                      role="progressbar"></div>
                             </div>
                         </div>
@@ -292,12 +331,12 @@ require_once 'layout/header.php';
                         <div class="col-sm-10 col-lg-9 col-xl-9 col-xxl-10 ps-sm-0">
                             <div class="d-flex align-items-end justify-content-between mb-1">
                                 <h6 class="mb-1">Edge</h6>
-                                <h6 class="fw-semibold mb-1">15,453 <span
+                                <h6 class="fw-semibold mb-1"><?=$Edg?>%<span
                                         class="text-danger fs-11">(<i
                                             class="fe fe-arrow-down"></i>23.70%)</span></h6>
                             </div>
                             <div class="progress h-2 mb-3">
-                                <div class="progress-bar bg-warning" style="width: 10%;"
+                                <div class="progress-bar bg-warning" style="width: <?=floor($Edg)?>%;"
                                      role="progressbar"></div>
                             </div>
                         </div>
@@ -310,38 +349,68 @@ require_once 'layout/header.php';
                         <div class="col-sm-10 col-lg-9 col-xl-9 col-xxl-10 ps-sm-0">
                             <div class="d-flex align-items-end justify-content-between mb-1">
                                 <h6 class="mb-1">Safari</h6>
-                                <h6 class="fw-semibold mb-1">10,054 <span
+                                <h6 class="fw-semibold mb-1"><?=$Safari?>%<span
                                         class="text-success fs-11">(<i
                                             class="fe fe-arrow-up"></i>11.04%)</span></h6>
                             </div>
                             <div class="progress h-2 mb-3">
-                                <div class="progress-bar bg-info" style="width: 40%;"
+                                <div class="progress-bar bg-info" style="width: <?=floor($Safari)?>%;"
                                      role="progressbar"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-2 col-lg-3 col-xl-3 col-xxl-2 mb-sm-0 mb-3">
-                            <img src="<?=$asset?>/images/browsers/netscape.svg" class="img-fluid"
-                                 alt="img">
-                        </div>
-                        <div class="col-sm-10 col-lg-9 col-xl-9 col-xxl-10 ps-sm-0">
-                            <div class="d-flex align-items-end justify-content-between mb-1">
-                                <h6 class="mb-1">Netscape</h6>
-                                <h6 class="fw-semibold mb-1">35,502 <span
-                                        class="text-success fs-11">(<i
-                                            class="fe fe-arrow-up"></i>12.75%)</span></h6>
-                            </div>
-                            <div class="progress h-2 mb-3">
-                                <div class="progress-bar bg-green" style="width: 30%;"
-                                     role="progressbar"></div>
-                            </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row pb-5 mb-5">
+        <div class="col-md-6 ">
+            <div class="card">
+                <div class="card-header pb-0 border-bottom-0">
+                    <h3 class="card-title">Mobile</h3>
+                    <div class="card-options">
+                        <a class="btn btn-sm btn-primary" href="javascript:void(0)"><i class="fa fa-mobile mb-0"></i></a>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    <h3 class="d-inline-block mb-2">46,789</h3>
+                    <div class="progress h-2 mt-2 mb-2">
+                        <div class="progress-bar bg-primary" style="width: 50%;" role="progressbar"></div>
+                    </div>
+                    <div class="float-start">
+                        <div class="mt-2">
+                            <i class="fa fa-caret-up text-success"></i>
+                            <span>12% increase</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <!-- COL END -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header pb-0 border-bottom-0">
+                    <h3 class="card-title">Ordinateur</h3>
+                    <div class="card-options">
+                        <a class="btn btn-sm btn-warning" href="javascript:void(0)"><i class="fa fa-desktop mb-0"></i></a>
+                    </div>
+                </div>
+                <div class="card-body pt-0">
+                    <h3 class="d-inline-block mb-2">32,784</h3>
+                    <div class="progress h-2 mt-2 mb-2">
+                        <div class="progress-bar bg-warning" style="width: 50%;" role="progressbar"></div>
+                    </div>
+                    <div class="float-start">
+                        <div class="mt-2">
+                            <i class="fa fa-caret-up text-warning"></i>
+                            <span>10% increase</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="sidebar sidebar-right sidebar-animate">

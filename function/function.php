@@ -1,6 +1,16 @@
 <?php
 
 
+//Pourcentage
+if(!function_exists('pourcentage')){
+    function pourcentage($total, $nb){
+
+        $res = ($nb * 100)/$total;
+        $resPourcen = number_format($res,2,'.', ' ');
+        return $resPourcen;
+    }
+}
+
 if(!function_exists('month_fr')){
     function month_fr($mois){
         $mounth_french = array(
