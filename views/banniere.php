@@ -32,11 +32,12 @@ require_once 'layout/header.php';
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-nowrap border-bottom" id="tableCat">
+                        <table class="table text-nowrap border-bottom" id="tableBannier">
                             <thead>
                             <tr class="border-bottom">
                                 <th class="wd-15p">Date de création</th>
-                                <th class="wd-15p">Nom</th>
+                                <th class="wd-15p">Titre</th>
+                                <th class="wd-15p">Sous titre</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                             </thead>
@@ -62,22 +63,10 @@ require_once 'layout/header.php';
             <div class="modal-header" style="border-bottom: 0 !important;">
                 <h3 class="modal-title">Ajouter une bannière</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
-                <form method="post" id="addArticleForm" enctype="multipart/form-data">
+                <form method="post" id="bannierForm" enctype="multipart/form-data">
                     <div class="card-body p-0">
-                        <?php if (!empty($success)) { ?>
-                            <div class="alert alert-success" style="font-size: 14px" role="alert">
-                                <?php foreach ($success as $succ) { ?>
-                                    <?php echo $succ ?>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
-                        <?php if (!empty($errors)) { ?>
-                            <div class="alert alert-danger" style="font-size: 14px" role="alert">
-                                <?php foreach ($errors as $error) { ?>
-                                    <?php echo $error ?>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
+                        <div class="banSucces"></div>
+                        <div class="banError"></div>
                         <div class="row">
 
                             <div class="form-group">
@@ -105,7 +94,7 @@ require_once 'layout/header.php';
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <button  class="btn btn-transparence-orange"> <i class="loader"></i> Publier l'article maintenant</button>
+                        <button  class="btn btn-transparence-orange"> <i class="loader"></i> Ajouter la bannière</button>
                     </div>
                 </form>
 
@@ -118,13 +107,13 @@ require_once 'layout/footer.php';
 ?>
 
 <script>
-    var tableCat;
+    var tableBannier;
     $(document).ready(function() {
 
-        tableCat = $('#tableCat').DataTable({
+        tableBannier = $('#tableBannier').DataTable({
             "ajax":{
                 "type":"post",
-                "url":"<?=$domaine_admin?>/controller/categorie.liste.php",
+                "url":"<?=$domaine_admin?>/controller/banniere.liste.php",
                 "data":{
                     token:"<?=$token?>"
                 }
@@ -160,14 +149,14 @@ require_once 'layout/footer.php';
             $('#udpCat').val(nom);
         });
 
-        $('#catUpdForm').submit(function(e){
+        $('#bannierForm').submit(function(e){
             e.preventDefault();
-            var value = document.getElementById('catUpdForm');
+            var value = document.getElementById('bannierForm');
             var form = new FormData(value);
 
             $.ajax({
                 method: 'post',
-                url: '<?=$domaine_admin?>/controller/update.categorie.php',
+                url: '<?=$domaine_admin?>/controller/banniere.save.php',
                 data: form,
                 contentType:false,
                 cache:false,
@@ -176,42 +165,12 @@ require_once 'layout/footer.php';
                 success: function(data){
                     alert(data.data_info);
                     if(data.data_info == "ok"){
-                        tableCat.ajax.reload(null,false);
-                        $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Catégorie modifiée avec succès !</div>');
-                    }else if(data.data_info == ''){
 
-                    }
-                    else {
-                        $('.updError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification de la catégorie</div>');
-                    }
-                },
-                error: function (error, ajaxOptions, thrownError) {
-                    alert(error.responseText);
-                }
-            });
-        });
-        $('#catForm').submit(function(e){
-            e.preventDefault();
-            var value = document.getElementById('catForm');
-            var form = new FormData(value);
+                        tableBannier.ajax.reload(null,false);
+                        $('.banSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">La bannière a été ajoutée avec succès !</div>');
 
-            $.ajax({
-                method: 'post',
-                url: '<?=$domaine_admin?>/controller/add.categorie.php',
-                data: form,
-                contentType:false,
-                cache:false,
-                processData:false,
-                dataType: 'json',
-                success: function(data){
-//                alert(data.data_info);
-                    if(data.data_info == "ok"){
-                        tableCat.ajax.reload(null,false);
-                        $('#cat').val('');
-                        $('.succes').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Catégorie ajoutée avec succès !</div>');
                     }else {
-                        $('#cat').val('');
-                        $('.error').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de l\'ajoiut de la catégorie</div>');
+                        $('.banError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification de la catégorie</div>');
                     }
                 },
                 error: function (error, ajaxOptions, thrownError) {
@@ -244,7 +203,7 @@ require_once 'layout/footer.php';
                         $.post('<?=$domaine_admin?>/controller/delete.categorie.php', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Opération effectuée avec succès!","", "success");
-                                tableCat.ajax.reload(null,false);
+                                tableBannier.ajax.reload(null,false);
                             }else{
                                 swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
                             }
