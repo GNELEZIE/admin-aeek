@@ -163,7 +163,7 @@ require_once 'layout/footer.php';
                 processData:false,
                 dataType: 'json',
                 success: function(data){
-                    alert(data.data_info);
+//                    alert(data.data_info);
                     if(data.data_info == "ok"){
 
                         tableBannier.ajax.reload(null,false);
@@ -188,8 +188,8 @@ require_once 'layout/footer.php';
     function supprimer(id = null){
         if(id){
             swal({
-                    title: "Voulez vous supprimer la catégorie ?",
-                    text: "L'action va supprimer la catégorie sélectionné",
+                    title: "Voulez vous supprimer la bannière ?",
+                    text: "L'action va supprimer la bannière sélectionné",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -200,7 +200,7 @@ require_once 'layout/footer.php';
 
                 function(isConfirm){
                     if (isConfirm) {
-                        $.post('<?=$domaine_admin?>/controller/delete.categorie.php', {id : id}, function (data) {
+                        $.post('<?=$domaine_admin?>/controller/banniere.delete.php', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Opération effectuée avec succès!","", "success");
                                 tableBannier.ajax.reload(null,false);

@@ -27,9 +27,9 @@ class Banniere{
 
 
 // Read
-    public function getCategorieById($id){
-        $query = "SELECT * FROM categorie
-        WHERE id_categorie = :id";
+    public function getBanById($id){
+        $query = "SELECT * FROM banniere
+        WHERE id_banniere = :id";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "id" => $id
@@ -47,9 +47,9 @@ class Banniere{
 
 
     // Delete
-    public function deleteCat($id){
+    public function deleteBan($id){
 
-        $query = "DELETE  FROM categorie WHERE id_categorie  = :id";
+        $query = "DELETE  FROM banniere WHERE id_banniere  = :id";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "id" => $id
