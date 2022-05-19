@@ -46,6 +46,12 @@
                         Commentaires
                     </a>
                 </li>
+                <li class="is-expanded">
+                    <a class="slide-item" href="<?=$domaine_admin?>/gallerie">
+                        <i class="side-menu__icon fa fa-camera"></i>
+                        Gallerie
+                    </a>
+                </li>
 
 
             </ul>

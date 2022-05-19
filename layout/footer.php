@@ -24,7 +24,6 @@
 <script src="<?=$asset?>/plugins/datatable/js/jquery.dataTables.min.js"></script>
 <script src="<?=$asset?>/plugins/datatable/js/dataTables.bootstrap5.js"></script>
 <script src="<?=$asset?>/js/table-data.js"></script>
-
 <script src="<?=$asset?>/js/circle-progress.min.js"></script>
 
 <script src="<?=$asset?>/plugins/peitychart/jquery.peity.min.js"></script>
@@ -79,6 +78,7 @@
 <script src="<?=$asset?>/js/themeColors.js"></script>
 
 <script src="<?=$asset?>/js/custom.js"></script>
+<script src="<?=$asset?>/plugins/bootstrapdatepicker/js/bootstrap-datepicker.min.js"></script>
 
 
 </body>
