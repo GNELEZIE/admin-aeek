@@ -149,6 +149,54 @@ require_once 'layout/footer.php';
             $('#udpCat').val(nom);
         });
 
+        var couverture = $('.couverture');
+        var inputCouverture = $('.input-couverture');
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                var fileType = input.files[0]['type'];
+                var valideImage = ["image/jpg","image/jpeg","image/png"];
+
+                reader.onload = function (e) {
+                    if($.inArray(fileType, valideImage) < 0){
+                        $('.file-msg').html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
+                        inputCouverture.val('');
+                        inputCouverture.attr('src', '');
+                        swal("Oups format non autorisé !","Les formats acceptés sont : jpg, jpeg et png !","error");
+                    }else{
+                        couverture.css('background-image', 'url('+e.target.result+')');
+                    }
+
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        inputCouverture.on('dragenter focus click', function() {
+            couverture.addClass('is-active');
+        });
+
+        inputCouverture.on('dragleave blur drop', function() {
+            couverture.removeClass('is-active');
+        });
+
+        inputCouverture.on('change', function() {
+
+            var filesCount = $(this)[0].files.length;
+            var textContainer = $(this).prev();
+            if (filesCount === 1) {
+                var fileName = $(this).val().split('\\').pop();
+                textContainer.text(fileName);
+            } else {
+                textContainer.html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
+            }
+            readURL(this);
+        });
+
+
+
         $('#bannierForm').submit(function(e){
             e.preventDefault();
             var value = document.getElementById('bannierForm');
