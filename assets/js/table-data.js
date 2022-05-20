@@ -20,16 +20,16 @@ $(function(e) {
     });
 
     //______File-Export Data Table
-    var table = $('#file-datatable').DataTable({
-        buttons: ['copy', 'excel', 'pdf', 'colvis'],
-        language: {
-            searchPlaceholder: 'Search...',
-            scrollX: "100%",
-            sSearch: '',
-        }
-    });
-    table.buttons().container()
-        .appendTo('#file-datatable_wrapper .col-md-6:eq(0)');
+    //var table = $('#file-datatable').DataTable({
+    //    buttons: ['copy', 'excel', 'pdf', 'colvis'],
+    //    language: {
+    //        searchPlaceholder: 'Search...',
+    //        scrollX: "100%",
+    //        sSearch: '',
+    //    }
+    //});
+    //table.buttons().container()
+    //    .appendTo('#file-datatable_wrapper .col-md-6:eq(0)');
 
     //______Delete Data Table
     var table = $('#delete-datatable').DataTable({
