@@ -22,11 +22,24 @@
     <link href="<?=$asset?>/plugins/sweetalert/sweet-alert.css" rel="stylesheet" />
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
     <style>
+
         .current{
             background: #ff46000f !important;
             color: #ff4600 !important;
             border-radius: 6px !important;
 
+        }
+        .loader-btn {
+            display: inline-block;
+            width: 0.9rem;
+            height: 0.9rem;
+            vertical-align: middle;
+            border: 0.2em solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            -webkit-animation: spinner-border .75s linear infinite;
+            animation: spinner-border .75s linear infinite;
+            align-self: center;
         }
         .page-item.active .page-link {
             color: #fff !important;

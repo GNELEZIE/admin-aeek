@@ -16,6 +16,11 @@
     </a>
 </li>
     <li>
+    <a class="side-menu__item <?php if($lien == 'tag'){echo 'current';} ;?>" href="<?=$domaine_admin?>/tag"><i class="side-menu__icon fe fe-tag"></i>
+        <span class="side-menu__label">Tag</span>
+    </a>
+</li>
+    <li>
     <a class="side-menu__item <?php if($lien == 'blog'){echo 'current';} ;?>" href="<?=$domaine_admin?>/blog">
         <i class="side-menu__icon fe fe-file-text"></i>
         <span class="side-menu__label">Blog</span>
