@@ -55,7 +55,7 @@ if($visAll = $allVis->fetch()){
 
 
 $list = $article->getAllArticle();
-if($data = $list->fetch()){
+if($dts = $list->fetch()){
     $nbs = $article->getAllNbrArticle()->fetch();
 }
 

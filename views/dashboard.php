@@ -55,8 +55,11 @@ if($visAll = $allVis->fetch()){
 
 
 $list = $article->getAllArticle();
-if($data = $list->fetch()){
+if($dts = $list->fetch()){
     $nbs = $article->getAllNbrArticle()->fetch();
+    $nbArticle = $nbs['nb'];
+}else{
+    $nbArticle = 0;
 }
 
 $rs = $comment->getAllComment();
@@ -135,7 +138,7 @@ require_once 'layout/head.php'
                     <div class="card-body">
                         <div class="d-flex">
                             <div class="text-white">
-                                <h2 class="mb-0 number-font"><?=$nbs['nb']?></h2>
+                                <h2 class="mb-0 number-font"><?=$nbArticle?></h2>
                                 <p class="text-white mb-0">Articles</p>
                             </div>
                             <div class="ms-auto"> <i class="fa fa-envelope-o text-white fs-30 me-2 mt-2"></i> </div>

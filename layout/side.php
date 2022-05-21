@@ -11,9 +11,15 @@
 </li>
 
 <li>
-    <a class="side-menu__item" href="widgets.html"><i
-            class="side-menu__icon fe fe-grid"></i><span
-            class="side-menu__label">Widgets</span></a>
+    <a class="side-menu__item <?php if($lien == 'add-categorie'){echo 'current';} ;?>" href="<?=$domaine_admin?>/add-categorie"><i class="side-menu__icon fe fe-list"></i>
+        <span class="side-menu__label">Catégorie</span>
+    </a>
+</li>
+    <li>
+    <a class="side-menu__item <?php if($lien == 'blog'){echo 'current';} ;?>" href="<?=$domaine_admin?>/blog">
+        <i class="side-menu__icon fe fe-file-text"></i>
+        <span class="side-menu__label">Blog</span>
+    </a>
 </li>
 
 

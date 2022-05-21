@@ -5,7 +5,7 @@ if(isset($doc[1])){
     $return = $doc[0];
 }
 if(!isset($_SESSION['useraeek'])){
-    header('location:'.$domaine_admin.'/login');
+    header('location:'.$domaine_admin.'/login?return='.$return);
     exit();
 }
 $listeCat = $categorie->getAllCategorie();
@@ -14,9 +14,9 @@ $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
 
-require_once 'layout/header.php';
+require_once 'layout/head.php';
 ?>
-
+<div class="container pt-5 mt-5 main-content app-content mt-0" style="margin-left: 355px !important;">
     <div class="row mt-5 pt-5">
         <div class="col-xl-8">
             <div class="card">
@@ -47,7 +47,7 @@ require_once 'layout/header.php';
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label class="col-md-3 form-label">Categories :</label>
+                            <label for="categorie" class="col-md-3 form-label">Categories :</label>
                             <div class="">
                                 <select name="categorie" id="categorie" class="form-control form-select select2 input-style" data-bs-placeholder="Select Country">
                                     <?php
@@ -58,6 +58,22 @@ require_once 'layout/header.php';
                                     <?php
                                     }
                                     ?>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-4">
+                            <label for="tags" class="col-md-3 form-label">Tags :</label>
+                            <div class="form-group">
+                                <select class="form-control select2" name="tags[]" id="tags" data-placeholder="Choisir un tag" multiple>
+                                    <option value="1">
+                                        Firefox
+                                    </option>
+                                    <option value="2">
+                                        Chrome
+                                    </option>
+                                    <option value="3">
+                                        Safari
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -105,56 +121,8 @@ require_once 'layout/header.php';
                             <h6><a href="#" class="mb-0">Generator on the Internet..</a></h6>
                             <small>12/05/2022</small>
                         </div>
-                    </div><div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">
-                        <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="<?=$asset?>/images/media/19.jpg" style="background: url(&quot;../assets/images/media/19.jpg&quot;) center top; height: 75px"></a>
-                        <div class="ps-3 flex-column">
-                            <span class="badge bg-danger me-1 mb-1 mt-1">Lifestyle</span>
-                            <h6><a href="#" class="mb-0">Generator on the Internet..</a></h6>
-                            <small>12/05/2022</small>
-                        </div>
-                    </div><div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">
-                        <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="<?=$asset?>/images/media/19.jpg" style="background: url(&quot;../assets/images/media/19.jpg&quot;) center top; height: 75px"></a>
-                        <div class="ps-3 flex-column">
-                            <span class="badge bg-danger me-1 mb-1 mt-1">Lifestyle</span>
-                            <h6><a href="#" class="mb-0">Generator on the Internet..</a></h6>
-                            <small>12/05/2022</small>
-                        </div>
-                    </div><div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">
-                        <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="<?=$asset?>/images/media/19.jpg" style="background: url(&quot;../assets/images/media/19.jpg&quot;) center top; height: 75px"></a>
-                        <div class="ps-3 flex-column">
-                            <span class="badge bg-danger me-1 mb-1 mt-1">Lifestyle</span>
-                            <h6><a href="#" class="mb-0">Generator on the Internet..</a></h6>
-                            <small>12/05/2022</small>
-                        </div>
-                    </div><div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">
-                        <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="<?=$asset?>/images/media/19.jpg" style="background: url(&quot;../assets/images/media/19.jpg&quot;) center top; height: 75px"></a>
-                        <div class="ps-3 flex-column">
-                            <span class="badge bg-danger me-1 mb-1 mt-1">Lifestyle</span>
-                            <h6><a href="#" class="mb-0">Generator on the Internet..</a></h6>
-                            <small>12/05/2022</small>
-                        </div>
-                    </div><div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">
-                        <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="<?=$asset?>/images/media/19.jpg" style="background: url(&quot;../assets/images/media/19.jpg&quot;) center top; height: 75px"></a>
-                        <div class="ps-3 flex-column">
-                            <span class="badge bg-danger me-1 mb-1 mt-1">Lifestyle</span>
-                            <h6><a href="#" class="mb-0">Generator on the Internet..</a></h6>
-                            <small>12/05/2022</small>
-                        </div>
-                    </div><div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">
-                        <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="<?=$asset?>/images/media/19.jpg" style="background: url(&quot;../assets/images/media/19.jpg&quot;) center top; height: 75px"></a>
-                        <div class="ps-3 flex-column">
-                            <span class="badge bg-danger me-1 mb-1 mt-1">Lifestyle</span>
-                            <h6><a href="#" class="mb-0">Generator on the Internet..</a></h6>
-                            <small>12/05/2022</small>
-                        </div>
-                    </div><div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">
-                        <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="<?=$asset?>/images/media/19.jpg" style="background: url(&quot;../assets/images/media/19.jpg&quot;) center top; height: 75px"></a>
-                        <div class="ps-3 flex-column">
-                            <span class="badge bg-danger me-1 mb-1 mt-1">Lifestyle</span>
-                            <h6><a href="#" class="mb-0">Generator on the Internet..</a></h6>
-                            <small>12/05/2022</small>
-                        </div>
-                    </div><div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">
+                    </div>
+                    <div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">
                         <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="<?=$asset?>/images/media/19.jpg" style="background: url(&quot;../assets/images/media/19.jpg&quot;) center top; height: 75px"></a>
                         <div class="ps-3 flex-column">
                             <span class="badge bg-danger me-1 mb-1 mt-1">Lifestyle</span>
@@ -162,16 +130,25 @@ require_once 'layout/header.php';
                             <small>12/05/2022</small>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
     </div>
+    </div>
 <?php
-require_once 'layout/footer.php';
+require_once 'layout/foot.php';
 ?>
 
 <script>
     $(document).ready(function() {
+
+//        $("#myTags").tagit({
+//            fieldName: "tags[]"
+//        });
+
+
         $('#summernote').summernote({
             placeholder: 'Hello Bootstrap 4'
         });

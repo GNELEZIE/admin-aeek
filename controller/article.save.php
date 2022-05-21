@@ -13,7 +13,10 @@ if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['cat
 
     $categorie = htmlentities(trim(addslashes($categorie)));
     $titre = htmlentities(trim(addslashes($titre)));
-
+//    $tags = htmlentities(trim($tags));
+    foreach ($_POST['tags'] as $value){
+        $tags = $value;
+    }
     $description ='';
     $propriete1 = "titre";
     $verifSlug = $article->verifArticle($propriete1,$titre);
@@ -37,7 +40,7 @@ if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['cat
 
     }
 
-    $save= $article->addArticle($dateGmt,$titre,$categorie,$summernote,$photo,$slug,$_SESSION['useraeek']['id_admin']);
+    $save= $article->addArticle($dateGmt,$titre,$categorie,$tags,$summernote,$photo,$slug,$_SESSION['useraeek']['id_admin']);
     if($save > 0){
         $success['message'] = 'Votre article a été publié avec succès <a href="'.$domaine.'/show/'.$slug.'" target="_blank">Voir l\'article</a>';
     }

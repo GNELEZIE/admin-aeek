@@ -11,7 +11,7 @@
     <meta name="keywords" content="">
     <link rel="shortcut icon" type="image/x-icon" href="<?=$asset?>/media/logoAEEK.png" />
 
-    <title>Dasboard – AEEK </title>
+    <title>Dasboard – <?=ucfirst($page)?> </title>
 
     <link id="style" href="<?=$asset?>/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 

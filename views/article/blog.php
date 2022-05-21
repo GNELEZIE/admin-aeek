@@ -5,7 +5,7 @@ if(isset($doc[1])){
     $return = $doc[0];
 }
 if(!isset($_SESSION['useraeek'])){
-    header('location:'.$domaine_admin.'/login');
+    header('location:'.$domaine_admin.'/login?return='.$return);
     exit();
 }
 
@@ -35,9 +35,9 @@ if(isset($doc[1]) and !isset($doc[2])) {
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
-require_once 'layout/header.php';
+require_once 'layout/head.php';
     ?>
-
+<div class="container pt-5 mt-5 main-content app-content mt-0" style="margin-left: 355px !important;">
     <?php
     if(isset($doc[1]) and !isset($doc[2])){
     ?>
@@ -76,7 +76,7 @@ require_once 'layout/header.php';
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label class="col-md-3 form-label">Categories :</label>
+                            <label for="categorie" class="col-md-3 form-label">Categories :</label>
                             <div class="">
                                 <select name="categorie" id="categorie" class="form-control form-select select2 input-style" data-bs-placeholder="Select Country">
                                     <option value="<?=$catData['id_categorie']?>"><?=html_entity_decode(stripslashes($catData['nom']))?></option>
@@ -95,7 +95,7 @@ require_once 'layout/header.php';
 
                         <!-- Row -->
                         <div class="row">
-                            <label class="col-md-3 form-label mb-4">Description :</label>
+                            <label for="summernote" class="col-md-3 form-label mb-4">Description :</label>
                             <div class="mb-4">
                                 <textarea class="content input-style" name="summernote" id="summernote" placeholder="Description"><?= html_entity_decode(stripslashes($articleData['description']))?></textarea>
                             </div>
@@ -170,11 +170,11 @@ require_once 'layout/header.php';
 
 ?>
 
-
+</div>
 
 
 <?php
-require_once 'layout/footer.php';
+require_once 'layout/foot.php';
 ?>
 
 <script>

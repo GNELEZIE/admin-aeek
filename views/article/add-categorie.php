@@ -5,7 +5,7 @@ if(isset($doc[1])){
     $return = $doc[0];
 }
 if(!isset($_SESSION['useraeek'])){
-    header('location:'.$domaine_admin.'/login');
+    header('location:'.$domaine_admin.'/login?return='.$return);
     exit();
 }
 //add.categorie
@@ -16,11 +16,11 @@ if(!isset($_SESSION['useraeek'])){
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
-require_once 'layout/header.php';
+require_once 'layout/head.php';
 ?>
 
 
-<div class="container pt-5 mt-5">
+<div class="container pt-5 mt-5 main-content app-content mt-0" style="margin-left: 355px !important;">
     <div class="row pt-5 mt-5">
         <div class="col-lg-12">
             <div class="card">
@@ -110,7 +110,7 @@ require_once 'layout/header.php';
 </div>
 
 <?php
-require_once 'layout/footer.php';
+require_once 'layout/foot.php';
 ?>
 
 <script>
@@ -170,7 +170,7 @@ require_once 'layout/footer.php';
                 processData:false,
                 dataType: 'json',
                 success: function(data){
-                alert(data.data_info);
+//                alert(data.data_info);
                     if(data.data_info == "ok"){
                         tableCat.ajax.reload(null,false);
                         $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Catégorie modifiée avec succès !</div>');

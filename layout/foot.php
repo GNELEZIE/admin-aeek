@@ -4,8 +4,8 @@
     <div class="container">
         <div class="row align-items-center flex-row-reverse">
             <div class="col-md-12 col-sm-12 text-center">
-                Copyright © <span id="year"></span> <a href="javascript:void(0)">Sash</a>. Designed with <span
-                    class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> Spruko </a> All rights reserved.
+                Copyright © <span id="year"></span> <a href="javascript:void(0)">AEEK Kasséré</a>. Develop and Designed <span
+                    class="fa fa-heart text-danger"></span> by <a href="javascript:void(0)"> GNELEZIE </a> Tous les droits sont réservés.
             </div>
         </div>
     </div>
@@ -39,7 +39,7 @@
 
 <!-- SIDEBAR JS -->
 <script src="<?=$asset?>/plugins/sidebar/sidebar.js"></script>
-
+<script src="<?=$asset?>/plugins/sweetalert/sweet-alert.min.js"></script>
 
 
 
@@ -56,6 +56,8 @@
 <script src="<?=$asset?>/plugins/datatable/js/dataTables.bootstrap5.js"></script>
 <script src="<?=$asset?>/plugins/datatable/dataTables.responsive.min.js"></script>
 
+<script src="<?=$asset?>/plugins/summernote/summernote1.js"></script>
+<script src="<?=$asset?>/js/summernote.js"></script>
 <!-- INTERNAL APEXCHART JS -->
 <script src="<?=$asset?>/js/apexcharts.js"></script>
 <script src="<?=$asset?>/plugins/apexchart/irregular-data-series.js"></script>
@@ -76,7 +78,7 @@
 
 <!-- INTERNAL intlTelInput js-->
 <script src="<?=$asset?>/plugins/intl-tel-input-master/intlTelInput.js"></script>
-<script src="<?=$asset?>/plugins/intl-tel-input-master/country-select.js"></script>
+<!--<script src="--><?//=$asset?><!--/plugins/intl-tel-input-master/country-select.js"></script>-->
 <script src="<?=$asset?>/plugins/intl-tel-input-master/utils.js"></script>
 <script src="<?=$asset?>/plugins/date-picker/date-picker.js"></script>
 <script src="<?=$asset?>/plugins/date-picker/jquery-ui.js"></script>

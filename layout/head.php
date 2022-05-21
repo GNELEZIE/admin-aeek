@@ -3,41 +3,45 @@
 
 <head>
 
-    <!-- META DATA -->
     <meta charset="UTF-8">
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sash – Bootstrap 5  Admin & Dashboard Template">
-    <meta name="author" content="Spruko Technologies Private Limited">
-    <meta name="keywords"
-          content="admin,admin dashboard,admin panel,admin template,bootstrap,clean,dashboard,flat,jquery,modern,responsive,premium admin templates,responsive admin,ui,ui kit.">
+    <meta name="description" content="Admin aeek Kasséré">
+    <meta name="author" content="Gnelezie Ouattara">
 
-    <!-- FAVICON -->
-    <link rel="shortcut icon" type="image/x-icon" href="<?=$asset?>/images/brand/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="<?=$asset?>/media/logoAEEK.png" />
 
-    <!-- TITLE -->
-    <title>Sash – Bootstrap 5 Admin & Dashboard Template </title>
+    <title>Dasboard – <?=ucfirst($page)?></title>
 
-    <!-- BOOTSTRAP CSS -->
     <link id="style" href="<?=$asset?>/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- STYLE CSS -->
     <link href="<?=$asset?>/css/style.css" rel="stylesheet" />
     <link href="<?=$asset?>/css/dark-style.css" rel="stylesheet" />
-    <!-- <link href="<?=$asset?>/css/transparent-style.css" rel="stylesheet"> -->
     <link href="<?=$asset?>/css/skin-modes.css" rel="stylesheet" />
-
-    <!--- FONT-ICONS CSS -->
     <link href="<?=$asset?>/css/icons.css" rel="stylesheet" />
-
-    <!-- COLOR SKIN CSS -->
+    <link href="<?=$asset?>/plugins/sweetalert/sweet-alert.css" rel="stylesheet" />
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
     <style>
         .current{
             background: #ff46000f !important;
             color: #ff4600 !important;
             border-radius: 6px !important;
+
         }
+        .page-item.active .page-link {
+            color: #fff !important;
+            background-color: #ff4600 !important;
+            border-color: #ff4600 !important;
+        }
+
+        div.dataTables_wrapper div.dataTables_paginate ul.pagination {
+            margin-bottom: 17px !important;
+        }
+
+
+        /*.side-menu__item{*/
+            /*color: #282f53 !important;*/
+        /*}*/
 
         .side-menu__item:hover{
             background: #ff46000f !important;
@@ -58,7 +62,7 @@
         /*.side-menu__item:focus{*/
             /*background: #ff7729 !important; ;*/
         /*}*/
-        .desktop-logo{
+        .desktop-logo,.toggle-logo, .light-logo, .light-logo1{
             max-width: 30% !important;
         }
         .text-noir{
@@ -137,6 +141,30 @@
         .text-left{
             text-align: left !important;
         }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice{
+            background: #00a6504a !important;
+            color: #0ba053 !important;
+            border: none !important;
+        }
+        .select2-container--default .select2-selection--multiple .select2-selection__choice, .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+            color: #0ba053 !important;
+        }
+        .bg-transparence-warning {
+            background: #f7b7312e !important;
+            color: #f7b731 !important;
+        }
+        .bg-transparence-warning:hover{
+            background: #f7b731 !important;
+            color: #FFFFFF !important;
+        }
+        .btn-transparence-info {
+            color: #1170e4 !important;
+            background: #1170e447 !important;
+        }
+        .btn-transparence-info:hover{
+            color: #FFFFFF !important;
+            background: #1170e4 !important;
+        }
         .btn-transparence-orange {
             background: #ff46003b !important;
             color: #ff4600 !important;
@@ -168,19 +196,12 @@
             padding: 7px !important;
         }
         .side-menu .side-menu__icon {
-            color: #ff7729 !important;
+            color: inherit !important;
+        }
+.side-menu .side-menu__icon :hover {
+            color: inherit !important;
         }
 
-        /*a:hover {*/
-        /*color: #ff7729 !important;*/
-        /*}*/
-        /*.side-menu__item:hover .side-menu__icon, .side-menu__item:hover .side-menu__label, .side-menu__item:focus .side-menu__icon, .side-menu__item:focus .side-menu__label {*/
-        /*color: #fc825f !important;*/
-        /*}*/
-        /*a:focus, a:active {*/
-        /*background: #ff772921  !important;*/
-        /*color: #ff7729  !important;*/
-        /*}*/
 
 
 
@@ -189,13 +210,10 @@
 
 <body class="app sidebar-mini ltr light-mode">
 
-<!-- GLOBAL-LOADER -->
 <div id="global-loader">
-    <img src="<?=$asset?>/images/loader.svg" class="loader-img" alt="Loader">
+    <img src="<?=$asset?>/media/loader.svg" class="loader-img" width="100px" alt="Loader">
 </div>
-<!-- /GLOBAL-LOADER -->
 
-<!-- PAGE -->
 <div class="page">
 <div class="page-main">
 
@@ -204,17 +222,13 @@
 <div class="container-fluid main-container">
 <div class="d-flex">
 <a aria-label="Hide Sidebar" class="app-sidebar__toggle" data-bs-toggle="sidebar" href="javascript:void(0)"></a>
-<!-- sidebar-toggle-->
-<a class="logo-horizontal " href="index.html">
-    <img src="<?=$asset?>/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
-    <img src="<?=$asset?>/images/brand/logo-3.png" class="header-brand-img light-logo1"
-         alt="logo">
+
+
+<a class="logo-horizontal " href="<?=$domaine_admin?>">
+    <img src="<?=$asset?>/media/logoAEEK.png" class="header-brand-img desktop-logo" alt="logo">
+    <img src="<?=$asset?>/media/logoAEEK.png" class="header-brand-img light-logo1" alt="logo">
 </a>
-<!-- LOGO -->
-<div class="main-header-center ms-3 d-none d-lg-block">
-    <input class="form-control" placeholder="Search for results..." type="search">
-    <button class="btn px-0 pt-2"><i class="fe fe-search" aria-hidden="true"></i></button>
-</div>
+
 <div class="d-flex order-lg-2 ms-auto header-right-icons">
 <div class="dropdown d-none">
     <a href="javascript:void(0)" class="nav-link icon" data-bs-toggle="dropdown">
@@ -252,13 +266,7 @@
         </div>
     </div>
 </div>
-<div class="d-flex country">
-    <a class="nav-link icon text-center" data-bs-target="#country-selector"
-       data-bs-toggle="modal">
-        <i class="fe fe-globe"></i><span
-            class="fs-16 ms-2 d-none d-xl-block">English</span>
-    </a>
-</div>
+
 <!-- COUNTRY -->
 <div class="d-flex country">
     <a class="nav-link icon theme-layout nav-link-bg layout-setting">
@@ -267,123 +275,6 @@
     </a>
 </div>
 <!-- Theme-Layout -->
-<div class="dropdown  d-flex shopping-cart">
-    <a class="nav-link icon text-center" data-bs-toggle="dropdown">
-        <i class="fe fe-shopping-cart"></i><span class="badge bg-secondary header-badge">4</span>
-    </a>
-    <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-        <div class="drop-heading border-bottom">
-            <div class="d-flex">
-                <h6 class="mt-1 mb-0 fs-16 fw-semibold text-dark"> My Shopping Cart</h6>
-                <div class="ms-auto">
-                    <span class="badge bg-danger-transparent header-badge text-danger fs-14">Hurry Up!</span>
-                </div>
-            </div>
-        </div>
-        <div class="header-dropdown-list message-menu">
-            <div class="dropdown-item d-flex p-4">
-                <a href="cart.html" class="open-file"></a>
-                                                        <span
-                                                            class="avatar avatar-xl br-5 me-3 align-self-center cover-image"
-                                                            data-bs-image-src="<?=$asset?>/images/pngs/4.jpg"></span>
-                <div class="wd-50p">
-                    <h5 class="mb-1">Flower Pot for Home Decor</h5>
-                    <span>Status: <span class="text-success">In Stock</span></span>
-                    <p class="fs-13 text-muted mb-0">Quantity: 01</p>
-                </div>
-                <div class="ms-auto text-end d-flex fs-16">
-                                                            <span class="fs-16 text-dark d-none d-sm-block px-4">
-                                                                $438
-                                                            </span>
-                    <a href="javascript:void(0)" class="fs-16 btn p-0 cart-trash">
-                        <i class="fe fe-trash-2 border text-danger brround d-block p-2"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="dropdown-item d-flex p-4">
-                <a href="cart.html" class="open-file"></a>
-                                                        <span
-                                                            class="avatar avatar-xl br-5 me-3 align-self-center cover-image"
-                                                            data-bs-image-src="<?=$asset?>/images/pngs/6.jpg"></span>
-                <div class="wd-50p">
-                    <h5 class="mb-1">Black Digital Camera</h5>
-                    <span>Status: <span class="text-danger">Out Stock</span></span>
-                    <p class="fs-13 text-muted mb-0">Quantity: 06</p>
-                </div>
-                <div class="ms-auto text-end d-flex">
-                                                            <span class="fs-16 text-dark d-none d-sm-block px-4">
-                                                                $867
-                                                            </span>
-                    <a href="javascript:void(0)" class="fs-16 btn p-0 cart-trash">
-                        <i class="fe fe-trash-2 border text-danger brround d-block p-2"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="dropdown-item d-flex p-4">
-                <a href="cart.html" class="open-file"></a>
-                                                        <span
-                                                            class="avatar avatar-xl br-5 me-3 align-self-center cover-image"
-                                                            data-bs-image-src="<?=$asset?>/images/pngs/8.jpg"></span>
-                <div class="wd-50p">
-                    <h5 class="mb-1">Stylish Rockerz 255 Ear Pods</h5>
-                    <span>Status: <span class="text-success">In Stock</span></span>
-                    <p class="fs-13 text-muted mb-0">Quantity: 05</p>
-                </div>
-                <div class="ms-auto text-end d-flex">
-                                                            <span class="fs-16 text-dark d-none d-sm-block px-4">
-                                                                $323
-                                                            </span>
-                    <a href="javascript:void(0)" class="fs-16 btn p-0 cart-trash">
-                        <i class="fe fe-trash-2 border text-danger brround d-block p-2"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="dropdown-item d-flex p-4">
-                <a href="cart.html" class="open-file"></a>
-                                                        <span
-                                                            class="avatar avatar-xl br-5 me-3 align-self-center cover-image"
-                                                            data-bs-image-src="<?=$asset?>/images/pngs/1.jpg"></span>
-                <div class="wd-50p">
-                    <h5 class="mb-1">Women Party Wear Dress</h5>
-                    <span>Status: <span class="text-success">In Stock</span></span>
-                    <p class="fs-13 text-muted mb-0">Quantity: 05</p>
-                </div>
-                <div class="ms-auto text-end d-flex">
-                                                            <span class="fs-16 text-dark d-none d-sm-block px-4">
-                                                                $867
-                                                            </span>
-                    <a href="javascript:void(0)" class="fs-16 btn p-0 cart-trash">
-                        <i class="fe fe-trash-2 border text-danger brround d-block p-2"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="dropdown-item d-flex p-4">
-                <a href="cart.html" class="open-file"></a>
-                                                        <span
-                                                            class="avatar avatar-xl br-5 me-3 align-self-center cover-image"
-                                                            data-bs-image-src="<?=$asset?>/images/pngs/3.jpg"></span>
-                <div class="wd-50p">
-                    <h5 class="mb-1">Running Shoes for men</h5>
-                    <span>Status: <span class="text-success">In Stock</span></span>
-                    <p class="fs-13 text-muted mb-0">Quantity: 05</p>
-                </div>
-                <div class="ms-auto text-end d-flex">
-                                                            <span class="fs-16 text-dark d-none d-sm-block px-4">
-                                                                $456
-                                                            </span>
-                    <a href="javascript:void(0)" class="fs-16 btn p-0 cart-trash">
-                        <i class="fe fe-trash-2 border text-danger brround d-block p-2"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="dropdown-divider m-0"></div>
-        <div class="dropdown-footer">
-            <a class="btn btn-primary btn-pill w-sm btn-sm py-2" href="checkout.html"><i class="fe fe-check-circle"></i> Checkout</a>
-            <span class="float-end p-2 fs-17 fw-semibold">Total: $6789</span>
-        </div>
-    </div>
-</div>
 <!-- CART -->
 <div class="dropdown d-flex">
     <a class="nav-link icon full-screen-link nav-link-bg">
@@ -542,39 +433,34 @@
             Messages</a>
     </div>
 </div>
-<!-- MESSAGE-BOX -->
-<div class="dropdown d-flex header-settings">
-    <a href="javascript:void(0);" class="nav-link icon"
-       data-bs-toggle="sidebar-right" data-target=".sidebar-right">
-        <i class="fe fe-align-right"></i>
-    </a>
-</div>
-<!-- SIDE-MENU -->
+
 <div class="dropdown d-flex profile-1">
     <a href="javascript:void(0)" data-bs-toggle="dropdown" class="nav-link leading-none d-flex">
-        <img src="<?=$asset?>/images/users/21.jpg" alt="profile-user"
+        <img src="<?=$asset?>/media/user.png" alt="profile-user"
              class="avatar  profile-user brround cover-image">
     </a>
     <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
         <div class="drop-heading">
             <div class="text-center">
-                <h5 class="text-dark mb-0 fs-14 fw-semibold">Percy Kewshun</h5>
-                <small class="text-muted">Senior Admin</small>
+                <h5 class="text-dark mb-0 fs-14 fw-semibold"><?=html_entity_decode(stripslashes($data['nom'])).' '.html_entity_decode(stripslashes($data['prenom']))?></h5>
+                <small class="text-muted">Admin</small>
             </div>
         </div>
         <div class="dropdown-divider m-0"></div>
-        <a class="dropdown-item" href="profile.html">
-            <i class="dropdown-icon fe fe-user"></i> Profile
+        <a class="dropdown-item" href="<?=$domaine_admin?>/profil">
+            <i class="dropdown-icon fe fe-user"></i> Profil
         </a>
-        <a class="dropdown-item" href="email-inbox.html">
-            <i class="dropdown-icon fe fe-mail"></i> Inbox
-            <span class="badge bg-danger rounded-pill float-end">5</span>
-        </a>
-        <a class="dropdown-item" href="lockscreen.html">
-            <i class="dropdown-icon fe fe-lock"></i> Lockscreen
-        </a>
-        <a class="dropdown-item" href="login.html">
-            <i class="dropdown-icon fe fe-alert-circle"></i> Sign out
+        <?php  if($data['role'] !=0){
+            ?>
+            <a class="dropdown-item" href="<?=$domaine_admin?>/membre">
+                <i class="dropdown-icon fe fe-user"></i> Membre
+            </a>
+        <?php
+        }
+        ?>
+
+        <a class="dropdown-item" href="<?=$domaine_admin?>/logout">
+            <i class="dropdown-icon fe fe-alert-circle"></i> Déconnexion
         </a>
     </div>
 </div>
@@ -585,19 +471,17 @@
 </div>
 </div>
 </div>
-<!-- /app-Header -->
 
-<!--APP-SIDEBAR-->
 <div class="sticky">
 <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
 <div class="app-sidebar">
 <div class="side-header">
-    <a class="header-brand1" href="index.html">
-        <img src="<?=$asset?>/images/brand/logo.png" class="header-brand-img desktop-logo" alt="logo">
-        <img src="<?=$asset?>/images/brand/logo-1.png" class="header-brand-img toggle-logo"
+    <a class="header-brand1" href="<?=$domaine_admin?>">
+        <img src="<?=$asset?>/media/logoAEEK.png" class="header-brand-img desktop-logo" alt="logo">
+        <img src="<?=$asset?>/media/logoAEEK.png" class="header-brand-img toggle-logo"
              alt="logo">
-        <img src="<?=$asset?>/images/brand/logo-2.png" class="header-brand-img light-logo" alt="logo">
-        <img src="<?=$asset?>/images/brand/logo-3.png" class="header-brand-img light-logo1"
+        <img src="<?=$asset?>/media/logoAEEK.png" class="header-brand-img light-logo" alt="logo">
+        <img src="<?=$asset?>/media/logoAEEK.png" class="header-brand-img light-logo1"
              alt="logo">
     </a>
     <!-- LOGO -->
