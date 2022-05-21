@@ -8,6 +8,7 @@ if(!isset($_SESSION['useraeek'])){
     header('location:'.$domaine_admin.'/login?return='.$return);
     exit();
 }
+$listeTags= $tag->getAllTag();
 $listeCat = $categorie->getAllCategorie();
 require_once 'controller/article.save.php';
 $token = openssl_random_pseudo_bytes(16);
@@ -65,15 +66,14 @@ require_once 'layout/head.php';
                             <label for="tags" class="col-md-3 form-label">Tags :</label>
                             <div class="form-group">
                                 <select class="form-control select2" name="tags[]" id="tags" data-placeholder="Choisir un tag" multiple>
-                                    <option value="1">
-                                        Firefox
-                                    </option>
-                                    <option value="2">
-                                        Chrome
-                                    </option>
-                                    <option value="3">
-                                        Safari
-                                    </option>
+                                    <?php
+                                    while($tgs = $listeTags->fetch()) {
+
+                                        ?>
+                                        <option value="<?=$tgs['id_tag']?>"><?=$tgs['nom']?></option>
+                                    <?php
+                                    }
+                                    ?>
                                 </select>
                             </div>
                         </div>

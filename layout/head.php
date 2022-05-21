@@ -155,7 +155,7 @@
             text-align: left !important;
         }
         .select2-container--default .select2-selection--multiple .select2-selection__choice{
-            background: #00a6504a !important;
+            background: #00a6501a !important;
             color: #0ba053 !important;
             border: none !important;
         }
