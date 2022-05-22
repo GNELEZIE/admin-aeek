@@ -16,7 +16,7 @@ if(!isset($_SESSION['useraeek'])){
 
 //require_once 'controller/article.save.php';
 
-require_once 'controller/article.update.php';
+//require_once 'controller/article.update.php';
 
 if(isset($doc[1]) and !isset($doc[2])) {
 
@@ -29,15 +29,22 @@ if(isset($doc[1]) and !isset($doc[2])) {
         header('location:' . $domaine_admin . '/error');
         exit();
     }
+
+    $myslg = $doc[1];
+}else{
+    $myslg = '';
 }
 
 //$listeCat = $categorie->getAllCategorie();
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
-require_once 'layout/header.php';
+require_once 'layout/head.php';
     ?>
+<div class="main-content app-content mt-0">
+<div class="side-app">
 
+<div class="main-container container-fluid">
     <?php
     if(isset($doc[1]) and !isset($doc[2])){
     ?>
@@ -48,25 +55,10 @@ require_once 'layout/header.php';
                 <div class="card-header">
                     <div class="card-title">Modifier l'article</div>
                 </div>
-                <form method="post" id="addArticleForm" enctype="multipart/form-data">
+                <form method="post" id="updArticleForm" enctype="multipart/form-data">
                     <div class="card-body">
-                        <?php if (!empty($success)) { ?>
-                            <div class="alert alert-success" style="font-size: 14px" role="alert">
-                                <?php foreach ($success as $succ) { ?>
-                                    <?php echo $succ ?>
-                                <?php } ?>
-                            </div>
-                        <?php } ?>
-                        <?php if (!empty($errors)) { ?>
-                            <div class="alert alert-danger" style="font-size: 14px" role="alert">
-                                <?php foreach ($errors as $error) { ?>
-                                    <?php echo $error ?>
-                                <?php } ?>
-                            </div>
-                        <?php }
-
-
-                        ?>
+                      <div class="succesUpd"></div>
+                      <div class="errorUpd"></div>
                         <div class="row mb-4">
                             <label class="col-md-3 form-label">Titre de l'article :</label>
                             <div class="">
@@ -76,7 +68,7 @@ require_once 'layout/header.php';
                             </div>
                         </div>
                         <div class="row mb-4">
-                            <label class="col-md-3 form-label">Categories :</label>
+                            <label for="categorie" class="col-md-3 form-label">Categories :</label>
                             <div class="">
                                 <select name="categorie" id="categorie" class="form-control form-select select2 input-style" data-bs-placeholder="Select Country">
                                     <option value="<?=$catData['id_categorie']?>"><?=html_entity_decode(stripslashes($catData['nom']))?></option>
@@ -115,7 +107,7 @@ require_once 'layout/header.php';
                 <div class="card-body m-0 p-0">
                     <form method="post" id="userImgForm" enctype="multipart/form-data">
                         <div class="couv mb-5">
-                            <img src="<?=$domaine_admin?>/uploads/<?php if($articleData['couverture'] != ''){echo $articleData['couverture'];}else{echo 'user.png';}?>" class="img-couv" id="imguser" alt="" style="border-radius: 7px 7px 0 0;"/>
+                            <img src="<?=$domaine?>/uploads/<?php if($articleData['couverture'] != ''){echo $articleData['couverture'];}else{echo 'user.png';}?>" class="img-couv" id="imguser" alt="" style="border-radius: 7px 7px 0 0;"/>
                             <input type="file" name="userImg" id="userImg" style="display: none"/>
                             <input type="hidden" class="form-control " name="artId" value="<?= $articleData['id_article'] ?>">
                         </div>
@@ -132,8 +124,8 @@ require_once 'layout/header.php';
 }else{
     ?>
 
-    <div class="container pt-5 mt-5">
-        <div class="row pt-5 mt-5">
+    <div class="container mt-5">
+        <div class="row mt-5"  style="margin-right: 30px !important; margin-left: 0 !important;">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-header" style="    border-bottom: 0 !important;">
@@ -170,11 +162,13 @@ require_once 'layout/header.php';
 
 ?>
 
-
+</div>
+</div>
+</div>
 
 
 <?php
-require_once 'layout/footer.php';
+require_once 'layout/foot.php';
 ?>
 
 <script>
@@ -212,6 +206,9 @@ require_once 'layout/footer.php';
             }
         });
     });
+
+
+
 
     // bloquer
     function bloquer(id = null){
@@ -316,6 +313,67 @@ require_once 'layout/footer.php';
         });
 
     });
+
+    // Supprimer article
+    function supprimer(id = null){
+        if(id){
+            swal({
+                    title: "Voulez vous supprimer l'article ?",
+                    text: "L'action va supprimer  l'article  sélectionné",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Oui, supprimer",
+                    cancelButtonText: "Non, annuler",
+                    closeOnConfirm: false
+                },
+
+                function(isConfirm){
+                    if (isConfirm) {
+                        $.post('<?=$domaine_admin?>/controller/article.delete.php', {id : id}, function (data) {
+                            if(data == "ok"){
+                                swal("Opération effectuée avec succès!","", "success");
+                                tableArticle.ajax.reload(null,false);
+                            }else{
+                                swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
+                            }
+                        });
+                    }
+                });
+        }else{
+            alert('actualise');
+        }
+    }
+</script>
+<script>
+
+        $('#updArticleForm').submit(function(e){
+        e.preventDefault();
+        var value = document.getElementById('updArticleForm');
+        var form = new FormData(value);
+
+        $.ajax({
+            method: 'post',
+            url: '<?=$domaine_admin?>/controller/article.update.php',
+            data: form,
+            contentType:false,
+            cache:false,
+            processData:false,
+            dataType: 'json',
+            success: function(data){
+    //                alert(data.data_info);
+                if(data.data_info == "ok"){
+                    $('.succesUpd').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Votre article a été modifié avec succès <a href="<?=$domaine ?>/show/<?=$myslg ?>" target="_blank">Voir l\'article</a></div>');
+                }else {
+                    $('.errorUpd').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification de l\'article</div>');
+                }
+            },
+            error: function (error, ajaxOptions, thrownError) {
+                alert(error.responseText);
+            }
+        });
+        });
+
 
 
 </script>

@@ -16,12 +16,15 @@ if(!isset($_SESSION['useraeek'])){
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
-require_once 'layout/header.php';
+require_once 'layout/head.php';
 ?>
 
+<div class="main-content app-content mt-0">
+<div class="side-app">
 
-<div class="container pt-5 mt-5">
-    <div class="row pt-5 mt-5">
+<div class="main-container container-fluid">
+<div class="container mt-5">
+    <div class="row mt-5">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header" style="    border-bottom: 0 !important;">
@@ -52,7 +55,9 @@ require_once 'layout/header.php';
         </div>
     </div>
 </div>
-
+</div>
+</div>
+</div>
 
 <!--// Modal-->
 
@@ -94,7 +99,7 @@ require_once 'layout/header.php';
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <button  class="btn btn-transparence-orange"> <i class="loader"></i> Ajouter la bannière</button>
+                        <button  class="btn btn-transparence-orange"> <i class="loader"></i> <i class="load"></i> Ajouter la bannière</button>
                     </div>
                 </form>
 
@@ -103,7 +108,7 @@ require_once 'layout/header.php';
 </div>
 
 <?php
-require_once 'layout/footer.php';
+require_once 'layout/foot.php';
 ?>
 
 <script>
@@ -199,6 +204,7 @@ require_once 'layout/footer.php';
 
         $('#bannierForm').submit(function(e){
             e.preventDefault();
+            $('.load').html('<i class="loader-btn"></i>');
             var value = document.getElementById('bannierForm');
             var form = new FormData(value);
 
@@ -213,7 +219,7 @@ require_once 'layout/footer.php';
                 success: function(data){
 //                    alert(data.data_info);
                     if(data.data_info == "ok"){
-
+                        $('.load').html('');
                         tableBannier.ajax.reload(null,false);
                         $('.banSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">La bannière a été ajoutée avec succès !</div>');
 

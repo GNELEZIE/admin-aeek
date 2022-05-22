@@ -48,27 +48,22 @@ $nbTot = $nbsComt + $nbsR;
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
-require_once 'layout/header.php';
+require_once 'layout/head.php';
 ?>
 
+<div class="main-content app-content mt-0">
+<div class="side-app">
 
-<div class="container pt-5 mt-5">
+<div class="main-container container-fluid">
+<div class="container mt-5">
     <div class="row">
-
-        <!-- COL END -->
-
-        <!-- COL END -->
-
-        <!-- COL END -->
-        
-        <!-- COL END -->
         <div class="col-sm-6 col-lg-6 col-md-12 col-xl-3">
             <div class="card">
                 <div class="row">
                     <div class="col-4">
                         <div class="circle-icon bg-primary text-center align-self-center box-primary-shadow bradius">
                             <img src="<?=$asset?>/images/svgs/circle.svg" alt="img" class="card-img-absolute">
-                            <i class="lnr lnr-user fs-30  text-white mt-4"></i>
+                            <i class="fa fa-comment-o text-success fa-3x fs-30  text-white mt-4"></i>
                         </div>
                     </div>
                     <div class="col-8">
@@ -87,7 +82,7 @@ require_once 'layout/header.php';
                     <div class="col-4">
                         <div class="card-img-absolute circle-icon bg-warning align-items-center text-center box-warning-shadow bradius">
                             <img src="<?=$asset?>/images/svgs/circle.svg" alt="img" class="card-img-absolute">
-                            <i class="lnr lnr-briefcase fs-30 text-white mt-4"></i>
+                            <i class="fa fa-comment-o text-success fa-3x  text-white mt-4"></i>
                         </div>
                     </div>
                     <div class="col-8">
@@ -106,7 +101,7 @@ require_once 'layout/header.php';
                     <div class="col-4">
                         <div class="card-img-absolute  circle-icon bg-success align-items-center text-center box-success-shadow bradius">
                             <img src="<?=$asset?>/images/svgs/circle.svg" alt="img" class="card-img-absolute">
-                            <i class="lnr lnr-gift fs-30 text-white mt-4"></i>
+                            <i class="fa fa-comment-o text-success fa-3x text-white mt-4"></i>
                         </div>
                     </div>
                     <div class="col-8">
@@ -123,9 +118,9 @@ require_once 'layout/header.php';
             <div class="card">
                 <div class="row">
                     <div class="col-4">
-                        <div class="card-img-absolute circle-icon bg-danger align-items-center text-center box-danger-shadow bradius">
+                        <div class="card-img-absolute circle-icon bg-dark align-items-center text-center box-danger-shadow bradius">
                             <img src="<?=$asset?>/images/svgs/circle.svg" alt="img" class="card-img-absolute">
-                            <i class=" lnr lnr-cart fs-30 text-white mt-4"></i>
+                            <i class=" fa fa-comment-o text-success fa-3x text-white mt-4"></i>
                         </div>
                     </div>
                     <div class="col-8">
@@ -139,7 +134,7 @@ require_once 'layout/header.php';
         </div>
         <!-- COL END -->
     </div>
-    <div class="row pt-5 mt-5">
+    <div class="row pt-5 mt-5" style="margin-right: 30px !important; margin-left: 0 !important;">
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header" style="    border-bottom: 0 !important;">
@@ -170,7 +165,7 @@ require_once 'layout/header.php';
         </div>
     </div>
 </div>
-
+</div>
 
 <!--// Modal-->
 
@@ -201,7 +196,7 @@ require_once 'layout/header.php';
                     </div>
                 </div>
                 <div class="modal-footer" style="border-top: 0 !important;">
-                    <button class="btn btn-green-transparent">Valider votre réponse</button>
+                    <button class="btn btn-green-transparent"> <i class="load"></i> Valider votre réponse</button>
                     <a href="javascript:void(0);" class="btn btn-red-transparent" data-bs-dismiss="modal">Annuler</a>
                 </div>
             </form>
@@ -228,33 +223,7 @@ require_once 'layout/header.php';
                     </div>
                 </div>
                 <div class="modal-footer" style="border-top: 0 !important;">
-                    <button class="btn btn-green-transparent">Valider la modification</button>
-                    <a href="javascript:void(0);" class="btn btn-red-transparent" data-bs-dismiss="modal">Annuler</a>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="modalAddCat">
-    <div class="modal-dialog modal-dialog-centered text-center" role="document">
-        <div class="modal-content modal-content-demo p-5">
-            <div class="modal-header" style="border-bottom: 0 !important;">
-                <h3 class="modal-title">Ajouter une catégorie</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-            </div>
-            <form method="post" id="catForm">
-                <div class="modal-body">
-                    <div class="succes"></div>
-                    <div class="error"></div>
-                </div>
-                <div class="row row-sm">
-                    <div class="form-group text-left pl-2">
-                        <label for="cat">Catégorie <i class="required"></i> </label>
-                        <input class="form-control" placeholder="Nom de la catégorie" type="text" name="cat" id="cat" required>
-                        <input type="hidden" class="form-control" name="formkey" value="<?= $token ?>">
-                    </div>
-                </div>
-                <div class="modal-footer" style="border-top: 0 !important;">
-                    <button class="btn btn-green-transparent">Ajouter une catégorie</button>
+                    <button class="btn btn-green-transparent"> <i class="load"></i> Valider la modification</button>
                     <a href="javascript:void(0);" class="btn btn-red-transparent" data-bs-dismiss="modal">Annuler</a>
                 </div>
             </form>
@@ -262,8 +231,10 @@ require_once 'layout/header.php';
     </div>
 </div>
 
+</div>
+</div>
 <?php
-require_once 'layout/footer.php';
+require_once 'layout/foot.php';
 ?>
 
 <script>
@@ -324,6 +295,7 @@ require_once 'layout/footer.php';
 
         $('#comentUpdForm').submit(function(e){
             e.preventDefault();
+            $('.load').html('<i class="loader-btn"></i>');
             var value = document.getElementById('comentUpdForm');
             var form = new FormData(value);
 
@@ -336,10 +308,11 @@ require_once 'layout/footer.php';
                 processData:false,
                 dataType: 'json',
                 success: function(data){
-                    alert(data.data_info);
+//                    alert(data.data_info);
                     if(data.data_info == "ok"){
                         tableComment.ajax.reload(null,false);
-                        $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Commentaire modifiée avec succès !</div>');
+                        $('.load').html('<i class=""></i>');
+                        $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Commentaire modifié avec succès !</div>');
                     }else if(data.data_info == ''){
 
                     }
@@ -359,6 +332,7 @@ require_once 'layout/footer.php';
         $('#comentReponseForm').submit(function(e){
             e.preventDefault();
             var value = document.getElementById('comentReponseForm');
+            $('.load').html('<i class="loader-btn"></i>');
             var form = new FormData(value);
 
             $.ajax({
@@ -373,6 +347,7 @@ require_once 'layout/footer.php';
 //                alert(data.data_info);
                     if(data.data_info == "ok"){
                         tableComment.ajax.reload(null,false);
+                        $('.load').html('');
                         $('#reponses').val('');
                         $('.succesR').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Votre réponse ajoutée avec succès !</div>');
                     }else {

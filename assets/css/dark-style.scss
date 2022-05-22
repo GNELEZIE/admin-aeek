@@ -8,7 +8,9 @@ body.dark-mode *::-webkit-scrollbar-thumb,
 body.dark-mode *:hover::-webkit-scrollbar-thumb {
     background: $dark-body;
 }
-
+.text-noir{
+  color: #dedefd !important;
+}
 .dark-mode {
     table.dataTable>tbody>tr.child ul.dtr-details>li {
         border-bottom: 1px solid $border-dark;

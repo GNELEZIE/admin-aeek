@@ -8,6 +8,7 @@ if(!isset($_SESSION['useraeek'])){
     header('location:'.$domaine_admin.'/login?return='.$return);
     exit();
 }
+$artByUser = $article->getArticleByUserId($_SESSION['useraeek']['id_admin']);
 $listeTags= $tag->getAllTag();
 $listeCat = $categorie->getAllCategorie();
 require_once 'controller/article.save.php';
@@ -17,9 +18,9 @@ $_SESSION['myformkey'] = $token;
 
 require_once 'layout/head.php';
 ?>
-<div class="container pt-5 mt-5 main-content app-content mt-0" style="margin-left: 355px !important;">
-    <div class="row mt-5 pt-5">
-        <div class="col-xl-8">
+<div class="container mt-5 main-content app-content mt-0" style="margin-left: 260px !important;">
+    <div class="row mt-5 " style="margin-right: 30px !important; margin-left: 0 !important;">
+        <div class="col-xl-12">
             <div class="card">
                 <div class="card-header">
                     <div class="card-title">Ajouter un article</div>
@@ -108,33 +109,34 @@ require_once 'layout/head.php';
 
             </div>
         </div>
-        <div class="col-xl-4">
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-title">Article recents</div>
-                </div>
-                <div class="card-body">
-                    <div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">
-                        <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="<?=$asset?>/images/media/19.jpg" style="background: url(&quot;../assets/images/media/19.jpg&quot;) center top; height: 75px"></a>
-                        <div class="ps-3 flex-column">
-                            <span class="badge bg-danger me-1 mb-1 mt-1">Lifestyle</span>
-                            <h6><a href="#" class="mb-0">Generator on the Internet..</a></h6>
-                            <small>12/05/2022</small>
-                        </div>
-                    </div>
-                    <div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">
-                        <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="<?=$asset?>/images/media/19.jpg" style="background: url(&quot;../assets/images/media/19.jpg&quot;) center top; height: 75px"></a>
-                        <div class="ps-3 flex-column">
-                            <span class="badge bg-danger me-1 mb-1 mt-1">Lifestyle</span>
-                            <h6><a href="#" class="mb-0">Generator on the Internet..</a></h6>
-                            <small>12/05/2022</small>
-                        </div>
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
+<!--        <div class="col-xl-4">-->
+<!--            <div class="card">-->
+<!--                <div class="card-header">-->
+<!--                    <div class="card-title">Article recents</div>-->
+<!--                </div>-->
+<!--                <div class="card-body">-->
+<!---->
+<!--<!--                    -->--><?php
+////                    while($artByUsr = $artByUser->fetch()){
+////                        $catData = $categorie->getCategorieById($artByUsr['categorie_id'])->fetch();
+////                        ?>
+<!--<!--                    <div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">-->-->
+<!--<!--                        <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="-->--><?////=$domaine?><!--<!--/uploads/-->--><?////=$artByUsr['couverture'];?><!--<!--" style="background: url(&quot;../assets/images/media/19.jpg&quot;) center top; height: 75px"></a>-->-->
+<!--<!--                        <div class="ps-3 flex-column">-->-->
+<!--<!--                            <span class="badge bg-danger me-1 mb-1 mt-1">-->--><?////=$catData['nom']?><!--<!--</span>-->-->
+<!--<!--                            <h6><a href="#" class="mb-0">-->--><?////=reduit_text(html_entity_decode(stripslashes($artByUsr['titre'])),'25');?><!--<!--</a></h6>-->-->
+<!--<!--                            <small>-->--><?////=date_fr($artByUsr['date_article'])?><!--<!--</small>-->-->
+<!--<!--                        </div>-->-->
+<!--<!--                    </div>-->-->
+<!--<!--                    -->--><?php
+////                    }
+////                    ?>
+<!---->
+<!---->
+<!---->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
     </div>
     </div>
 <?php
@@ -143,12 +145,6 @@ require_once 'layout/foot.php';
 
 <script>
     $(document).ready(function() {
-
-//        $("#myTags").tagit({
-//            fieldName: "tags[]"
-//        });
-
-
         $('#summernote').summernote({
             placeholder: 'Hello Bootstrap 4'
         });
@@ -157,49 +153,6 @@ require_once 'layout/foot.php';
     $('#addArticleForm').submit(function(e){
         $('.loader').html(' <i class="loader-btn text-white"></i> ');
     });
-
-//    $('#addArticleForm').submit(function(e){
-//        e.preventDefault();
-//        var value = document.getElementById('addArticleForm');
-//        var form = new FormData(value);
-//        $('.loader').html(' <i class="loader-btn text-white"></i> ');
-//        $.ajax({
-//            method: 'post',
-//            url: '<?//=$domaine_admin?>///controller/article.save.php',
-//            data: form,
-//            contentType:false,
-//            cache:false,
-//            processData:false,
-//            dataType: 'json',
-//            success: function(data){
-////                alert(data.data_info);
-//                if(data.data_info == "ok"){
-//                    $('.loader').html('');
-//                    swal("Opération effectuée avec succès!","", "success");
-////                    $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Catégorie modifiée avec succès !</div>');  couvertureInput.val('');
-//                    $('#summernote').val('');
-//                    $('#titre').val('');
-//                    $('#categorie').val('');
-//                    couvertureInput.attr('src', '');
-//                    $('.file-msg').html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
-//
-//
-//                }else if(data.data_info == '1'){
-//                    $('.loader').html('');
-//                    swal("Impossible de publier l'article!", "Une erreur s'est produite lors du traitement des données.", "error");
-//                }
-//                else {
-//                    $('.loader').html('');
-//                    swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
-////                    $('.updError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification de la catégorie</div>');
-//                }
-//            },
-//            error: function (error, ajaxOptions, thrownError) {
-//                alert(error.responseText);
-//            }
-//        });
-//    });
-
 
     var couverture = $('.couverture');
     var inputCouverture = $('.input-couverture');

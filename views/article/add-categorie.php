@@ -19,8 +19,10 @@ $_SESSION['myformkey'] = $token;
 require_once 'layout/head.php';
 ?>
 
+<div class="main-content app-content mt-0">
+<div class="side-app">
 
-<div class="container pt-5 mt-5 main-content app-content mt-0" style="margin-left: 355px !important;">
+<div class="main-container container-fluid">
     <div class="row pt-5 mt-5">
         <div class="col-lg-12">
             <div class="card">
@@ -51,7 +53,8 @@ require_once 'layout/head.php';
         </div>
     </div>
 </div>
-
+</div>
+</div>
 
 <!--// Modal-->
 
@@ -75,7 +78,7 @@ require_once 'layout/head.php';
                     </div>
                 </div>
                 <div class="modal-footer" style="border-top: 0 !important;">
-                    <button class="btn btn-green-transparent">Ajouter une catégorie</button>
+                    <button class="btn btn-green-transparent"><i class="load"></i> Modifier la catégorie</button>
                     <a href="javascript:void(0);" class="btn btn-red-transparent" data-bs-dismiss="modal">Annuler</a>
                 </div>
             </form>
@@ -101,7 +104,7 @@ require_once 'layout/head.php';
                     </div>
                 </div>
                 <div class="modal-footer" style="border-top: 0 !important;">
-                    <button class="btn btn-green-transparent">Ajouter une catégorie</button>
+                    <button class="btn btn-green-transparent"> <i class="load"></i> Ajouter une catégorie</button>
                     <a href="javascript:void(0);" class="btn btn-red-transparent" data-bs-dismiss="modal">Annuler</a>
                 </div>
             </form>
@@ -158,6 +161,7 @@ require_once 'layout/foot.php';
 
         $('#catUpdForm').submit(function(e){
             e.preventDefault();
+            $('.load').html('<i class="loader-btn"></i>');
             var value = document.getElementById('catUpdForm');
             var form = new FormData(value);
 
@@ -173,6 +177,7 @@ require_once 'layout/foot.php';
 //                alert(data.data_info);
                     if(data.data_info == "ok"){
                         tableCat.ajax.reload(null,false);
+                        $('.load').html('');
                         $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Catégorie modifiée avec succès !</div>');
                     }else if(data.data_info == ''){
 
@@ -188,6 +193,7 @@ require_once 'layout/foot.php';
         });
         $('#catForm').submit(function(e){
             e.preventDefault();
+            $('.load').html('<i class="loader-btn"></i>');
             var value = document.getElementById('catForm');
             var form = new FormData(value);
 
@@ -203,6 +209,7 @@ require_once 'layout/foot.php';
 //                alert(data.data_info);
                     if(data.data_info == "ok"){
                         tableCat.ajax.reload(null,false);
+                        $('.load').html('');
                         $('#cat').val('');
                         $('.succes').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Catégorie ajoutée avec succès !</div>');
                     }else {

@@ -20,7 +20,9 @@ require_once 'layout/head.php';
 ?>
 
 
-<div class="container pt-5 mt-5 main-content app-content mt-0" style="margin-left: 355px !important;">
+<div class="main-content app-content mt-0">
+<div class="side-app">
+<div class="main-container container-fluid">
     <div class="row pt-5 mt-5">
         <div class="col-lg-12">
             <div class="card">
@@ -51,7 +53,8 @@ require_once 'layout/head.php';
         </div>
     </div>
 </div>
-
+</div>
+</div>
 
 <!--// Modal-->
 

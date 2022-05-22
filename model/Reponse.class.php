@@ -101,6 +101,20 @@ class Reponse{
 
     }
 
+    public function deleteReponseByArticle($id){
+
+        $query = "DELETE  FROM reponse WHERE article_id   = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
+
 
 
 

@@ -70,20 +70,20 @@
 <script src="<?=$asset?>/js/charts.js"></script>
 
 <!-- INTERNAL Flot JS -->
-<script src="<?=$asset?>/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-<script src="<?=$asset?>/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!--<script src="--><?//=$asset?><!--/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>-->
+<!--<script src="--><?//=$asset?><!--/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>-->
 <!-- TIMEPICKER JS -->
-<script src="<?=$asset?>/plugins/time-picker/jquery.timepicker.js"></script>
+<!--<script src="--><?//=$asset?><!--/plugins/time-picker/jquery.timepicker.js"></script>-->
 <script src="<?=$asset?>/plugins/time-picker/toggles.min.js"></script>
 
 <!-- INTERNAL intlTelInput js-->
 <script src="<?=$asset?>/plugins/intl-tel-input-master/intlTelInput.js"></script>
 <!--<script src="--><?//=$asset?><!--/plugins/intl-tel-input-master/country-select.js"></script>-->
 <script src="<?=$asset?>/plugins/intl-tel-input-master/utils.js"></script>
-<script src="<?=$asset?>/plugins/date-picker/date-picker.js"></script>
-<script src="<?=$asset?>/plugins/date-picker/jquery-ui.js"></script>
-<script src="<?=$asset?>/plugins/input-mask/jquery.maskedinput.js"></script>
-<script src="<?=$asset?>/js/form-elements.js"></script>
+<!--<script src="--><?//=$asset?><!--/plugins/date-picker/date-picker.js"></script>-->
+<!--<script src="--><?//=$asset?><!--/plugins/date-picker/jquery-ui.js"></script>-->
+<!--<script src="--><?//=$asset?><!--/plugins/input-mask/jquery.maskedinput.js"></script>-->
+<!--<script src="--><?//=$asset?><!--/js/form-elements.js"></script>-->
 
 <!-- INTERNAL Vector js -->
 <script src="<?=$asset?>/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
@@ -100,7 +100,7 @@
 
 <!-- CUSTOM JS -->
 <script src="<?=$asset?>/js/custom.js"></script>
-
+<script src="<?=$asset?>/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 </body>
 
 </html>

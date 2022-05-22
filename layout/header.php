@@ -21,8 +21,9 @@
     <link href="<?=$asset?>/css/skin-modes.css" rel="stylesheet" />
     <link href="<?=$asset?>/css/icons.css" rel="stylesheet" />
     <link href="<?=$asset?>/plugins/sweetalert/sweet-alert.css" rel="stylesheet" />
-    <link rel="stylesheet" href="<?=$asset?>/plugins/jquery-datetimepicker/jquery.datetimepicker.css" />
-    <link rel="stylesheet" href="<?=$asset?>/plugins/bootstrapdatepicker/css/datepicker.css" type="text/css"/>
+<!--    <link rel="stylesheet" href="--><?//=$asset?><!--/plugins/bootstrap-datepicker/css/datepicker.css" type="text/css"/>-->
+<!--    <link rel="stylesheet" href="--><?//=$asset?><!--/plugins/jquery-datetimepicker/jquery.datetimepicker.css" />-->
+<!--    <link rel="stylesheet" href="--><?//=$asset?><!--/plugins/bootstrapdatepicker/css/datepicker.css" type="text/css"/>-->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
 
     <style>

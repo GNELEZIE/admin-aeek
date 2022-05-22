@@ -20,10 +20,28 @@
         <span class="side-menu__label">Tag</span>
     </a>
 </li>
-    <li>
+<li>
     <a class="side-menu__item <?php if($lien == 'blog'){echo 'current';} ;?>" href="<?=$domaine_admin?>/blog">
         <i class="side-menu__icon fe fe-file-text"></i>
         <span class="side-menu__label">Blog</span>
+    </a>
+</li>
+  <li>
+    <a class="side-menu__item <?php if($lien == 'commentaire'){echo 'current';} ;?>" href="<?=$domaine_admin?>/commentaire">
+        <i class="side-menu__icon fe fe-message-square"></i>
+        <span class="side-menu__label">Commentaire</span>
+    </a>
+</li>
+    <li>
+    <a class="side-menu__item <?php if($lien == 'banniere'){echo 'current';} ;?>" href="<?=$domaine_admin?>/banniere">
+        <i class="side-menu__icon fe fe-square"></i>
+        <span class="side-menu__label">Bannière</span>
+    </a>
+</li>
+    <li>
+    <a class="side-menu__item <?php if($lien == 'gallerie'){echo 'current';} ;?>" href="<?=$domaine_admin?>/gallerie">
+        <i class="side-menu__icon fe fe-camera"></i>
+        <span class="side-menu__label">Gallerie</span>
     </a>
 </li>
 

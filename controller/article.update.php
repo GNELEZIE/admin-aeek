@@ -1,9 +1,17 @@
 <?php
-//session_start();
-//$info ='';
+session_start();
+$info ='';
 //echo $_SESSION['myformkey'] .'=='. $_POST['formkey'];
 if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['categorie']) and isset($_POST['artIds']) and isset($_POST['summernote']) and isset($_SESSION['myformkey']) and isset($_POST['formkey']) and $_SESSION['myformkey'] == $_POST['formkey']){
+// include function
 
+    include_once "../function/function.php";
+
+//Include Connexion
+    include_once '../model/Connexion.class.php';
+
+// appelle des class
+    include_once "../model/Article.class.php";
     $summernote = filter_var(htmlentities($_POST['summernote']),FILTER_SANITIZE_STRING);
     extract($_POST);
 
@@ -16,12 +24,12 @@ if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['cat
 
     $upd= $article->updateArticleInfo($titre,$categorie,$summernote,$artIds);
     if($upd > 0){
-        $success['message'] = 'Votre article a été modifié avec succès <a href="'.$domaine.'/show/'.$slug.'" target="_blank">Voir l\'article</a>';
+       $info = 'ok';
     }
 
 }
 
-//$output = array(
-//    'data_info' => $info
-//);
-//echo json_encode($output);
+$output = array(
+    'data_info' => $info
+);
+echo json_encode($output);

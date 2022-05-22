@@ -46,6 +46,15 @@ class Article{
         ));
         return $rs;
     }
+    public function getArticleByUserId($userId){
+        $query = "SELECT * FROM article
+        WHERE user_id = :userId ORDER BY id_article DESC LIMIT 10";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "userId" => $userId
+        ));
+        return $rs;
+    }
     public function getArticleBySlug($slug){
         $query = "SELECT * FROM article
         WHERE slug = :slug";
@@ -120,6 +129,29 @@ class Article{
 
         return $rs;
     }
+
+    // Delete
+    public function deleteArticle($id){
+
+        $query = "DELETE  FROM article WHERE id_article  = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
+
+
+
+
+
+
+
+
 
 }
 

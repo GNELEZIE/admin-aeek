@@ -1,5 +1,5 @@
 <?php
-class Events{
+class Gallerie{
     public function __construct() {
         $this->bdd = bdd();
     }
@@ -7,16 +7,14 @@ class Events{
 
 // Create
 
-    public function addEvents($created_date,$date_events,$nom, $slug){
-        $query = "INSERT INTO events(created_date,date_events,nom, slug)
-            VALUES (:created_date,:date_events,:nom, :slug)";
+    public function addGallerie($date_gallerie,$photo,$event_id){
+        $query = "INSERT INTO gallerie(date_gallerie,photo,event_id)
+            VALUES (:date_gallerie,:photo,:event_id)";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
-            "created_date" => $created_date,
-            "date_events" => $date_events,
-            "nom" => $nom,
-            "slug" => $slug
-
+            "date_gallerie" => $date_gallerie,
+            "photo" => $photo,
+            "event_id" => $event_id
         ));
         $nb = $rs->rowCount();
         if($nb > 0){
@@ -27,9 +25,9 @@ class Events{
 
 
 // Read
-    public function getEventById($id){
-        $query = "SELECT * FROM events
-        WHERE id_events = :id";
+    public function getGallerieById($id){
+        $query = "SELECT * FROM gallerie
+        WHERE event_id = :id";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "id" => $id
@@ -55,7 +53,15 @@ class Events{
         ));
         return $rs;
     }
-
+    public function getEventById($id){
+        $query = "SELECT * FROM gallerie
+        WHERE id_gallerie = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+        return $rs;
+    }
     public function getAllEvents(){
         $query = "SELECT * FROM events
           ORDER BY id_events    DESC ";
@@ -66,9 +72,9 @@ class Events{
 
 
     // Delete
-    public function deleteBan($id){
+    public function deleteGallerie($id){
 
-        $query = "DELETE  FROM banniere WHERE id_banniere  = :id";
+        $query = "DELETE  FROM gallerie WHERE id_gallerie = :id";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "id" => $id
@@ -97,4 +103,4 @@ class Events{
 
 }
 
-$events = new Events();
+$gallerie = new Gallerie();

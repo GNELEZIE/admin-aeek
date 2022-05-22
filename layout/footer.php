@@ -78,7 +78,7 @@
 <script src="<?=$asset?>/js/themeColors.js"></script>
 
 <script src="<?=$asset?>/js/custom.js"></script>
-<script src="<?=$asset?>/plugins/bootstrapdatepicker/js/bootstrap-datepicker.min.js"></script>
+<!--<script src="--><?//=$asset?><!--/plugins/bootstrapdatepicker/js/bootstrap-datepicker.min.js"></script>-->
 
 
 </body>

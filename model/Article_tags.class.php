@@ -44,37 +44,11 @@ class Article_tags{
 
 
 
-    public function getitagBySlug($slug){
-        $query = "SELECT * FROM tag
-        WHERE slug = :slug";
-        $rs = $this->bdd->prepare($query);
-        $rs->execute(array(
-            "slug" => $slug
-        ));
-        return $rs;
-    }
-
-    //Update
-
-    public function updateTag($nom,$slug,$id){
-        $query = "UPDATE tag
-                 SET nom = :nom, slug = :slug
-           WHERE id_tag = :id ";
-        $rs = $this->bdd->prepare($query);
-        $rs->execute(array(
-            "nom" => $nom,
-            "slug" => $slug,
-            "id" => $id
-
-        ));
-        $nb = $rs->rowCount();
-        return $nb;
-    }
 
     // Delete
-    public function deleteTag($id){
+    public function deleteArtTag($id){
 
-        $query = "DELETE  FROM tag WHERE id_tag  = :id";
+        $query = "DELETE  FROM article_tags WHERE article_id  = :id";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "id" => $id

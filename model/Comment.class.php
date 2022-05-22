@@ -134,6 +134,19 @@ class Comment{
         return $nb;
 
     }
+    public function deleteCommentByArticle($id){
+
+        $query = "DELETE  FROM comment WHERE article_id  = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
 
 
 

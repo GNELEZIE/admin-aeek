@@ -23,6 +23,7 @@ include_once 'model/Banniere.class.php';
 include_once 'model/Events.class.php';
 include_once 'model/Tag.class.php';
 include_once 'model/Article_tags.class.php';
+include_once 'model/Gallerie.class.php';
 
 
 

@@ -264,7 +264,9 @@ body.dark-mode *:hover::-webkit-scrollbar-thumb {
 .dark-mode .breadcrumb-item+.breadcrumb-item::before {
     color: #9595b5;
 }
-
+.text-noir{
+    color: #dedefd !important;
+}
 .dark-mode .breadcrumb1 {
     background-color: #1a1a3c;
 }

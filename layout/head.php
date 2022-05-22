@@ -20,6 +20,7 @@
     <link href="<?=$asset?>/css/skin-modes.css" rel="stylesheet" />
     <link href="<?=$asset?>/css/icons.css" rel="stylesheet" />
     <link href="<?=$asset?>/plugins/sweetalert/sweet-alert.css" rel="stylesheet" />
+    <link rel="stylesheet" href="<?=$asset?>/plugins/bootstrap-datepicker/css/datepicker.css" type="text/css"/>
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
     <style>
 
@@ -28,6 +29,53 @@
             color: #ff4600 !important;
             border-radius: 6px !important;
 
+        }
+        .gallerie-img{
+            object-fit: cover;
+            height: 250px !important;
+        }
+        .mytrash{
+            color: transparent;
+            text-align: right;
+        }
+        .mytrash:hover{
+            color: #ff0085;
+        }
+
+        .supicon{
+            position: absolute;
+            right: 31px;
+            top: 15px;
+        }
+
+
+
+        .mytrash a:hover{
+            color: #ff0085;
+        }
+        .supimg{
+            position: absolute;
+            right: 24px;
+            top: 10px;
+        }
+
+        .datepicker.dropdown-menu{
+            z-index: 99999 !important;
+        }
+        .datepicker table tr td.active.active{
+            background : #f87405 !important;
+        }
+        .card-img-absolute {
+            margin-left: 11px !important;
+        }
+        #back-to-top {
+            color: #f87405 !important;
+            border: none !important;
+            background: rgb(248 116 5 / 15%) !important
+        }
+        #back-to-top:hover {
+            color: #f87405 !important;
+            border: 2px solid #f87405;
         }
         .loader-btn {
             display: inline-block;
@@ -79,8 +127,9 @@
             max-width: 30% !important;
         }
         .text-noir{
-            color: #000000 !important;
+            color: #282f53 ;
         }
+
         .slide-item.active, .slide-item:hover, .slide-item:focus{
             background: #ff772921 !important;
             color: #ff7729 !important;
@@ -162,6 +211,16 @@
         .select2-container--default .select2-selection--multiple .select2-selection__choice, .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
             color: #0ba053 !important;
         }
+        .ui-state-default:hover{
+            background: #ff4600 !important;
+            border: none !important;
+        }
+        .ui-datepicker .ui-datepicker-calendar .ui-datepicker-today a {
+            background-color: #ffd4c4 !important;
+            color: #ff4600 !important;
+            border: none !important;
+        }
+
         .bg-transparence-warning {
             background: #f7b7312e !important;
             color: #f7b731 !important;
@@ -203,7 +262,7 @@
             border: none !important;
         }
         table tr:hover{
-            background: #f0f0f5 !important;
+            background: #f0f0f55c !important;
         }
         .table td {
             padding: 7px !important;
