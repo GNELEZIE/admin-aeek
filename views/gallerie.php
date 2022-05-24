@@ -13,7 +13,7 @@ if(isset($doc[1]) and !isset($doc[2])) {
     $liste = $events->getEventBySlug($doc[1]);
 
     if ($eventsData = $liste->fetch()) {
-       $eventId =  $eventsData['id_events'];
+        $eventId =  $eventsData['id_events'];
 //        $catData = $categorie->getCategorieById($articleData['categorie_id'])->fetch();
     } else {
         header('location:' . $domaine_admin . '/error');
@@ -40,101 +40,86 @@ require_once 'layout/head.php';
 
                 <div class="row mt-5 pt-5">
                     <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row photoContent"></div>
-                                            <form method="post" enctype="multipart/form-data" id="photoForm">
-                                                <input type="file" id="photo" name="photo" style="display: none" accept=".jpeg, .jpg, .png">
-                                                <input type="hidden" class="form-control" name="formkey" value="<?=$token?>">
-                                                <input type="hidden" class="form-control" name="event_id" value="<?=$listEvts['id_events']?>">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row photoContent"></div>
+                                <form method="post" enctype="multipart/form-data" id="photoForm">
+                                    <input type="file" id="photo" name="photo" style="display: none" accept=".jpeg, .jpg, .png">
+                                    <input type="hidden" class="form-control" name="formkey" value="<?=$token?>">
+                                    <input type="hidden" class="form-control" name="event_id" value="<?=$listEvts['id_events']?>">
 
-                                            </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <?php
-                }else{
-
-                 ?>
-                    <div class="row mt-5 pt-5">
-                        <div class="col-xl-8">
-                            <div class="card">
-                                <div class="card-header" style="    border-bottom: 0 !important;">
-                                    <h3 class="card-title">Les evenements</h3>
-                                </div>
-                                <div class="card-btn pl-3" style="border-bottom: 0 !important; padding-left: 20px;">
-                                    <a href="#modalAddEvents" class="btn-transparence-orange"  data-bs-effect="effect-sign" data-bs-toggle="modal"  style="padding: 7px 15px; border-radius: 3px;"> <i class="fa fa-plus"></i> Ajouter un evenement</a>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table text-nowrap border-bottom" id="tableEvents">
-                                            <thead>
-                                            <tr class="border-bottom">
-                                                <th class="wd-15p">Date de création</th>
-                                                <th class="wd-15p">Date de l'évènement</th>
-                                                <th class="wd-15p">Nom</th>
-                                                <th class="wd-15p">Photo</th>
-                                                <th class="text-center">Actions</th>
-                                            </tr>
-                                            </thead>
-                                            <tbody>
-                                            <tr>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4">
-                            <div class="card p-3">
-                                <h2 class="font-20 font-bold" style="font-size: 20px !important; font-weight: bold">Ajouter un évènemente</h2>
-                                <form method="post" id="eventForm">
-                                    <div class="row row-sm">
-                                        <div class="form-group text-left pl-2">
-                                            <label for="nom">Nom de l'évènemente <i class="required"></i> </label>
-                                            <input class="form-control" placeholder="Nom de l'évènemente" type="text" name="nom" id="nom" required>
-                                            <input type="hidden" class="form-control" name="formkey" value="<?= $token ?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="input-group">
-                                                <div class="input-group-text btn-transparence-orange">
-                                                    <i class="fa fa-calendar tx-16 lh-0 op-6"></i>
-                                                </div>
-                                                <input class="form-control" name="dateEvent" id="dateEvent" placeholder="Date de l'evènement" type="text">
-                                            </div>
-                                        </div
-
-                                    </div>
-                                    <div class="text-center" style="border-top: 0 !important;">
-                                        <button class="btn btn-green-transparent">Ajouter un évènemente</button>
-                                    </div>
                                 </form>
                             </div>
                         </div>
                     </div>
-                <?php } ?>
-
+                </div>
             </div>
-        </div>
-    </div>
 
+            <?php
+            }else{
 
+                ?>
+                <div class="row mt-5 pt-5">
+                    <div class="col-xl-8">
+                        <div class="card">
+                            <div class="card-header" style="    border-bottom: 0 !important;">
+                                <h3 class="card-title">Les evenements</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table text-nowrap border-bottom" id="tableEvents">
+                                        <thead>
+                                        <tr class="border-bottom">
+                                            <th class="wd-15p">Date de création</th>
+                                            <th class="wd-15p">Date de l'évènement</th>
+                                            <th class="wd-15p">Nom</th>
+                                            <th class="wd-15p">Photo</th>
+                                            <th class="text-center">Actions</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4">
+                        <div class="card p-3">
+                            <h2 class="font-20 font-bold" style="font-size: 20px !important; font-weight: bold">Ajouter un évènemente</h2>
+                            <form method="post" id="eventForm">
+                                <div class="row row-sm">
+                                    <div class="form-group text-left pl-2">
+                                        <label for="nom">Nom de l'évènemente <i class="required"></i> </label>
+                                        <input class="form-control" placeholder="Nom de l'évènemente" type="text" name="nom" id="nom" required>
+                                        <input type="hidden" class="form-control" name="formkey" value="<?= $token ?>">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-text btn-transparence-orange">
+                                                <i class="fa fa-calendar tx-16 lh-0 op-6"></i>
+                                            </div>
+                                            <input class="form-control" name="dateEvent" id="dateEvent" placeholder="Date de l'evènement" type="text">
+                                        </div>
+                                    </div
 
-
-<div class="modal fade" id="modalAddEvents">
-    <div class="modal-dialog modal-dialog-centered text-center" role="document">
-        <div class="modal-content modal-content-demo p-5">
-            <div class="modal-header" style="border-bottom: 0 !important;">
-                <h3 class="modal-title">Ajouter un évènement</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-            </div>
+                                </div>
+                                <div class="text-center" style="border-top: 0 !important;">
+                                    <button class="btn btn-green-transparent">Ajouter un évènemente</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
 
         </div>
     </div>
 </div>
+
+
 <?php
 require_once 'layout/foot.php';
 ?>
@@ -338,35 +323,35 @@ require_once 'layout/foot.php';
 
 
     $('#eventForm').submit(function(e){
-    e.preventDefault();
-    $('.load').html('<i class="loader-btn"></i>');
-    var value = document.getElementById('eventForm');
-    var form = new FormData(value);
+        e.preventDefault();
+        $('.load').html('<i class="loader-btn"></i>');
+        var value = document.getElementById('eventForm');
+        var form = new FormData(value);
 
-    $.ajax({
-        method: 'post',
-        url: '<?=$domaine_admin?>/controller/events.save.php',
-        data: form,
-        contentType:false,
-        cache:false,
-        processData:false,
-        dataType: 'json',
-        success: function(data){
+        $.ajax({
+            method: 'post',
+            url: '<?=$domaine_admin?>/controller/events.save.php',
+            data: form,
+            contentType:false,
+            cache:false,
+            processData:false,
+            dataType: 'json',
+            success: function(data){
 //                alert(data.data_info);
-            if(data.data_info == "ok"){
-                tableEvents.ajax.reload(null,false);
-                $('.load').html('');
-                $('#cat').val('');
-                swal("Evènement ajouté avec succès!","", "success");
-            }else {
-                $('#cat').val('');
-                swal("Impossible d'ajouter l'evènement!", "Une erreur s'est produite lors du traitement des données.", "error");
+                if(data.data_info == "ok"){
+                    tableEvents.ajax.reload(null,false);
+                    $('.load').html('');
+                    $('#cat').val('');
+                    swal("Evènement ajouté avec succès!","", "success");
+                }else {
+                    $('#cat').val('');
+                    swal("Impossible d'ajouter l'evènement!", "Une erreur s'est produite lors du traitement des données.", "error");
+                }
+            },
+            error: function (error, ajaxOptions, thrownError) {
+                alert(error.responseText);
             }
-        },
-        error: function (error, ajaxOptions, thrownError) {
-            alert(error.responseText);
-        }
-    });
+        });
     });
 
 

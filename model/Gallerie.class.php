@@ -35,6 +35,7 @@ class Gallerie{
         return $rs;
     }
 
+
    public function getEventBySlug($slugs){
         $query = "SELECT * FROM events
         WHERE slug = :slugs";

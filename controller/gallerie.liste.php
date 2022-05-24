@@ -34,7 +34,7 @@ $data_list .= '
        <div class="col-md-4">
                      <a href="javascript:void(0)" class="mytrash" onclick="ajoutPhoto()" title="Ajouter une photo">
                        <div class="w-100 text-center" style="background-color: #ff772917; padding-top: 26%; padding-bottom: 20%; height: 257px;">
-                         <i class="mdi mdi-plus-circle-outline" style="font-size: 50px; color: #cdcdcd"></i>
+                         <i class="mdi mdi-plus-circle-outline" style="font-size: 50px; color: #ff7729"></i>
                            </div>
                              </a>
                       </div>
