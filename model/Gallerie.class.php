@@ -62,6 +62,15 @@ class Gallerie{
         ));
         return $rs;
     }
+    public function getEventByEventsId($id){
+        $query = "SELECT * FROM gallerie
+        WHERE event_id = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+        return $rs;
+    }
     public function getAllEvents(){
         $query = "SELECT * FROM events
           ORDER BY id_events    DESC ";
@@ -69,12 +78,36 @@ class Gallerie{
         return $rs;
     }
 
+    //Count
 
+    public function nbPhotoByEvents($eventId){
+        $query = "SELECT COUNT(*) as nb FROM gallerie
+        WHERE event_id = :eventId ";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "eventId" => $eventId
+
+        ));
+        return $rs;
+    }
 
     // Delete
     public function deleteGallerie($id){
 
         $query = "DELETE  FROM gallerie WHERE id_gallerie = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
+    public function deleteGallerieByEventId($id){
+
+        $query = "DELETE  FROM gallerie WHERE event_id = :id";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "id" => $id

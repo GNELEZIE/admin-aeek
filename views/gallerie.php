@@ -36,7 +36,6 @@ require_once 'layout/head.php';
                 <?php
                 if(isset($doc[1]) and !isset($doc[2])){
                 $listEvts = $events->getEventsBySlug($doc[1])->fetch();
-
                 ?>
 
                 <div class="row mt-5 pt-5">
@@ -58,6 +57,7 @@ require_once 'layout/head.php';
 
                 <?php
                 }else{
+
                  ?>
                     <div class="row mt-5 pt-5">
                         <div class="col-xl-8">
@@ -187,8 +187,8 @@ require_once 'layout/foot.php';
     function supPhoto(id = null){
         if(id){
             swal({
-                    title: "Voulez vous supprimer la bannière ?",
-                    text: "L'action va supprimer la bannière sélectionné",
+                    title: "Voulez vous supprimer la photo ?",
+                    text: "L'action va supprimer la photo sélectionné",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -370,6 +370,35 @@ require_once 'layout/foot.php';
     });
 
 
+    function supEvent(id = null){
+        if(id){
+            swal({
+                    title: "Voulez vous supprimer l'évènemente  ?",
+                    text: "L'action va supprimer l'évènemente sélectionné",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Oui, supprimer",
+                    cancelButtonText: "Non, annuler",
+                    closeOnConfirm: false
+                },
+
+                function(isConfirm){
+                    if (isConfirm) {
+                        $.post('<?=$domaine_admin?>/controller/events.delete.php', {id : id}, function (data) {
+                            if(data == "ok"){
+                                swal("Opération effectuée avec succès!","", "success");
+                                tableEvents.ajax.reload(null,false);
+                            }else{
+                                swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
+                            }
+                        });
+                    }
+                });
+        }else{
+            alert('actualise');
+        }
+    }
 
 
 

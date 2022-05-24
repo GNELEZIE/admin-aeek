@@ -66,9 +66,9 @@ class Events{
 
 
     // Delete
-    public function deleteBan($id){
+    public function deleteEvent($id){
 
-        $query = "DELETE  FROM banniere WHERE id_banniere  = :id";
+        $query = "DELETE  FROM events WHERE id_events  = :id";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "id" => $id

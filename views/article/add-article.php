@@ -109,34 +109,7 @@ require_once 'layout/head.php';
 
             </div>
         </div>
-<!--        <div class="col-xl-4">-->
-<!--            <div class="card">-->
-<!--                <div class="card-header">-->
-<!--                    <div class="card-title">Article recents</div>-->
-<!--                </div>-->
-<!--                <div class="card-body">-->
-<!---->
-<!--<!--                    -->--><?php
-////                    while($artByUsr = $artByUser->fetch()){
-////                        $catData = $categorie->getCategorieById($artByUsr['categorie_id'])->fetch();
-////                        ?>
-<!--<!--                    <div class="d-flex overflow-visible pb-2 pt-2" style="border-bottom: 1px solid #e9edf4;">-->-->
-<!--<!--                        <a href="blog-details.html" class="card-aside-column br-5 cover-image" data-bs-image-src="-->--><?////=$domaine?><!--<!--/uploads/-->--><?////=$artByUsr['couverture'];?><!--<!--" style="background: url(&quot;../assets/images/media/19.jpg&quot;) center top; height: 75px"></a>-->-->
-<!--<!--                        <div class="ps-3 flex-column">-->-->
-<!--<!--                            <span class="badge bg-danger me-1 mb-1 mt-1">-->--><?////=$catData['nom']?><!--<!--</span>-->-->
-<!--<!--                            <h6><a href="#" class="mb-0">-->--><?////=reduit_text(html_entity_decode(stripslashes($artByUsr['titre'])),'25');?><!--<!--</a></h6>-->-->
-<!--<!--                            <small>-->--><?////=date_fr($artByUsr['date_article'])?><!--<!--</small>-->-->
-<!--<!--                        </div>-->-->
-<!--<!--                    </div>-->-->
-<!--<!--                    -->--><?php
-////                    }
-////                    ?>
-<!---->
-<!---->
-<!---->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
+
     </div>
     </div>
 <?php
