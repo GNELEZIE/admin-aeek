@@ -7,7 +7,7 @@ $doc = explode('/',$slug);
 $lien = $doc[0];
 
 if($lien =='' || $lien =='index'){
-    $lien = 'home';
+    $lien = 'dashboard';
     $page = '';
 }else{
     $page = $lien;
@@ -28,6 +28,8 @@ if(file_exists('views/'.$lien.'.php')){
     require_once 'views/article/'.$lien.'.php';
 }elseif(file_exists('views/commentaire/'.$lien.'.php')){
     require_once 'views/commentaire/'.$lien.'.php';
+}elseif(file_exists('views/membre/'.$lien.'.php')){
+    require_once 'views/membre/'.$lien.'.php';
 }
 else{
     header('location:'.$domaine.'/error');

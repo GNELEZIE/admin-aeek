@@ -434,24 +434,6 @@ require_once 'layout/head.php'
             </div>
         </div>
     </div>
-    <div class="col-lg-6">
-        <div class="card">
-            <div class="card-header">
-                <div class="card-title">Default Date picker</div>
-            </div>
-            <div class="card-body">
-                <p class="mg-b-20 mg-sm-b-40">The datepicker is tied to a standard form input field. Click on the input to open an interactive calendar in a small overlay. If a date is chosen, feedback is shown as the input's value.</p>
-                <div class="wd-200 mg-b-30">
-                    <div class="input-group">
-                        <div class="input-group-text">
-                            <i class="fa fa-calendar tx-16 lh-0 op-6"></i>
-                        </div>
-                        <input class="form-control fc-datepicker" name="dateEvent" id="dateEvent" placeholder="MM/DD/YYYY" type="text">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 

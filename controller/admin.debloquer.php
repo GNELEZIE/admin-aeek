@@ -1,12 +1,12 @@
 <?php
 session_start();
-if(isset($_SESSION['adminafricahelp']) and isset($_POST['id'])){
+if(isset($_SESSION['useraeek']) and isset($_POST['id'])){
     // include function
-    include_once "../assets/function/function.php";
+    include_once "../function/function.php";
 
     //Include Connexion
-    include_once '../class/Connexion.class.php';
-    include_once "../class/Admin.class.php";
+    include_once '../model/Connexion.class.php';
+    include_once "../model/Admin.class.php";
 
     extract($_POST);
 

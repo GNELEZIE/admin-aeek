@@ -1,5 +1,5 @@
 <?php
-class Admin {
+class Membre {
     public  function  __construct(){
         $this->bdd = bdd();
     }
@@ -8,7 +8,7 @@ class Admin {
     //Create
 
     public function addAdmin($userDate,$nom,$prenom,$slug,$email,$phone,$iso_phone,$dial_phone){
-        $query = "INSERT INTO admin(date_admin,nom,prenom,slug,email,phone,iso_phone,dial_phone)
+        $query = "INSERT INTO admin(admin_date,nom,prenom,slug,email,phone,iso_phone,dial_phone)
             VALUES (:userDate,:nom,:prenom,:slug,:email,:phone,:iso_phone,:dial_phone)";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
@@ -72,7 +72,7 @@ class Admin {
 
     public function getAllAdmin(){
         $query = "SELECT * FROM admin
-        WHERE role != 1  ORDER BY id_admin DESC";
+        WHERE role = 0 ORDER BY id_admin DESC";
         $rs = $this->bdd->query($query);
 
         return $rs;
@@ -207,4 +207,4 @@ class Admin {
 }
 // Instance
 
-$admin = new Admin();
+$membre = new Membre();

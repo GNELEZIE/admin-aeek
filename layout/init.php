@@ -6,7 +6,9 @@ session_start();
 include_once "function/domaine.php";
 include_once "function/mailing.php";
 include_once "function/function.php";
-
+//https://detectdevice.com/#php-class
+include_once "function/detectdevice/Mobile_Detect.php";
+include_once "function/detectdevice/detect.php";
 
 
 //Include Connexion
@@ -24,6 +26,7 @@ include_once 'model/Events.class.php';
 include_once 'model/Tag.class.php';
 include_once 'model/Article_tags.class.php';
 include_once 'model/Gallerie.class.php';
+include_once 'model/Membre.class.php';
 
 
 

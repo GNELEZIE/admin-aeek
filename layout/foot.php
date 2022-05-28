@@ -101,6 +101,7 @@
 <!-- CUSTOM JS -->
 <script src="<?=$asset?>/js/custom.js"></script>
 <script src="<?=$asset?>/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="<?=$asset?>/plugins/intltelinput/js/intlTelInput.min.js"></script>
 </body>
 
 </html>
