@@ -34,7 +34,7 @@ include_once 'model/Membre.class.php';
     $email = my_decrypt($_COOKIE['useraeek']);
     $result = $admin->getAdminByEmail($email);
     if($data = $result->fetch()){
-        if($data['bloquer'] == 0){
+        if($data['bloquer'] == 1){
             $_SESSION['useraeek'] = $data;
         }else{
             setcookie('aeekcookie',null,time()-60*60*24*30,'/',$cookies_domaine,true,true);
@@ -47,7 +47,7 @@ include_once 'model/Membre.class.php';
  if(isset($_SESSION['useraeek'])){
      $result = $admin->getAdminById($_SESSION['useraeek']['id_admin']);
      if($data = $result->fetch()){
-         if($data['bloquer'] != 0){
+         if($data['bloquer'] != 1){
              if(isset($_COOKIE['ecoldecroshi'])) {
                  setcookie('ecoldecroshi',null,time()-60*60*24*30,'/',$cookies_domaine,true,true);
              }

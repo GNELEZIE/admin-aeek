@@ -1,14 +1,21 @@
 <?php
 
-if(isset($_SESSION['adminafricahelp']) and isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['email']) and isset($_POST['phone']) and isset($_SESSION['myformkey']) and isset($_POST['formkey']) and $_SESSION['myformkey'] == $_POST['formkey']){
+if(isset($_SESSION['useraeek']) and isset($_POST['nom']) and isset($_POST['prenom']) and isset($_POST['email']) and isset($_POST['phone']) and isset($_SESSION['myformkey']) and isset($_POST['formkey']) and $_SESSION['myformkey'] == $_POST['formkey']){
     extract($_POST);
-    include_once "assets/function/mailing.php";
     $nom = htmlentities(trim(addslashes(strip_tags($nom))));
     $prenom = htmlentities(trim(addslashes(strip_tags($prenom))));
     $phone = htmlentities(trim(addslashes(strip_tags($phone))));
     $isoPhone = htmlentities(trim(addslashes(strip_tags($isoPhone))));
     $dialPhone = htmlentities(trim(addslashes(strip_tags($dialPhone))));
     $email = htmlentities(trim(addslashes(strip_tags($email))));
+    $fonction = htmlentities(trim(addslashes(strip_tags($fonction))));
+    $niveau = htmlentities(trim(addslashes(strip_tags($niveau))));
+    $biographie = htmlentities(trim(addslashes(strip_tags($biographie))));
+    $facebook = htmlentities(trim(addslashes(strip_tags($facebook))));
+    $twitter = htmlentities(trim(addslashes(strip_tags($twitter))));
+    $linkedin = htmlentities(trim(addslashes(strip_tags($linkedin))));
+    $instagram = htmlentities(trim(addslashes(strip_tags($instagram))));
+
     $slug = create_slug($_POST['nom']);
     $propriete1 = 'nom';
     $verifSlug = $admin->verifUtilisateur($propriete1,$nom);
@@ -23,24 +30,31 @@ if(isset($_SESSION['adminafricahelp']) and isset($_POST['nom']) and isset($_POST
     $propriete5 = 'iso_phone';
     $propriete6 = 'dial_phone';
     $propriete7 = 'slug';
-    if($nbSlug > 0 AND $rsSlug['id_admin'] != $_SESSION['adminafricahelp']['id_admin']){
+    $propriete8 = 'fonction';
+    $propriete9 = 'niveau';
+    $propriete10 = 'biographie';
+    $propriete11 = 'facebook';
+    $propriete12 = 'twitter';
+    $propriete13 = 'linkedin';
+    $propriete14 = 'instagram';
+    if($nbSlug > 0 AND $rsSlug['id_admin'] != $_SESSION['useraeek']['id_admin']){
         $slug = $slug.'-'.$nbSlug;
     }
 
 
     if($email != '' AND !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['upd'] = 'Votre adresse email n\'est pas correct';
-    }else if($_SESSION['adminafricahelp']['email'] ==$email){
-        $update = $admin->updateData8($propriete1,$nom,$propriete2,$prenom,$propriete3,$email,$propriete4,$phone,$propriete5,$isoPhone,$propriete6,$dialPhone,$propriete7,$slug,$_SESSION['adminafricahelp']['id_admin']);
+    }else if($_SESSION['useraeek']['email'] ==$email){
+        $update = $admin->updateData14($propriete1,$nom,$propriete2,$prenom,$propriete3,$email,$propriete4,$phone,$propriete5,$isoPhone,$propriete6,$dialPhone,$propriete7,$slug,$propriete8,$fonction,$propriete9,$niveau,$propriete10,$biographie,$propriete11,$facebook,$propriete12,$twitter,$propriete13,$linkedin,$propriete14,$instagram,$_SESSION['useraeek']['id_admin']);
         if($update > 0){
             $success['upd'] = 'Votre profil à été mis à jour avec succès';
         }
-    }else if($verifEmail->rowCount() > 0 and $rsEmail['email'] != $_SESSION['adminafricahelp']['email']){
+    }else if($verifEmail->rowCount() > 0 and $rsEmail['email'] != $_SESSION['useraeek']['email']){
         $errors['upd'] = 'Votre adresse email existe déjà !';
     }
     else{
-        $update = $admin->updateData7($propriete1,$nom,$propriete2,$prenom,$propriete4,$phone,$propriete5,$isoPhone,$propriete6,$dialPhone,$propriete7,$slug,$_SESSION['adminafricahelp']['id_admin']);
-        $mailToken = str_replace('+','-',my_encrypt($_SESSION['adminafricahelp']['email']));
+        $update = $admin->updateData13($propriete1,$nom,$propriete2,$prenom,$propriete4,$phone,$propriete5,$isoPhone,$propriete6,$dialPhone,$propriete7,$slug,$propriete8,$fonction,$propriete9,$niveau,$propriete10,$biographie,$propriete11,$facebook,$propriete12,$twitter,$propriete13,$linkedin,$propriete14,$instagram,$_SESSION['useraeek']['id_admin']);
+        $mailToken = str_replace('+','-',my_encrypt($_SESSION['useraeek']['email']));
         $subject = trim('Modification de votre email');
         $message = '
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -282,7 +296,7 @@ if(isset($_SESSION['adminafricahelp']) and isset($_POST['nom']) and isset($_POST
         sendMailNoReply($email,$subject,$message);
 
         $tab = array(
-            "id" => $_SESSION['adminafricahelp']['id_admin'],
+            "id" => $_SESSION['useraeek']['id_admin'],
             "email" => $email,
         );
         $_SESSION['_valid'] = $tab;

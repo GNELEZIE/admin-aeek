@@ -446,8 +446,8 @@ require_once 'layout/foot.php';
     function supprimer(id = null){
         if(id){
             swal({
-                    title: "Voulez vous supprimer le commentaire ?",
-                    text: "L'action va supprimer le commentaire",
+                    title: "Voulez vous supprimer l'admin ?",
+                    text: "L'action va supprimer l'admin",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -458,12 +458,12 @@ require_once 'layout/foot.php';
 
                 function(isConfirm){
                     if (isConfirm) {
-                        $.post('<?=$domaine_admin?>/controller/delete.comment.php', {id : id}, function (data) {
+                        $.post('<?=$domaine_admin?>/controller/admin.delete.php', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Opération effectuée avec succès!","", "success");
                                 tableMmbres.ajax.reload(null,false);
                             }else{
-                                swal("Impossible de supprimer le commentaire!", "Une erreur s'est produite lors du traitement des données.", "error");
+                                swal("Impossible de supprimer l'admin!", "Une erreur s'est produite lors du traitement des données.", "error");
                             }
                         });
                     }

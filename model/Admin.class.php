@@ -233,7 +233,72 @@ class Admin {
         $nb = $rs->rowCount();
         return $nb;
     }
+    public function updateData13($propriete1,$val1,$propriete2,$val2,$propriete3,$val3,$propriete4,$val4,$propriete5,$val5,$propriete6,$val6,$propriete7,$val7,$propriete8,$val8,$propriete9,$val9,$propriete10,$val10,$propriete11,$val11,$propriete12,$val12,$propriete13,$val13,$id){
+        $query = "UPDATE admin
+            SET $propriete1 = :val1, $propriete2 = :val2, $propriete3 = :val3, $propriete4 = :val4, $propriete5 = :val5, $propriete6 = :val6, $propriete7 = :val7, $propriete8 = :val8, $propriete9 = :val9, $propriete10 = :val10, $propriete11 = :val11, $propriete12 = :val12, $propriete13 = :val13
+            WHERE id_admin = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "val1" => $val1,
+            "val2" => $val2,
+            "val3" => $val3,
+            "val4" => $val4,
+            "val5" => $val5,
+            "val6" => $val6,
+            "val7" => $val7,
+            "val8" => $val8,
+            "val9" => $val9,
+            "val10" => $val10,
+            "val11" => $val11,
+            "val12" => $val12,
+            "val13" => $val13,
+            "id" => $id
+        ));
 
+        $nb = $rs->rowCount();
+        return $nb;
+    }
+  public function updateData14($propriete1,$val1,$propriete2,$val2,$propriete3,$val3,$propriete4,$val4,$propriete5,$val5,$propriete6,$val6,$propriete7,$val7,$propriete8,$val8,$propriete9,$val9,$propriete10,$val10,$propriete11,$val11,$propriete12,$val12,$propriete13,$val13,$propriete14,$val14,$id){
+        $query = "UPDATE admin
+            SET $propriete1 = :val1, $propriete2 = :val2, $propriete3 = :val3, $propriete4 = :val4, $propriete5 = :val5, $propriete6 = :val6, $propriete7 = :val7, $propriete8 = :val8, $propriete9 = :val9, $propriete10 = :val10, $propriete11 = :val11, $propriete12 = :val12, $propriete13 = :val13, $propriete14 = :val14
+            WHERE id_admin = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "val1" => $val1,
+            "val2" => $val2,
+            "val3" => $val3,
+            "val4" => $val4,
+            "val5" => $val5,
+            "val6" => $val6,
+            "val7" => $val7,
+            "val8" => $val8,
+            "val9" => $val9,
+            "val10" => $val10,
+            "val11" => $val11,
+            "val12" => $val12,
+            "val13" => $val13,
+            "val14" => $val14,
+            "id" => $id
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+    }
+
+    // Delete
+    public function deleteAdmin($id){
+
+        $query = "DELETE  FROM admin WHERE id_admin  = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
 
 
 }

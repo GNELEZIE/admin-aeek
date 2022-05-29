@@ -24,6 +24,11 @@
 <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
 <link rel="stylesheet" href="<?=$asset?>/plugins/intltelinput/css/intlTelInput.min.css"/>
 <style>
+.badge-dim.badge-danger {
+    color: #e85347 !important;
+    background-color: #fceceb !important;
+    border-color: #fceceb !important;
+}
 .iti, .select2-container{
     width: 100% !important;
 }
