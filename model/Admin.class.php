@@ -103,7 +103,39 @@ class Admin {
         return $rs;
     }
 
+//Count
+    public function nbAdmin(){
 
+        $query = "SELECT COUNT(*) as nb FROM admin
+                  WHERE role !=1";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
+    public function nbAdminEnAttent(){
+
+        $query = "SELECT COUNT(*) as nb FROM admin
+                  WHERE bloquer = 0 AND role !=1";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
+    public function nbAdminValider(){
+
+        $query = "SELECT COUNT(*) as nb FROM admin
+                  WHERE bloquer = 1 AND role !=1";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
+    public function nbAdminBloquer(){
+
+        $query = "SELECT COUNT(*) as nb FROM admin
+                  WHERE bloquer = 2 AND role !=1";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
     // update
 
 

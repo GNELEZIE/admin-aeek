@@ -11,7 +11,13 @@ if(isset($_SESSION['useraeek']) and isset($_POST['id'])){
     extract($_POST);
 
     $id = htmlentities(trim(addslashes($id)));
-    $etat = 0;
+    $dts = $admin->getAdminById($id)->fetch();
+    if($dts['mot_de_passe'] != ''){
+        $etat = 1;
+    }else{
+        $etat = 0;
+    }
+
     $upd = $admin->updateBloquer($etat,$id);
     if($upd >0){
         echo 'ok';

@@ -17,43 +17,26 @@ if($result['status'] == 'success'){
 }else{
     $countryCode = 'CI';
 }
-//add.categorie
-//categorie.liste
-//delete.categorie
-//update.categorie
-//require_once 'controller/add.categorie.php';
-$rs = $comment->getAllComment();
-$rsEnAt = $comment->getAllCommentEnAttente();
-$rsValid = $comment->getAllCommentValider();
-$rsr = $reponse->getAllReponses();
 
-if($rsEnAts = $rsEnAt->fetch()){
-    $comNbEn = $comment->nbCommentsEnAtt()->fetch();
-    $nbsComtEnAtt =  $comNbEn['nb'];
+$rs = $admin->getAllAdmin();
+
+if($adList = $rs->fetch()){
+    $totalAd = $admin->nbAdmin()->fetch();
+    $totalAdEnAtt = $admin->nbAdminEnAttent()->fetch();
+    $totalABlq = $admin->nbAdminBloquer()->fetch();
+    $totalAVal = $admin->nbAdminValider()->fetch();
+    $nbAd = $totalAd['nb'];
+    $nbAdEnAttent = $totalAdEnAtt['nb'];
+    $nbAdBloquer = $totalABlq['nb'];
+    $totalAValider = $totalAVal['nb'];
 }else{
-    $nbsComtEnAtt = 0;
-}
-if($rsV = $rsValid->fetch()){
-    $comNbValid = $comment->nbCommentsValid()->fetch();
-    $nbsComtValider =  $comNbValid['nb'];
-}else{
-    $nbsComtValider = 0;
-}
-if($resl = $rs->fetch()){
-    $comNb = $comment->nbComments()->fetch();
-    $nbsComt =  $comNb['nb'];
-}else{
-    $nbsComt = 0;
+    $nbAd = 0;
+    $nbAdEnAttent = 0;
+    $nbAdBloquer = 0;
+    $totalAValider = 0;
 }
 
 
-if($reslr = $rsr->fetch()){
-    $rpNb = $reponse->nbRepon()->fetch();
-    $nbsR =  $rpNb['nb'];
-}else{
-    $nbsR = 0;
-}
-$nbTot = $nbsComt + $nbsR;
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
@@ -65,7 +48,7 @@ require_once 'layout/head.php';
 
         <div class="main-container container-fluid">
             <div class="container mt-5">
-                <div class="row">
+                <div class="row reloaded">
                     <div class="col-sm-6 col-lg-6 col-md-12 col-xl-3">
                         <div class="card">
                             <div class="row">
@@ -77,8 +60,8 @@ require_once 'layout/head.php';
                                 </div>
                                 <div class="col-8">
                                     <div class="card-body p-4">
-                                        <h2 class="mb-2 fw-normal mt-2"><?=$nbTot?></h2>
-                                        <h5 class="fw-normal mb-0">Commentaires</h5>
+                                        <h2 class="mb-2 fw-normal mt-2"><?=$nbAd?></h2>
+                                        <h5 class="fw-normal mb-0">Membres</h5>
                                     </div>
                                 </div>
                             </div>
@@ -96,7 +79,7 @@ require_once 'layout/head.php';
                                 </div>
                                 <div class="col-8">
                                     <div class="card-body p-4">
-                                        <h2 class="mb-2 fw-normal mt-2"><?=$nbsComtEnAtt?></h2>
+                                        <h2 class="mb-2 fw-normal mt-2"><?=$nbAdEnAttent?></h2>
                                         <h5 class="fw-normal mb-0"> En attente</h5>
                                     </div>
                                 </div>
@@ -115,8 +98,8 @@ require_once 'layout/head.php';
                                 </div>
                                 <div class="col-8">
                                     <div class="card-body p-4">
-                                        <h2 class="mb-2 fw-normal mt-2"><?=$nbsComtValider?></h2>
-                                        <h5 class="fw-normal mb-0">Validé</h5>
+                                        <h2 class="mb-2 fw-normal mt-2"><?=$totalAValider?></h2>
+                                        <h5 class="fw-normal mb-0">Valider</h5>
                                     </div>
                                 </div>
                             </div>
@@ -127,15 +110,15 @@ require_once 'layout/head.php';
                         <div class="card">
                             <div class="row">
                                 <div class="col-4">
-                                    <div class="card-img-absolute circle-icon bg-dark align-items-center text-center box-danger-shadow bradius">
+                                    <div class="card-img-absolute circle-icon bg-danger align-items-center text-center box-danger-shadow bradius">
                                         <img src="<?=$asset?>/images/svgs/circle.svg" alt="img" class="card-img-absolute">
                                         <i class=" fa fa-user-o text-success fa-3x text-white mt-4"></i>
                                     </div>
                                 </div>
                                 <div class="col-8">
                                     <div class="card-body p-4">
-                                        <h2 class="mb-2 fw-normal mt-2"><?=$nbsR?></h2>
-                                        <h5 class="fw-normal mb-0">Réponses</h5>
+                                        <h2 class="mb-2 fw-normal mt-2"><?=$nbAdBloquer?></h2>
+                                        <h5 class="fw-normal mb-0">Bloquer</h5>
                                     </div>
                                 </div>
                             </div>
@@ -300,6 +283,7 @@ require_once 'layout/foot.php';
                     if(data.data_info == "ok"){
                         tableMmbres.ajax.reload(null,false);
                         $('.load').html('');
+                        $(".reloaded").load(location.href + " .reloaded");
                         swal("Succès !","Le membre a été ajouté avec succès","success");
                         $('#email').val('');
                         $('#nom').val('');
@@ -358,7 +342,7 @@ require_once 'layout/foot.php';
         tableMmbres = $('#tableMmbres').DataTable({
             "ajax":{
                 "type":"post",
-                "url":"<?=$domaine_admin?>/controller/membre.liste.php",
+                "url":"<?=$domaine_admin?>/controller/admin.liste.php",
                 "data":{
                     token:"<?=$token?>"
                 }
@@ -415,6 +399,7 @@ require_once 'layout/foot.php';
                             if(data == "ok"){
                                 swal("Opération effectuée avec succès!","", "success");
                                 tableMmbres.ajax.reload(null,false);
+                                $(".reloaded").load(location.href + " .reloaded");
                             }else{
                                 swal("Impossible de bloquer le membre!", "Une erreur s'est produite lors du traitement des données.", "error");
                             }
@@ -445,6 +430,7 @@ require_once 'layout/foot.php';
                             if(data == "ok"){
                                 swal("Opération effectuée avec succès!","", "success");
                                 tableMmbres.ajax.reload(null,false);
+                                $(".reloaded").load(location.href + " .reloaded");
                             }else{
                                 swal("Impossible de débloquer le membre!", "Une erreur s'est produite lors du traitement des données.", "error");
                             }

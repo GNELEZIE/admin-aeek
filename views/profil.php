@@ -8,6 +8,20 @@ if(!isset($_SESSION['useraeek'])){
     header('location:'.$domaine_admin.'/login?return='.$return);
     exit();
 }
+$myIp =  Detect::ip();
+$result = json_decode(getDataByUrl('http://ip-api.com/json/'.$myIp),true);
+if($result['status'] == 'success'){
+    $countryCode = $result['countryCode'];
+}else{
+    $countryCode = 'CI';
+}
+if($data['phone'] != ''){
+    $isoPhone = $data['iso_phone'];
+    $dialPhone = $data['dial_phone'];
+}else{
+    $isoPhone = 'ci';
+    $dialPhone = 225;
+}
 
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
@@ -22,53 +36,189 @@ require_once 'layout/head.php';
                     <div class="col-xl-8">
                         <div class="card">
                             <div class="card-header" style="    border-bottom: 0 !important;">
-                                <h3 class="card-title">Les evenements</h3>
+                                <h3 class="card-title">Modification du profil</h3>
                             </div>
                             <div class="card-body">
                                 <form method="post" id="addMembreForm">
-                                    <div class="form-group">
-                                        <div class="form-label-group">
-                                            <label class="form-label" for="nom">Nom  <i class="required"></i></label>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-label-group">
+                                                    <label class="form-label" for="nom">Nom  <i class="required"></i></label>
+                                                </div>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="nom" name="nom" placeholder="nom" value="<?=html_entity_decode(stripslashes($data['nom']))?>" required>
+                                                    <input type="hidden" class="form-control" name="formkey" value="<?=$token?>">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-control-wrap">
-                                            <input type="text" class="form-control" id="nom" name="nom" placeholder="nom" required>
-                                            <input type="hidden" class="form-control" name="formkey" value="<?=$token?>">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="form-label-group">
-                                            <label class="form-label" for="prenom">Prénom <i class="required"></i></label>
-                                        </div>
-                                        <div class="form-control-wrap">
-                                            <input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="form-label-group">
-                                            <label class="form-label" for="email">Email <i class="required"></i></label>
-                                        </div>
-                                        <div class="form-control-wrap">
-                                            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-label-group">
+                                                    <label class="form-label" for="prenom">Prénom <i class="required"></i></label>
+                                                </div>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" value="<?=html_entity_decode(stripslashes($data['prenom']))?>" required>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <label for="role" class="col-md-3 form-label m-0 p-0 pb-2">Rôle</label>
-                                    <div class="">
-                                        <select name="role" id="role" class="form-control form-select select2 input-style" data-bs-placeholder="Select Country">
-                                            <option value="1">Admin</option>
-                                            <option value="2">Editeur</option>
-                                            <option value="3">Membre</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <div class="form-label-group">
-                                            <label class="form-label" for="phone">Téléphone <i class="required"></i></label>
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-label-group">
+                                                    <label class="form-label" for="email">Email <i class="required"></i></label>
+                                                </div>
+                                                <div class="form-control-wrap">
+                                                    <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="<?=html_entity_decode(stripslashes($data['email']))?> ">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-control-wrap">
-                                            <input type="tel" class="form-control" name="phone" id="phone" value="" required>
-                                            <input type="hidden"  name="isoPhone" id="isoPhone" value="value="">
-                                            <input type="hidden"  name="dialPhone" id="dialPhone" value="">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-label-group">
+                                                    <label class="form-label" for="phone">Téléphone <i class="required"></i></label>
+                                                </div>
+                                                <div class="form-control-wrap">
+                                                    <input type="tel" class="form-control" name="phone" id="phone" value="<?=$data['phone']?>" required>
+                                                    <input type="hidden"  name="isoPhone" id="isoPhone" value="value="<?=$isoPhone?>">
+                                                    <input type="hidden"  name="dialPhone" id="dialPhone" value="<?=$dialPhone?>">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-label-group">
+                                                    <label class="form-label" for="fonction">Fonction  </label>
+                                                </div>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="fonction" name="fonction" placeholder="nom" value="<?=html_entity_decode(stripslashes($data['fonction']))?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-label-group">
+                                                    <label class="form-label" for="niveau">Niveau d'étude</label>
+                                                </div>
+                                                <div class="form-control-wrap">
+                                                    <input type="text" class="form-control" id="niveau" name="niveau" placeholder="niveau" value="<?=html_entity_decode(stripslashes($data['niveau']))?>" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="form-label-group">
+                                                    <label class="form-label" for="biographie">Biographie</label>
+                                                </div>
+                                                <div class="form-control-wrap">
+                                                    <textarea class="form-control" id="biographie" name="biographie" placeholder="biographie" required><?=html_entity_decode(stripslashes($data['biographie']))?></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-label-group">
+                                                    <label class="form-label" for="fonction">Facebook  </label>
+                                                </div>
+                                                <div class="form-control-wrap">
+                                                    <input type="url" class="form-control" id="facebook" name="facebook" placeholder="https://facebook.com/nom" value="<?=html_entity_decode(stripslashes($data['facebook']))?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-label-group">
+                                                    <label class="form-label" for="twitter">Twitter</label>
+                                                </div>
+                                                <div class="form-control-wrap">
+                                                    <input type="url" class="form-control" id="twitter" name="twitter" placeholder="twitter" value="<?=html_entity_decode(stripslashes($data['twitter']))?>" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-label-group">
+                                                    <label class="form-label" for="fonction">Linkedin  </label>
+                                                </div>
+                                                <div class="form-control-wrap">
+                                                    <input type="url" class="form-control" id="linkedin" name="linkedin" placeholder="linkedin" value="<?=html_entity_decode(stripslashes($data['linkedin']))?>">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="form-label-group">
+                                                    <label class="form-label" for="twitter">Instagram</label>
+                                                </div>
+                                                <div class="form-control-wrap">
+                                                    <input type="url" class="form-control" id="instagram" name="instagram" placeholder="instagram" value="<?=html_entity_decode(stripslashes($data['instagram']))?>" >
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                        </div>
+                                        <div class="col-md-6">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                        </div>
+                                        <div class="col-md-6">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                        </div>
+                                        <div class="col-md-6">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                        </div>
+                                        <div class="col-md-6">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                        </div>
+                                        <div class="col-md-6">
+
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+
+                                        </div>
+                                        <div class="col-md-6">
+
+                                        </div>
+                                    </div>
+
+
+
+
+
                                     <div class="form-group text-center">
                                         <button class="btn btn-green-transparent"> <i class="load"></i> Ajouter un membre</button>
                                         <a href="javascript:void(0);" class="btn btn-red-transparent" data-bs-dismiss="modal">Annuler</a>
@@ -139,49 +289,8 @@ require_once 'layout/foot.php';
         $('#dialPhone').val(countryData["dialCode"]);
     });
 
-    function ajoutPhoto(){
-        $('#photo').trigger('click');
-    }
-    chargePhoto();
-    function chargePhoto(){
-        $.ajax({
-            type: 'post',
-            url: '<?=$domaine_admin?>/controller/gallerie.liste.php',
-            "data":{
-                eventId:"<?=$eventId?>"
-            },
-            dataType: 'json',
-            success: function(data){
-                $('.photoContent').html(data.fichierList);
-            }
-        });
-    }
 
-    $('#photo').change(function(e){
-        e.preventDefault();
-//        $('.loaderPhoto').css('display','block');
-        var value = document.getElementById('photoForm');
-        var form = new FormData(value);
 
-        $.ajax({
-            method: 'post',
-            url: '<?=$domaine_admin?>/controller/gallerie.save.php',
-            data: form,
-            contentType:false,
-            cache:false,
-            processData:false,
-            success: function(data){
-                if(data == "ok"){
-                    chargePhoto();
-                }else {
-                    swal("Action Impossible !", "Une erreur s\'est produite lors du traitement des données !", "error");
-                }
-                $('.loaderPhoto').css('display','none');
-            }
-        });
 
-    });
-
-    }
 </script>
 
