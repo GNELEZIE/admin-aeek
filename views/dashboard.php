@@ -81,6 +81,17 @@ if($reslr = $rsr->fetch()){
 }else{
     $nbsR = 0;
 }
+
+$Emploi_dt= $emplois->getAllEmploisActive();
+
+if($reslr = $Emploi_dt->fetch()){
+    $nbEmploi= $emplois->nbEmplois()->fetch();
+    $emploiNb = $nbEmploi['nb'];
+}else{
+    $emploiNb = 0;
+}
+
+
 $nbTotComment = $nbsComt + $nbsR;
 require_once 'layout/head.php'
 ?>
@@ -124,10 +135,10 @@ require_once 'layout/head.php'
                     <div class="card-body">
                         <div class="d-flex">
                             <div class="text-white">
-                                <h2 class="mb-0 number-font"><?=$nbTotComment?></h2>
-                                <p class="text-white mb-0">Commentaires</p>
+                                <h2 class="mb-0 number-font"><?=$emploiNb?></h2>
+                                <p class="text-white mb-0">Offres d'emplois</p>
                             </div>
-                            <div class="ms-auto"> <i class="fa fa-comment-o text-white fs-30 me-2 mt-2"></i> </div>
+                            <div class="ms-auto"> <i class="fa fa-briefcase text-white fs-30 me-2 mt-2"></i> </div>
                         </div>
                     </div>
                 </div>

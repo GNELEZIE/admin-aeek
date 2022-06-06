@@ -26,7 +26,8 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
         }
         $nbs = '<a href="" class="bg-transparence-warning" style="padding: 6px;">'.$nbGal.'</a>';
         $action = '<div class="btn-list text-center">
-                                         <a href="'.$domaine_admin.'/gallerie/'.$data['slug'].'" class="btn btn-sm btn-transparence-info"> <i class="fe fe-eye"></i> </a>
+                                         <a href="'.$domaine_admin.'/gallerie/'.$data['slug'].'" class="btn btn-sm btn-transparence-info">
+                                         <i class="fe fe-eye"></i> </a>
 
                                         <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="supEvent('.$data['id_events'].')">
                                             <span class="fe fe-trash-2"> </span>
