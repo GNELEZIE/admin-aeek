@@ -80,6 +80,19 @@ class Emplois{
         return $nb;
 
     }
+    public function expireEmplois($etat){
+        $query = "UPDATE emplois
+            SET statut = :etat";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "etat" => $etat
+
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
 
     // Verification valeur existant
     public function verifEmplois($propriete,$val){
