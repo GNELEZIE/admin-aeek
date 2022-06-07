@@ -171,6 +171,22 @@ div.dataTables_wrapper div.dataTables_paginate ul.pagination {
 .couverture.is-active {
     background-color: #eff7fa;
 }
+.logo {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    border: 2px dashed #888ea8;
+    border-radius: 6px;
+    transition: 0.2s;
+    min-height: 200px;
+    background: no-repeat center;
+    background-size: contain;
+}
+.logo.is-active {
+    background-color: #eff7fa;
+}
 
 .file-msg {
     text-align: center;

@@ -44,14 +44,40 @@
         <span class="side-menu__label">Gallerie</span>
     </a>
 </li>
-    <li>
-    <a class="side-menu__item <?php if($lien == 'emplois'){echo 'current';} ;?>" href="<?=$domaine_admin?>/emplois">
-        <i class="side-menu__icon fe fe-briefcase"></i>
-        <span class="side-menu__label">Offre d'emplois</span>
-    </a>
-</li>
+<!--    <li>-->
+<!--    <a class="side-menu__item --><?php //if($lien == 'emplois'){echo 'current';} ;?><!--" href="--><?//=$domaine_admin?><!--/emplois">-->
+<!--        <i class="side-menu__icon fe fe-briefcase"></i>-->
+<!--        <span class="side-menu__label">Offre d'emplois</span>-->
+<!--    </a>-->
+<!--</li>-->
 
-
+    <li class="slide">
+        <a class="side-menu__item <?php if($lien == 'emplois'){echo 'current';} ;?>" data-bs-toggle="slide" href="javascript:void(0)">
+            <i class="side-menu__icon fe fe-briefcase"></i>
+            <span class="side-menu__label">Offre d'emplois</span>
+            <i class="angle fe fe-chevron-right"></i>
+        </a>
+        <ul class="slide-menu">
+            <li>
+                <a href="<?=$domaine_admin?>/emplois" class="slide-item  <?php if($lien == 'emplois' || $lien == 'offre-externe'){echo 'current';} ;?>">
+                    <i class="side-menu__icon fe fe-briefcase"></i>
+                    <span class="side-menu__label">La liste des offres</span>
+                </a>
+            </li>
+            <li>
+                <a href="<?=$domaine_admin?>/offre-externe" class="slide-item  <?php if($lien == 'offre-externe'){echo 'current';} ;?>">
+                    <i class="side-menu__icon fe fe-briefcase"></i>
+                    <span class="side-menu__label">Offre exterieur</span>
+                </a>
+            </li>
+            <li>
+                <a href="<?=$domaine_admin?>/gallerie" class="slide-item">
+                    <i class="side-menu__icon fe fe-briefcase"></i>
+                    <span class="side-menu__label">Offre interieur</span>
+                </a>
+            </li>
+        </ul>
+    </li>
 
 </ul>
 <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"

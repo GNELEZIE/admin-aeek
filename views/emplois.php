@@ -8,11 +8,7 @@ if(!isset($_SESSION['useraeek'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
-//add.categorie
-//categorie.liste
-//delete.categorie
-//update.categorie
-//require_once 'controller/add.categorie.php';
+
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
@@ -35,12 +31,14 @@ require_once 'layout/head.php';
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-nowrap border-bottom" id="tableBannier">
+                        <table class="table text-nowrap border-bottom" id="TableEmplois">
                             <thead>
                             <tr class="border-bottom">
                                 <th class="wd-15p">Date de création</th>
                                 <th class="wd-15p">Titre</th>
-                                <th class="wd-15p">Description</th>
+                                <th class="wd-15p">Expire le</th>
+                                <th class="wd-15p">Type contrat</th>
+                                <th class="wd-15p">Statut</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                             </thead>
@@ -75,8 +73,8 @@ require_once 'layout/head.php';
                         <div class="row">
 
                             <div class="form-group">
-                                <label for="titre" class="form-label">Titre de la bannière</label>
-                                <input type="text" class="form-control input-style" name="titre" id="titre" placeholder="Titre de la bannière" required>
+                                <label for="titre" class="form-label">Nom de l'offre</label>
+                                <input type="text" class="form-control input-style" name="titre" id="titre" placeholder="Nom de l'offre" required>
                                 <input type="hidden" class="form-control " name="formkey" value="<?= $token ?>">
                             </div>
                             <div class="form-group">
@@ -112,13 +110,13 @@ require_once 'layout/foot.php';
 ?>
 
 <script>
-    var tableBannier;
+    var TableEmplois;
     $(document).ready(function() {
 
-        tableBannier = $('#tableBannier').DataTable({
+        TableEmplois = $('#TableEmplois').DataTable({
             "ajax":{
                 "type":"post",
-                "url":"<?=$domaine_admin?>/controller/banniere.liste.php",
+                "url":"<?=$domaine_admin?>/controller/emplois.liste.php",
                 "data":{
                     token:"<?=$token?>"
                 }
@@ -154,96 +152,79 @@ require_once 'layout/foot.php';
             $('#udpCat').val(nom);
         });
 
-        var couverture = $('.couverture');
-        var inputCouverture = $('.input-couverture');
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                var fileType = input.files[0]['type'];
-                var valideImage = ["image/jpg","image/jpeg","image/png"];
-
-                reader.onload = function (e) {
-                    if($.inArray(fileType, valideImage) < 0){
-                        $('.file-msg').html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
-                        inputCouverture.val('');
-                        inputCouverture.attr('src', '');
-                        swal("Oups format non autorisé !","Les formats acceptés sont : jpg, jpeg et png !","error");
-                    }else{
-                        couverture.css('background-image', 'url('+e.target.result+')');
-                    }
-
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        inputCouverture.on('dragenter focus click', function() {
-            couverture.addClass('is-active');
-        });
-
-        inputCouverture.on('dragleave blur drop', function() {
-            couverture.removeClass('is-active');
-        });
-
-        inputCouverture.on('change', function() {
-
-            var filesCount = $(this)[0].files.length;
-            var textContainer = $(this).prev();
-            if (filesCount === 1) {
-                var fileName = $(this).val().split('\\').pop();
-                textContainer.text(fileName);
-            } else {
-                textContainer.html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
-            }
-            readURL(this);
-        });
-
-
-
-        $('#bannierForm').submit(function(e){
-            e.preventDefault();
-            $('.load').html('<i class="loader-btn"></i>');
-            var value = document.getElementById('bannierForm');
-            var form = new FormData(value);
-
-            $.ajax({
-                method: 'post',
-                url: '<?=$domaine_admin?>/controller/banniere.save.php',
-                data: form,
-                contentType:false,
-                cache:false,
-                processData:false,
-                dataType: 'json',
-                success: function(data){
-//                    alert(data.data_info);
-                    if(data.data_info == "ok"){
-                        $('.load').html('');
-                        tableBannier.ajax.reload(null,false);
-                        $('.banSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">La bannière a été ajoutée avec succès !</div>');
-
-                    }else {
-                        $('.banError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification de la catégorie</div>');
-                    }
-                },
-                error: function (error, ajaxOptions, thrownError) {
-                    alert(error.responseText);
-                }
-            });
-        });
-
 
 
 
     });
 
+    function bloquer(id = null){
+        if(id){
+            swal({
+                    title: "Voulez vous bloquer l'offre ?",
+                    text: "L'action va bloquer l'offre sélectionné",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Oui, bloquer",
+                    cancelButtonText: "Non, annuler",
+                    closeOnConfirm: false
+                },
+
+                function(isConfirm){
+                    if (isConfirm) {
+                        $.post('<?=$domaine_admin?>/controller/emploi.bloquer.php', {id : id}, function (data) {
+                            if(data == "ok"){
+                                swal("Opération effectuée avec succès!","", "success");
+                                TableEmplois.ajax.reload(null,false);
+                                $(".reloaded").load(location.href + " .reloaded");
+                            }else{
+                                swal("Impossible de bloquer l'offre!", "Une erreur s'est produite lors du traitement des données.", "error");
+                            }
+                        });
+                    }
+                });
+        }else{
+            alert('actualise');
+        }
+    }
+
+    function debloquer(id = null){
+        if(id){
+            swal({
+                    title: "Voulez vous débloquer l'offre ?",
+                    text: "L'action va débloquer l'offre sélectionné",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Oui, débloquer",
+                    cancelButtonText: "Non, annuler",
+                    closeOnConfirm: false
+                },
+
+                function(isConfirm){
+                    if (isConfirm) {
+                        $.post('<?=$domaine_admin?>/controller/emplois.debloquer.php', {id : id}, function (data) {
+                            if(data == "ok"){
+                                swal("Opération effectuée avec succès!","", "success");
+                                TableEmplois.ajax.reload(null,false);
+                                $(".reloaded").load(location.href + " .reloaded");
+                            }else{
+                                swal("Impossible de débloquer l'offre!", "Une erreur s'est produite lors du traitement des données.", "error");
+                            }
+                        });
+                    }
+                });
+        }else{
+            alert('actualise');
+        }
+    }
+
     // supprimer
     function supprimer(id = null){
         if(id){
             swal({
-                    title: "Voulez vous supprimer la bannière ?",
-                    text: "L'action va supprimer la bannière sélectionné",
+                    title: "Voulez vous supprimer l'offre ?",
+                    text: "L'action va supprimer l'offre sélectionné",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -254,10 +235,10 @@ require_once 'layout/foot.php';
 
                 function(isConfirm){
                     if (isConfirm) {
-                        $.post('<?=$domaine_admin?>/controller/banniere.delete.php', {id : id}, function (data) {
+                        $.post('<?=$domaine_admin?>/controller/emplois.delete.php', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Opération effectuée avec succès!","", "success");
-                                tableBannier.ajax.reload(null,false);
+                                TableEmplois.ajax.reload(null,false);
                             }else{
                                 swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
                             }
