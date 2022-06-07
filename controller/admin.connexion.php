@@ -6,8 +6,11 @@ if(isset($_POST['email']) and isset($_POST['password']) and isset($_SESSION['myf
 
     if($password != ''){
         $result = $admin->getAdminByEmail($email);
+
         if($data = $result->fetch()){
+
             if($data['email_valid'] == 1) {
+
                 if ($data['bloquer'] == 1) {
                     if (password_verify($password, $data['mot_de_passe'])) {
                         $_SESSION['useraeek'] = $data;
