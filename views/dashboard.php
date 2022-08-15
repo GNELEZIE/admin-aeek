@@ -93,6 +93,9 @@ if($reslr = $Emploi_dt->fetch()){
 
 
 $nbTotComment = $nbsComt + $nbsR;
+$token = openssl_random_pseudo_bytes(16);
+$token = bin2hex($token);
+$_SESSION['myformkey'] = $token;
 require_once 'layout/head.php'
 ?>
 <!--app-content open-->
@@ -166,7 +169,7 @@ require_once 'layout/head.php'
         <div class="card-header">
             <h4 class="card-title fw-semibold">Commentaire en attente</h4>
         </div>
-        <div class="card-body pb-0">
+        <div class="card-body pb-0" id="here">
             <ul class="task-list">
                 <?php
                 $com = $comment->getAllCommentCinq();
@@ -180,14 +183,15 @@ require_once 'layout/head.php'
                                     class="text-muted fs-11 mx-2 fw-normal"><?=date_lettre($comments['date_comment'])?></span>
                             </h6>
                             <p class="text-muted fs-12"><?=reduit_text(html_entity_decode(stripslashes($comments['message'])),'40')?> <a
-                                    href="javascript:void(0)" class="fw-semibold"> Voir l'article</a></p>
+                                    href="#" class="fw-semibold"> Voir l'article</a></p>
                         </div>
                         <div class="ms-auto d-md-flex">
-                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"
-                               data-bs-placement="top" title="Edit" aria-label="Edit"><span
-                                    class="fe fe-edit"></span></a>
-                            <a href="javascript:void(0)" class="text-muted"><span
-                                    class="fe fe-trash-2"></span></a>
+
+                            <a href="#modalUpdComment" id="bEdit" type="button"  data-bs-toggle="modal" data-id="<?=$comments['id_comment']?>"  data-name="<?=$comments['nom']?>" data-message="<?=$comments['message']?>" data-target="#modalUpdComment">
+                                <span class="fe fe-edit"> </span>
+                            </a>
+
+                            <a href="javascript:void(0)"  onclick="supprimer(<?=$comments['id_comment']?>)" class="text-muted text-red"><span class="fe fe-trash-2"></span></a>
                         </div>
                     </li>
                 <?php
@@ -195,76 +199,6 @@ require_once 'layout/head.php'
                 ?>
 
 
-
-
-                <!--                    <li class="d-sm-flex">-->
-                <!--                        <div>-->
-                <!--                            <i class="task-icon bg-success"></i>-->
-                <!--                            <h6 class="fw-semibold">New Comment<span-->
-                <!--                                    class="text-muted fs-11 mx-2 fw-normal">25 June 2021</span>-->
-                <!--                            </h6>-->
-                <!--                            <p class="text-muted fs-12">Victoria commented on Project <a-->
-                <!--                                    href="javascript:void(0)" class="fw-semibold"> AngularJS Template</a></p>-->
-                <!--                        </div>-->
-                <!--                        <div class="ms-auto d-md-flex">-->
-                <!--                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"-->
-                <!--                               data-bs-placement="top" title="Edit" aria-label="Edit"><span-->
-                <!--                                    class="fe fe-edit"></span></a>-->
-                <!--                            <a href="javascript:void(0)" class="text-muted"><span-->
-                <!--                                    class="fe fe-trash-2"></span></a>-->
-                <!--                        </div>-->
-                <!--                    </li>-->
-                <!--                    <li class="d-sm-flex">-->
-                <!--                        <div>-->
-                <!--                            <i class="task-icon bg-warning"></i>-->
-                <!--                            <h6 class="fw-semibold">Task Overdue<span-->
-                <!--                                    class="text-muted fs-11 mx-2 fw-normal">14 June 2021</span>-->
-                <!--                            </h6>-->
-                <!--                            <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a-->
-                <!--                                    href="javascript:void(0)" class="fw-semibold"> Integrated management</a></p>-->
-                <!--                        </div>-->
-                <!--                        <div class="ms-auto d-md-flex">-->
-                <!--                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"-->
-                <!--                               data-bs-placement="top" title="Edit" aria-label="Edit"><span-->
-                <!--                                    class="fe fe-edit"></span></a>-->
-                <!--                            <a href="javascript:void(0)" class="text-muted"><span-->
-                <!--                                    class="fe fe-trash-2"></span></a>-->
-                <!--                        </div>-->
-                <!--                    </li>-->
-                <!--                    <li class="d-sm-flex">-->
-                <!--                        <div>-->
-                <!--                            <i class="task-icon bg-danger"></i>-->
-                <!--                            <h6 class="fw-semibold">Task Overdue<span-->
-                <!--                                    class="text-muted fs-11 mx-2 fw-normal">29 June 2021</span>-->
-                <!--                            </h6>-->
-                <!--                            <p class="text-muted mb-0 fs-12">Petey Cruiser finished task <a-->
-                <!--                                    href="javascript:void(0)" class="fw-semibold"> Integrated management</a></p>-->
-                <!--                        </div>-->
-                <!--                        <div class="ms-auto d-md-flex">-->
-                <!--                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"-->
-                <!--                               data-bs-placement="top" title="Edit" aria-label="Edit"><span-->
-                <!--                                    class="fe fe-edit"></span></a>-->
-                <!--                            <a href="javascript:void(0)" class="text-muted"><span-->
-                <!--                                    class="fe fe-trash-2"></span></a>-->
-                <!--                        </div>-->
-                <!--                    </li>-->
-                <!--                    <li class="d-sm-flex">-->
-                <!--                        <div>-->
-                <!--                            <i class="task-icon bg-info"></i>-->
-                <!--                            <h6 class="fw-semibold">Task Finished<span-->
-                <!--                                    class="text-muted fs-11 mx-2 fw-normal">09 July 2021</span>-->
-                <!--                            </h6>-->
-                <!--                            <p class="text-muted fs-12">Adam Berry finished task on<a href="javascript:void(0)"-->
-                <!--                                                                                      class="fw-semibold"> Project Management</a></p>-->
-                <!--                        </div>-->
-                <!--                        <div class="ms-auto d-md-flex">-->
-                <!--                            <a href="javascript:void(0)" class="text-muted me-2" data-bs-toggle="tooltip"-->
-                <!--                               data-bs-placement="top" title="Edit" aria-label="Edit"><span-->
-                <!--                                    class="fe fe-edit"></span></a>-->
-                <!--                            <a href="javascript:void(0)" class="text-muted"><span-->
-                <!--                                    class="fe fe-trash-2"></span></a>-->
-                <!--                        </div>-->
-                <!--                    </li>-->
             </ul>
         </div>
     </div>
@@ -447,7 +381,33 @@ require_once 'layout/head.php'
     </div>
 </div>
 
-
+<div class="modal fade" id="modalUpdComment">
+    <div class="modal-dialog modal-dialog-centered text-center" role="document">
+        <div class="modal-content modal-content-demo p-5">
+            <div class="modal-header" style="border-bottom: 0 !important;">
+                <h3 class="modal-title">Commentaire de : <span id="nom"></span> </h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <form method="post" id="comentUpdForm">
+                <div class="modal-body">
+                    <div class="updSucces"></div>
+                    <div class="updError"></div>
+                </div>
+                <div class="row row-sm">
+                    <div class="form-group text-left pl-2">
+                        <label for="cat">Vous pouvez modifier le commentaire <i class="required"></i> </label>
+                        <textarea class="form-control" placeholder="Nom de la catégorie" rows="10" name="message" id="message" required></textarea>
+                        <input type="hidden" class="form-control" name="formkeys" value="<?= $token ?>">
+                        <input type="hidden" class="form-control" name="idComment" id="idComment">
+                    </div>
+                </div>
+                <div class="modal-footer" style="border-top: 0 !important;">
+                    <button class="btn btn-green-transparent"> <i class="load"></i> Valider la modification</button>
+                    <a href="javascript:void(0);" class="btn btn-red-transparent" data-bs-dismiss="modal">Annuler</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 
 
@@ -469,4 +429,82 @@ require_once 'layout/head.php'
 <?php
 require_once 'layout/foot.php';
 ?>
+
+<script>
+
+    $('#comentUpdForm').submit(function(e){
+        e.preventDefault();
+        $('.load').html('<i class="loader-btn"></i>');
+        var value = document.getElementById('comentUpdForm');
+        var form = new FormData(value);
+
+        $.ajax({
+            method: 'post',
+            url: '<?=$domaine_admin?>/controller/update.comment.php',
+            data: form,
+            contentType:false,
+            cache:false,
+            processData:false,
+            dataType: 'json',
+            success: function(data){
+//                    alert(data.data_info);
+                if(data.data_info == "ok"){
+                    tableComment.ajax.reload(null,false);
+                    $( "#here" ).load(window.location.href + " #here" );
+                    $('.load').html('<i class=""></i>');
+                    $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Commentaire modifié avec succès !</div>');
+                }else if(data.data_info == ''){
+
+                }
+                else {
+                    $('.updError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification du commentaire</div>');
+                }
+            },
+            error: function (error, ajaxOptions, thrownError) {
+                alert(error.responseText);
+            }
+        });
+    });
+
+    $('#modalUpdComment').on('show.bs.modal', function (e) {
+        var rowid = $(e.relatedTarget).data('id');
+        var nom = $(e.relatedTarget).data('name');
+        var description = $(e.relatedTarget).data('message');
+        $('#idComment').val(rowid);
+        $('#nom').html(nom);
+        $('#message').val(description);
+    });
+
+    function supprimer(id = null){
+        if(id){
+            swal({
+                    title: "Voulez vous supprimer le commentaire ?",
+                    text: "L'action va supprimer le commentaire",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Oui, supprimer",
+                    cancelButtonText: "Non, annuler",
+                    closeOnConfirm: false
+                },
+
+                function(isConfirm){
+                    if (isConfirm) {
+                        $.post('<?=$domaine_admin?>/controller/delete.comment.php', {id : id}, function (data) {
+                            if(data == "ok"){
+                                swal("Opération effectuée avec succès!","", "success");
+
+                                    $( "#here" ).load(window.location.href + " #here" );
+
+                            }else{
+                                swal("Impossible de supprimer le commentaire!", "Une erreur s'est produite lors du traitement des données.", "error");
+                            }
+                        });
+                    }
+                });
+        }else{
+            alert('actualise');
+        }
+    }
+</script>
 
