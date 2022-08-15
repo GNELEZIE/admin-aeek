@@ -22,6 +22,9 @@
     <link href="<?=$asset?>/css/icons.css" rel="stylesheet" />
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
     <style>
+        .bgimg2{
+            background: url("<?=$assets?>/media/aeek-2.jpeg") !important;
+        }
         .btn-orange {
             color: #fff !important;
             background: #ff5c00 !important;

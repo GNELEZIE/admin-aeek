@@ -24,6 +24,9 @@
 <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
 <link rel="stylesheet" href="<?=$asset?>/plugins/intltelinput/css/intlTelInput.min.css"/>
 <style>
+.bgimg2{
+    background: url("<?=$assets?>/media/aeek-2.jpeg") !important;
+}
 .badge-dim.badge-danger {
     color: #e85347 !important;
     background-color: #fceceb !important;
@@ -49,7 +52,9 @@
 .mytrash:hover{
     color: #ff0085;
 }
-
+.text-red{
+    color: #ff0000;
+}
 .supicon{
     position: absolute;
     right: 31px;
