@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['sous_titre'])  and isset($_SESSION['myformkey']) and isset($_POST['formkey']) and $_SESSION['myformkey'] == $_POST['formkey']){
+if(isset($_SESSION['useraeek'])   and isset($_SESSION['myformkey']) and isset($_POST['formkey']) and $_SESSION['myformkey'] == $_POST['formkey']){
     $data_info = '';
     $data_photo = '';
     extract($_POST);
@@ -22,7 +22,7 @@ if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['sou
 
         if (in_array($photo_ext, $extensionValide)) {
             $photo = uniqid().'.'.$photo_ext;
-            $destination = $_SERVER['DOCUMENT_ROOT'].'/www/aeek-kassre/uploads/'.$photo;
+            $destination = $_SERVER['DOCUMENT_ROOT'].'/aeek-kassere.com/uploads/' . $photo;
             $tmp_name = $_FILES['couverture']['tmp_name'];
             move_uploaded_file($tmp_name, $destination);
     }

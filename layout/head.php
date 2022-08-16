@@ -24,8 +24,13 @@
 <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
 <link rel="stylesheet" href="<?=$asset?>/plugins/intltelinput/css/intlTelInput.min.css"/>
 <style>
+#imguser{
+    border-radius: 6px 6px 0 0 !important;
+}
 .bgimg2{
     background: url("<?=$assets?>/media/aeek-2.jpeg") !important;
+    background-size: cover !important;
+    background-position: top !important;
 }
 .badge-dim.badge-danger {
     color: #e85347 !important;

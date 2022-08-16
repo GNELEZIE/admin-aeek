@@ -76,12 +76,12 @@ require_once 'layout/head.php';
 
                             <div class="form-group">
                                 <label for="titre" class="form-label">Titre de la bannière</label>
-                                <input type="text" class="form-control input-style" name="titre" id="titre" placeholder="Titre de la bannière" required>
+                                <input type="text" class="form-control input-style" name="titre" id="titre" placeholder="Titre de la bannière">
                                 <input type="hidden" class="form-control " name="formkey" value="<?= $token ?>">
                             </div>
                             <div class="form-group">
                                 <label for="sous_titre" class="form-label">Sous Titre </label>
-                                <input type="text" class="form-control input-style" name="sous_titre" id="sous_titre" placeholder="Sous titre" required>
+                                <input type="text" class="form-control input-style" name="sous_titre" id="sous_titre" placeholder="Sous titre">
                             </div>
                         </div>
 

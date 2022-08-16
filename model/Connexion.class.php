@@ -1,4 +1,8 @@
 <?php
+//define('DB_HOST', 'localhost');
+//define('DB_NAME', 'aeekk1940127');
+//define('DB_USERNAME', 'aeekk1940127');
+//define('DB_PASSWORD', '68dn7bnunn');
 
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'aeek_kassere');

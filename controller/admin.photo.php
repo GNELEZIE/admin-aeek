@@ -24,12 +24,12 @@ if(isset($_SESSION['useraeek'])){
 
         if (in_array($photo_ext, $extensionValide)) {
             $photo = uniqid().'.'.$photo_ext;
-            $destination = $_SERVER['DOCUMENT_ROOT'].'/www/aeek-kassre/uploads/'.$photo;
+            $destination = $_SERVER['DOCUMENT_ROOT'].'/aeek-kassere.com/uploads/' . $photo;
             $tmp_name = $_FILES['userImg']['tmp_name'];
 
             if(move_uploaded_file($tmp_name,$destination)){
                 if($ex_photo  != ''){
-                    $fichier =$_SERVER['DOCUMENT_ROOT'].'/www/aeek-kassre/uploads/'.$ex_photo;
+                    $destination = $_SERVER['DOCUMENT_ROOT'].'/aeek-kassere.com/uploads/' . $ex_photo;
                     if(file_exists($fichier)){
                         unlink($fichier);
                     }

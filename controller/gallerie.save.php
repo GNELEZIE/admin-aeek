@@ -21,7 +21,7 @@ if(isset($_SESSION['useraeek']) and isset($_POST['event_id'])){
 
         if (in_array($photo_ext, $extensionValide)) {
             $photo = uniqid().'.'.$photo_ext;
-            $destination = $_SERVER['DOCUMENT_ROOT'].'/www/aeek-kassre/uploads/'.$photo;
+            $destination = $_SERVER['DOCUMENT_ROOT'].'/aeek-kassere.com/uploads/' . $photo;
             $tmp_name = $_FILES['photo']['tmp_name'];
 
             if(move_uploaded_file($tmp_name,$destination)){
