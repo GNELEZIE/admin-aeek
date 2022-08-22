@@ -1,0 +1,23 @@
+<?php
+session_start();
+if(isset($_SESSION['useraeek']) and isset($_POST['id'])){
+    // include function
+    include_once "../function/function.php";
+
+    //Include Connexion
+    include_once '../model/Connexion.class.php';
+    include_once "../model/User.class.php";
+
+    extract($_POST);
+
+    $id = htmlentities(trim(addslashes($id)));
+    $dts = $user->getUserById($id)->fetch();
+
+        $etat = 1;
+
+
+    $upd = $user->updateBloquer($etat,$id);
+    if($upd >0){
+        echo 'ok';
+    }
+}

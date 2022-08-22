@@ -28,6 +28,8 @@ include_once 'model/Article_tags.class.php';
 include_once 'model/Gallerie.class.php';
 include_once 'model/Membre.class.php';
 include_once 'model/Emplois.class.php';
+include_once 'model/User.class.php';
+include_once 'model/Propos.class.php';
 
 
 

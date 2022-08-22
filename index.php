@@ -30,6 +30,8 @@ if(file_exists('views/'.$lien.'.php')){
     require_once 'views/commentaire/'.$lien.'.php';
 }elseif(file_exists('views/membre/'.$lien.'.php')){
     require_once 'views/membre/'.$lien.'.php';
+}elseif(file_exists('views/users/'.$lien.'.php')){
+    require_once 'views/users/'.$lien.'.php';
 }
 else{
     header('location:'.$domaine.'/error');

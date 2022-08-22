@@ -22,9 +22,9 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
         $nbs = $reponse->nbReponses($data['id_comment'])->fetch();
 
 
-        $auth = '<a href="#" class="text-noir">'.html_entity_decode(stripslashes($data['nom'])).'<br> <small>'.html_entity_decode(stripslashes($data['email'])).'</small></a>';
+        $auth = '<a href="#" class="" style="color:inherit">'.html_entity_decode(stripslashes($data['nom'])).'<br> <small>'.html_entity_decode(stripslashes($data['email'])).'</small></a>';
 
-        $des = '<a href="#" class="text-noir">'.reduit_text(html_entity_decode(stripslashes($data['message'])),'30').'</a>';
+        $des = '<a href="#" class="" style="color:inherit">'.reduit_text(html_entity_decode(stripslashes($data['message'])),'30').'</a>';
 
         $rsp = '<button type="button" class="btn bg-transparence-warning btn-sm d-block"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">'.$nbs['nb'].'</font></font></button>';
 
