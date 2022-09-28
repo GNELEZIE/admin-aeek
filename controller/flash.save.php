@@ -10,10 +10,11 @@ if(isset($_SESSION['useraeek'])   and isset($_SESSION['myformkey']) and isset($_
 
     //Include Connexion
     include_once '../model/Connexion.class.php';
-    include_once "../model/Banniere.class.php";
+    include_once "../model/Flash.class.php";
 
     $titre =  htmlentities(trim(addslashes($titre)));
     $sous_titre =  htmlentities(trim(addslashes($sous_titre)));
+    $dateEvent =  htmlentities(trim(addslashes($dateEvent)));
 
 
         $extensionValide = array('jpeg', 'jpg', 'png');
@@ -28,7 +29,7 @@ if(isset($_SESSION['useraeek'])   and isset($_SESSION['myformkey']) and isset($_
     }
     $data_info = 'ok';
 
-    $save = $banniere->addBanniere($dateGmt,$titre,$sous_titre,$photo);
+    $save = $flash->addFlash($dateGmt,$titre,$sous_titre,$_POST['dateEvent'],$photo);
     if($save >0){
         $data_info = 'ok';
     }

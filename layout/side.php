@@ -44,12 +44,12 @@
                 <span class="side-menu__label">Gallerie</span>
             </a>
         </li>
-        <!--    <li>-->
-        <!--    <a class="side-menu__item --><?php //if($lien == 'emplois'){echo 'current';} ;?><!--" href="--><?//=$domaine_admin?><!--/emplois">-->
-        <!--        <i class="side-menu__icon fe fe-briefcase"></i>-->
-        <!--        <span class="side-menu__label">Offre d'emplois</span>-->
-        <!--    </a>-->
-        <!--</li>-->
+        <li>
+            <a class="side-menu__item <?php if($lien == 'flash'){echo 'current';} ;?>" href="<?=$domaine_admin?>/flash">
+                <i class="side-menu__icon fe fe-briefcase"></i>
+                <span class="side-menu__label">Flash infos</span>
+            </a>
+        </li>
 
         <li class="slide">
             <a class="side-menu__item <?php if($lien == 'emplois'){echo 'current';} ;?>" data-bs-toggle="slide" href="javascript:void(0)">

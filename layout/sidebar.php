@@ -52,6 +52,12 @@
                         Gallerie
                     </a>
                 </li>
+                <li class="is-expanded">
+                    <a class="slide-item" href="<?=$domaine_admin?>/flash">
+                        <i class="side-menu__icon fa fa-camera"></i>
+                        Flash info
+                    </a>
+                </li>
 
 
             </ul>

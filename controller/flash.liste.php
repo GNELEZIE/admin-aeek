@@ -10,21 +10,22 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
     include_once '../model/Connexion.class.php';
 
 // appelle des class
-    include_once "../model/Banniere.class.php";
+    include_once "../model/Flash.class.php";
 
 
 
-    $listeBan= $banniere->getAllBanniere();
-    while($data = $listeBan->fetch()) {
+    $listeFlash = $flash->getAllFlash();
+    while($data = $listeFlash->fetch()) {
 
         $action = '<div class="btn-list text-center">
-                                        <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="supprimer('.$data['id_banniere'].')">
+                                        <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="supprimer('.$data['id_flash'].')">
                                             <span class="fe fe-trash-2"> </span>
                                         </a>
                                     </div>';
 
         $arr_list['data'][] = array(
-            date_fr($data['date_banniere']),
+            date_fr($data['date_flash']),
+            date_fr($data['date_event']),
             html_entity_decode(stripslashes($data['titre'])),
             html_entity_decode(stripslashes($data['sous_titre'])),
             $action
