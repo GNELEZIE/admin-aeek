@@ -41,7 +41,6 @@ require_once 'layout/head.php';
                                 <th class="wd-15p">Date de création</th>
                                 <th class="wd-15p">Date évènement</th>
                                 <th class="wd-15p">Titre</th>
-                                <th class="wd-15p">Sous titre</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                             </thead>
