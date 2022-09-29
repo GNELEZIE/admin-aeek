@@ -27,7 +27,6 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
             date_fr($data['date_flash']),
             date_fr($data['date_event']),
             html_entity_decode(stripslashes($data['titre'])),
-            html_entity_decode(stripslashes($data['sous_titre'])),
             $action
 
 

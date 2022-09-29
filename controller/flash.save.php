@@ -14,8 +14,7 @@ if(isset($_SESSION['useraeek'])   and isset($_SESSION['myformkey']) and isset($_
 
     $titre =  htmlentities(trim(addslashes($titre)));
     $sous_titre =  htmlentities(trim(addslashes($sous_titre)));
-    $dateEvent =  htmlentities(trim(addslashes($dateEvent)));
-
+    $dateEvents = date_eng($_POST['dateEvent']);
 
         $extensionValide = array('jpeg', 'jpg', 'png');
         $photo_ext = explode('.',$_FILES['couverture']['name']);
@@ -29,7 +28,7 @@ if(isset($_SESSION['useraeek'])   and isset($_SESSION['myformkey']) and isset($_
     }
     $data_info = 'ok';
 
-    $save = $flash->addFlash($dateGmt,$titre,$sous_titre,$_POST['dateEvent'],$photo);
+    $save = $flash->addFlash($dateGmt,$titre,$sous_titre,$dateEvents,$photo);
     if($save >0){
         $data_info = 'ok';
     }
