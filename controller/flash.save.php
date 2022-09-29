@@ -14,6 +14,15 @@ if(isset($_SESSION['useraeek'])   and isset($_SESSION['myformkey']) and isset($_
 
     $titre =  htmlentities(trim(addslashes($titre)));
     $sous_titre =  htmlentities(trim(addslashes($sous_titre)));
+    $slug = create_slug($_POST['titre']);
+    $propriete1 = 'titre';
+    $verifSlug = $flash->verifFlash($propriete1,$titre);
+    $rsSlug = $verifSlug->fetch();
+    $nbSlug =$verifSlug->rowCount();
+
+    if($nbSlug > 0){
+        $slug = $slug.'-'.$nbSlug;
+    }
     $dateEvents = date_eng($_POST['dateEvent']);
 
         $extensionValide = array('jpeg', 'jpg', 'png');
@@ -28,7 +37,7 @@ if(isset($_SESSION['useraeek'])   and isset($_SESSION['myformkey']) and isset($_
     }
     $data_info = 'ok';
 
-    $save = $flash->addFlash($dateGmt,$titre,$sous_titre,$dateEvents,$photo);
+    $save = $flash->addFlash($dateGmt,$titre,$slug,$sous_titre,$dateEvents,$photo);
     if($save >0){
         $data_info = 'ok';
     }

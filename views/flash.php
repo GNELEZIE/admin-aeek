@@ -31,7 +31,7 @@ require_once 'layout/head.php';
                     <h3 class="card-title">Flash informations</h3>
                 </div>
                 <div class="card-btn pl-3" style="border-bottom: 0 !important; padding-left: 20px;">
-                    <a href="#modalAddCat" class="btn-transparence-orange"  data-bs-effect="effect-sign" data-bs-toggle="modal"  style="padding: 7px 15px; border-radius: 3px;"> <i class="fa fa-plus"></i> Ajouter une flas</a>
+                    <a href="#modalAddCat" class="btn-transparence-orange"  data-bs-effect="effect-sign" data-bs-toggle="modal"  style="padding: 7px 15px; border-radius: 3px;"> <i class="fa fa-plus"></i> Ajouter une flash</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -75,8 +75,8 @@ require_once 'layout/head.php';
                         <div class="row">
 
                             <div class="form-group">
-                                <label for="titre" class="form-label">Titre de la bannière</label>
-                                <input type="text" class="form-control input-style" name="titre" id="titre" placeholder="Titre de la bannière">
+                                <label for="titre" class="form-label">Titre de la flash</label>
+                                <input type="text" class="form-control input-style" name="titre" id="titre" placeholder="Titre de la flash">
                                 <input type="hidden" class="form-control " name="formkey" value="<?= $token ?>">
                             </div>
                             <div class="form-group">

@@ -7,13 +7,14 @@ class Flash{
 
 // Create
 
-    public function addFlash($date_flash,$titre,$sous_titre,$date_event,$photo){
-        $query = "INSERT INTO flash(date_flash,titre,sous_titre,date_event,photo)
-            VALUES (:date_flash,:titre,:sous_titre,:date_event,:photo)";
+    public function addFlash($date_flash,$titre,$slug,$sous_titre,$date_event,$photo){
+        $query = "INSERT INTO flash(date_flash,titre,slug,sous_titre,date_event,photo)
+            VALUES (:date_flash,:titre,:slug,:sous_titre,:date_event,:photo)";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "date_flash" => $date_flash,
             "titre" => $titre,
+            "slug" => $slug,
             "sous_titre" => $sous_titre,
             "date_event" => $date_event,
             "photo" => $photo
@@ -64,8 +65,8 @@ class Flash{
 
 
     // Verification valeur existant
-    public function verifCategorie($propriete,$val){
-        $query = "SELECT * FROM categorie WHERE $propriete = :val";
+    public function verifFlash($propriete,$val){
+        $query = "SELECT * FROM flash WHERE $propriete = :val";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "val" => $val
