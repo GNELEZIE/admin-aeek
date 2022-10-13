@@ -28,12 +28,20 @@ class Comment{
     }
 
     public function getAllCommentCinq(){
-        $query = "SELECT * FROM comment
-          WHERE statut =!1  ORDER BY id_comment DESC LIMIT 10";
+        $query = "SELECT * FROM comment ORDER BY id_comment DESC LIMIT 10";
         $rs = $this->bdd->query($query);
         return $rs;
     }
 
+    public function getCommentByArticleid($id){
+        $query = "SELECT * FROM comment
+        WHERE article_id = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+        return $rs;
+    }
     public function getCommentById($id){
         $query = "SELECT * FROM comment
         WHERE article_id = :id";

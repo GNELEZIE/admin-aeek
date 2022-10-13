@@ -167,13 +167,14 @@ require_once 'layout/head.php'
 <div class="col-xl-6 col-md-6">
     <div class="card">
         <div class="card-header">
-            <h4 class="card-title fw-semibold">Commentaire en attente</h4>
+            <h4 class="card-title fw-semibold">commentaires récents</h4>
         </div>
         <div class="card-body pb-0" id="here">
             <ul class="task-list">
                 <?php
                 $com = $comment->getAllCommentCinq();
                 while($comments = $com->fetch()){
+                    $artLis = $article->getArticleById($comments['id_comment'])->fetch();
                     ?>
 
                     <li class="d-sm-flex">
@@ -182,8 +183,8 @@ require_once 'layout/head.php'
                             <h6 class="fw-semibold"><?=$comments['nom']?><span
                                     class="text-muted fs-11 mx-2 fw-normal"><?=date_lettre($comments['date_comment'])?></span>
                             </h6>
-                            <p class="text-muted fs-12"><?=reduit_text(html_entity_decode(stripslashes($comments['message'])),'40')?> <a
-                                    href="#" class="fw-semibold"> Voir l'article</a></p>
+                            <p class="text-muted fs-12"><?=reduit_text(html_entity_decode(stripslashes($comments['message'])),'40')?>
+                                <a href="<?=$domaine?>/blog/<?=$artLis['slug']?>" class="fw-semibold" target="_blank"> Voir l'article</a></p>
                         </div>
                         <div class="ms-auto d-md-flex">
 
