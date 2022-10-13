@@ -217,7 +217,7 @@ require_once 'layout/foot.php';
                 processData:false,
                 dataType: 'json',
                 success: function(data){
-//                    alert(data.data_info);
+
                     if(data.data_info == "ok"){
                         $('.load').html('');
                         tableBannier.ajax.reload(null,false);

@@ -10,10 +10,6 @@ if(!isset($_SESSION['useraeek'])){
 }
 
 
-
-
-
-
 //require_once 'controller/article.save.php';
 
 //require_once 'controller/article.update.php';
@@ -84,22 +80,17 @@ require_once 'layout/head.php';
                                 </select>
                             </div>
                         </div>
-
-                        <!-- Row -->
                         <div class="row">
                             <label class="col-md-3 form-label mb-4">Description :</label>
                             <div class="mb-4">
                                 <textarea class="content input-style" name="summernote" id="summernote" placeholder="Description"><?= html_entity_decode(stripslashes($articleData['description']))?></textarea>
                             </div>
                         </div>
-                        <!--End Row-->
                     </div>
                     <div class="card-footer text-center">
                         <button  class="btn btn-green-transparent"> <i class="loader"></i> <span class="fe fe-edit"> </span> Modifier l'article maintenant</button>
                     </div>
                 </form>
-
-
             </div>
         </div>
         <div class="col-md-3">
@@ -119,7 +110,6 @@ require_once 'layout/head.php';
             </div>
         </div>
     </div>
-    <!-- End Article editor-->
 <?php
 }else{
     ?>
