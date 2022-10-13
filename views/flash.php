@@ -81,7 +81,7 @@ require_once 'layout/head.php';
                             </div>
                             <div class="form-group">
                                 <label for="sous_titre" class="form-label">Sous Titre </label>
-                                <input type="text" class="form-control input-style" name="sous_titre" id="sous_titre" placeholder="Sous titre">
+                                <textarea  rows="5" class="form-control input-style" name="sous_titre" id="sous_titre" placeholder="Sous titre"></textarea>
                             </div>
                             <div class="form-group">
                                 <div class="input-group">

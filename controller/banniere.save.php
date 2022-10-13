@@ -22,7 +22,7 @@ if(isset($_SESSION['useraeek'])   and isset($_SESSION['myformkey']) and isset($_
 
         if (in_array($photo_ext, $extensionValide)) {
             $photo = uniqid().'.'.$photo_ext;
-            $destination = $_SERVER['DOCUMENT_ROOT'].'/www/aeek-kassere-v2/uploads/' . $photo;
+            $destination = $_SERVER['DOCUMENT_ROOT'].'/aeek-kassere.com/uploads/' . $photo;
             $tmp_name = $_FILES['couverture']['tmp_name'];
             move_uploaded_file($tmp_name, $destination);
     }

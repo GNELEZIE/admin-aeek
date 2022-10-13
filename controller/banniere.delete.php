@@ -15,7 +15,7 @@ if(isset($_SESSION['useraeek']) and isset($_POST['id'])){
     $delete = $banniere->deleteBan($id);
     if($delete > 0){
         if($data['photo'] != ''){
-            $fichier = $_SERVER['DOCUMENT_ROOT'].'/www/aeek-kassre/uploads/'.$data['photo'];
+            $fichier = $_SERVER['DOCUMENT_ROOT'].'/www/aeek-kassere-v1/uploads/'.$data['photo'];
             if(file_exists($fichier)){
                 unlink($fichier);
             }
