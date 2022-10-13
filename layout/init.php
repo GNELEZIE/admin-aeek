@@ -32,6 +32,7 @@ include_once 'model/User.class.php';
 include_once 'model/Propos.class.php';
 include_once 'model/Flash.class.php';
 include_once 'model/Voter.class.php';
+include_once 'model/Candidat.class.php';
 
 
 

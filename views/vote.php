@@ -35,12 +35,14 @@ require_once 'layout/head.php';
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table text-nowrap border-bottom" id="tableBannier">
+                        <table class="table text-nowrap border-bottom" id="tableCandidat">
                             <thead>
                             <tr class="border-bottom">
-                                <th class="wd-15p">Date de création</th>
+                                <th class="wd-15p">Rang</th>
+                                <th class="wd-15p">Photo</th>
                                 <th class="wd-15p">Nom & Prénom</th>
                                 <th class="wd-15p">Fonction</th>
+                                <th class="wd-15p">Voix</th>
                                 <th class="text-center">Actions</th>
                             </tr>
                             </thead>
@@ -66,22 +68,30 @@ require_once 'layout/head.php';
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo p-5">
             <div class="modal-header" style="border-bottom: 0 !important;">
-                <h3 class="modal-title">Ajouter une bannière</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Ajouter un candidat</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
-                <form method="post" id="bannierForm" enctype="multipart/form-data">
+                <form method="post" id="CandForm" enctype="multipart/form-data">
                     <div class="card-body p-0">
                         <div class="banSucces"></div>
                         <div class="banError"></div>
                         <div class="row">
 
                             <div class="form-group">
-                                <label for="titre" class="form-label">Titre de la bannière</label>
-                                <input type="text" class="form-control input-style" name="titre" id="titre" placeholder="Titre de la bannière">
+                                <label for="nom" class="form-label">Nom</label>
+                                <input type="text" class="form-control input-style" name="nom" id="nom" placeholder="Nom">
                                 <input type="hidden" class="form-control " name="formkey" value="<?= $token ?>">
                             </div>
                             <div class="form-group">
-                                <label for="sous_titre" class="form-label">Sous Titre </label>
-                                <input type="text" class="form-control input-style" name="sous_titre" id="sous_titre" placeholder="Sous titre">
+                                <label for="prenom" class="form-label">Prenom </label>
+                                <input type="text" class="form-control input-style" name="prenom" id="prenom" placeholder="Prenom">
+                            </div>
+                            <div class="form-group">
+                                <label for="fonction" class="form-label">Fonction </label>
+                                <input type="text" class="form-control input-style" name="fonction" id="fonction" placeholder="Fonction">
+                            </div>
+                            <div class="form-group">
+                                <label for="fonction" class="form-label">Biographie </label>
+                                <textarea   class="form-control input-style" name="bio" id="bio" placeholder="Biographie"></textarea>
                             </div>
                         </div>
 
@@ -99,7 +109,7 @@ require_once 'layout/head.php';
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <button  class="btn btn-transparence-orange"> <i class="loader"></i> <i class="load"></i> Ajouter la bannière</button>
+                        <button  class="btn btn-transparence-orange"> <i class="loader"></i> <i class="load"></i> Ajouter le candidat</button>
                     </div>
                 </form>
 
@@ -112,13 +122,13 @@ require_once 'layout/foot.php';
 ?>
 
 <script>
-    var tableVote;
+    var tableCandidat;
     $(document).ready(function() {
 
-        tableBannier = $('#tableBannier').DataTable({
+        tableCandidat = $('#tableCandidat').DataTable({
             "ajax":{
                 "type":"post",
-                "url":"<?=$domaine_admin?>/controle/vote.liste",
+                "url":"<?=$domaine_admin?>/controle/candidat.liste",
                 "data":{
                     token:"<?=$token?>"
                 }
@@ -202,15 +212,15 @@ require_once 'layout/foot.php';
 
 
 
-        $('#bannierForm').submit(function(e){
+        $('#CandForm').submit(function(e){
             e.preventDefault();
             $('.load').html('<i class="loader-btn"></i>');
-            var value = document.getElementById('bannierForm');
+            var value = document.getElementById('CandForm');
             var form = new FormData(value);
 
             $.ajax({
                 method: 'post',
-                url: '<?=$domaine_admin?>/controller/banniere.save.php',
+                url: '<?=$domaine_admin?>/controle/candidat.save',
                 data: form,
                 contentType:false,
                 cache:false,
@@ -221,10 +231,10 @@ require_once 'layout/foot.php';
                     if(data.data_info == "ok"){
                         $('.load').html('');
                         tableBannier.ajax.reload(null,false);
-                        $('.banSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">La bannière a été ajoutée avec succès !</div>');
+                        $('.banSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Le candidat a été ajouté avec succès !</div>');
 
                     }else {
-                        $('.banError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification de la catégorie</div>');
+                        $('.banError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de l\'ajout du membre</div>');
                     }
                 },
                 error: function (error, ajaxOptions, thrownError) {

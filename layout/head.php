@@ -24,6 +24,13 @@
 <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
 <link rel="stylesheet" href="<?=$asset?>/plugins/intltelinput/css/intlTelInput.min.css"/>
 <style>
+td{
+    vertical-align: middle !important;
+}
+.img-cand{
+    border-radius: 50% !important;
+    width: 66px !important;
+}
 #imguser{
     border-radius: 6px 6px 0 0 !important;
 }
