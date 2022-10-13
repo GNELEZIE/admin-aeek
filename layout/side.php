@@ -27,6 +27,12 @@
             </a>
         </li>
         <li>
+            <a class="side-menu__item <?php if($lien == 'vote'){echo 'current';} ;?>" href="<?=$domaine_admin?>/vote">
+                <i class="side-menu__icon fe fe-message-square"></i>
+                <span class="side-menu__label">Vote</span>
+            </a>
+        </li>
+        <li>
             <a class="side-menu__item <?php if($lien == 'commentaire'){echo 'current';} ;?>" href="<?=$domaine_admin?>/commentaire">
                 <i class="side-menu__icon fe fe-message-square"></i>
                 <span class="side-menu__label">Commentaire</span>
