@@ -22,8 +22,11 @@
     <link href="<?=$asset?>/css/icons.css" rel="stylesheet" />
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
     <style>
+
         .bgimg2{
-            background: url("<?=$assets?>/media/aeek-2.jpeg") !important;
+            background: url("<?=$assets?>/media/bg-login.jpg") !important;
+            background-size: cover !important;
+            background-position: top !important;
         }
         .btn-orange {
             color: #fff !important;
@@ -48,7 +51,7 @@
     </style>
 </head>
 
-<body class="app sidebar-mini ltr light-mode">
+<body class="bgimg2">
 
 
 

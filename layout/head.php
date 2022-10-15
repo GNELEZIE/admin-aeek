@@ -30,6 +30,7 @@ td{
 .img-cand{
     border-radius: 50% !important;
     width: 66px !important;
+    height: 66px !important;
 }
 #imguser{
     border-radius: 6px 6px 0 0 !important;

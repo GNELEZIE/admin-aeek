@@ -86,11 +86,24 @@ class Candidat {
 
     }
 
+    // Delete
+    public function deleteCandidat($id){
+
+        $query = "DELETE  FROM candidat WHERE id_candidat  = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
+
 
     // Verification valeur existant
-    public function verifUtilisateur($propriete,$val){
-
-        $query = "SELECT * FROM admin WHERE $propriete = :val";
+    public function verifCandidat($propriete,$val){
+        $query = "SELECT * FROM candidat WHERE $propriete = :val";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "val" => $val

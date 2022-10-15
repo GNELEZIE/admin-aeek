@@ -8,6 +8,18 @@ if(!isset($_SESSION['useraeek'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
+$nbV = $voter->getNbrVote();
+if($nbRvot = $nbV->fetch()){
+    $votants = $nbRvot['nb'];
+}else{
+    $votants =  0;
+}
+$nbC = $candidat->getNbCandidat();
+if($nbrCand = $nbC->fetch()){
+    $nbrCandidats = $nbrCand['nb'];
+}else{
+    $nbrCandidats =  0;
+}
 //add.categorie
 //categorie.liste
 //delete.categorie
@@ -24,10 +36,43 @@ require_once 'layout/head.php';
 
 <div class="main-container container-fluid">
 <div class="container mt-5">
+    <div class="row pt-5 mt-5">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xl-12">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card bg-primary img-card box-primary-shadow">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="text-white">
+                                    <h2 class="mb-0 number-font"><?=$votants?></h2>
+                                    <p class="text-white mb-0">Votants</p>
+                                </div>
+                                <div class="ms-auto"> <i class="fa fa-user-o text-white fs-30 me-2 mt-2"></i> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6 col-xl-3">
+                    <div class="card bg-secondary img-card box-secondary-shadow">
+                        <div class="card-body">
+                            <div class="d-flex">
+                                <div class="text-white">
+                                    <h2 class="mb-0 number-font"><?=$nbrCandidats?></h2>
+                                    <p class="text-white mb-0">Candidats</p>
+                                </div>
+                                <div class="ms-auto"> <i class="fa fa-user-o text-white fs-30 me-2 mt-2"></i> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
     <div class="row mt-5">
         <div class="col-lg-12">
             <div class="card">
-                <div class="card-header" style="    border-bottom: 0 !important;">
+                <div class="card-header" style="border-bottom: 0 !important;">
                     <h3 class="card-title">Les résultats</h3>
                 </div>
                 <div class="card-btn pl-3" style="border-bottom: 0 !important; padding-left: 20px;">
@@ -90,7 +135,7 @@ require_once 'layout/head.php';
                                 <input type="text" class="form-control input-style" name="fonction" id="fonction" placeholder="Fonction">
                             </div>
                             <div class="form-group">
-                                <label for="fonction" class="form-label">Biographie </label>
+                                <label for="bio" class="form-label">Biographie </label>
                                 <textarea   class="form-control input-style" name="bio" id="bio" placeholder="Biographie"></textarea>
                             </div>
                         </div>
@@ -109,7 +154,7 @@ require_once 'layout/head.php';
                         </div>
                     </div>
                     <div class="card-footer text-center">
-                        <button  class="btn btn-transparence-orange"> <i class="loader"></i> <i class="load"></i> Ajouter le candidat</button>
+                        <button  class="btn btn-transparence-orange"> <i class="loader"></i> <i class="loadCandidat"></i> Ajouter le candidat</button>
                     </div>
                 </form>
 
@@ -175,7 +220,7 @@ require_once 'layout/foot.php';
 
                 reader.onload = function (e) {
                     if($.inArray(fileType, valideImage) < 0){
-                        $('.file-msg').html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
+                        $('.couverture').html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
                         inputCouverture.val('');
                         inputCouverture.attr('src', '');
                         swal("Oups format non autorisé !","Les formats acceptés sont : jpg, jpeg et png !","error");
@@ -214,7 +259,7 @@ require_once 'layout/foot.php';
 
         $('#CandForm').submit(function(e){
             e.preventDefault();
-            $('.load').html('<i class="loader-btn"></i>');
+            $('.loadCandidat').html('<i class="loader-btn"></i>');
             var value = document.getElementById('CandForm');
             var form = new FormData(value);
 
@@ -229,12 +274,18 @@ require_once 'layout/foot.php';
                 success: function(data){
 
                     if(data.data_info == "ok"){
-                        $('.load').html('');
-                        tableBannier.ajax.reload(null,false);
-                        $('.banSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Le candidat a été ajouté avec succès !</div>');
-
+                        $('.loadCandidat').html('');
+                        $('#nom').val('');
+                        $('#prenom').val('');
+                        $('#fonction').val('');
+                        $('#bio').val('');
+                        $('.file-msg').html('<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-camera mb-2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><br/>Cliquez ou glissez déposez la photo de couverture');
+                        inputCouverture.val('');
+                        inputCouverture.attr('src', '');
+                        tableCandidat.ajax.reload(null,false);
+                        swal("Le candidat a été ajouté avec succès!","", "success");
                     }else {
-                        $('.banError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de l\'ajout du membre</div>');
+                        swal("Impossible d'ahouter le candidat!", "Une erreur s'est produite lors du traitement des données.", "error");
                     }
                 },
                 error: function (error, ajaxOptions, thrownError) {
@@ -252,8 +303,8 @@ require_once 'layout/foot.php';
     function supprimer(id = null){
         if(id){
             swal({
-                    title: "Voulez vous supprimer la bannière ?",
-                    text: "L'action va supprimer la bannière sélectionné",
+                    title: "Voulez vous supprimer le candidat ?",
+                    text: "L'action va supprimer le candidat sélectionné",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
@@ -264,10 +315,10 @@ require_once 'layout/foot.php';
 
                 function(isConfirm){
                     if (isConfirm) {
-                        $.post('<?=$domaine_admin?>/controller/banniere.delete.php', {id : id}, function (data) {
+                        $.post('<?=$domaine_admin?>/controle/candidat.delete', {id : id}, function (data) {
                             if(data == "ok"){
-                                swal("Opération effectuée avec succès!","", "success");
-                                tableBannier.ajax.reload(null,false);
+                                swal("Suppression effectuée avec succès!","", "success");
+                                tableCandidat.ajax.reload(null,false);
                             }else{
                                 swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
                             }

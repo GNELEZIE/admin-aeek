@@ -9,7 +9,15 @@ if(isset($_SESSION['useraeek'])   and isset($_SESSION['myformkey']) and isset($_
     $fonction =  htmlentities(trim(addslashes($fonction)));
     $bio =  htmlentities(trim(addslashes($bio)));
 
+    $slug = create_slug($_POST['prenom']);
+    $propriete1 = 'prenom';
+    $verifSlug = $candidat->verifCandidat($propriete1,$nom);
+    $rsSlug = $verifSlug->fetch();
+    $nbSlug =$verifSlug->rowCount();
 
+    if($nbSlug > 0){
+        $slug = $slug.'-'.$nbSlug;
+    }
 
         $extensionValide = array('jpeg', 'jpg', 'png');
         $photo_ext = explode('.',$_FILES['couverture']['name']);
@@ -17,13 +25,13 @@ if(isset($_SESSION['useraeek'])   and isset($_SESSION['myformkey']) and isset($_
 
         if (in_array($photo_ext, $extensionValide)) {
             $photo = uniqid().'.'.$photo_ext;
+//            $destination = $_SERVER['DOCUMENT_ROOT'].'/www/aeek-kassere-v1/uploads/' . $photo;
             $destination = $_SERVER['DOCUMENT_ROOT'].'/aeek-kassere.com/uploads/' . $photo;
             $tmp_name = $_FILES['couverture']['tmp_name'];
             move_uploaded_file($tmp_name, $destination);
     }
-    $data_info = 'ok';
 
-    $save = $candidat->addCandidat($dateGmt,$nom,$prenom,$fonction,$bio,$photo);
+    $save = $candidat->addCandidat($dateGmt,$nom,$prenom,$slug,$fonction,$bio,$photo);
     if($save >0){
         $data_info = 'ok';
     }

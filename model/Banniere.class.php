@@ -53,7 +53,6 @@ class Banniere{
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "id" => $id
-
         ));
 
         $nb = $rs->rowCount();
