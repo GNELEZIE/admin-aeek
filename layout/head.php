@@ -301,6 +301,16 @@ table thead tr:first-child th, table thead tr:first-child td {
     color: #FFFFFF !important;
     border: none !important;
 }
+.btn-info-transparent{
+    background: #05c3fb29 !important;
+    color: #05c3fb !important;
+    border: none !important;
+}
+.btn-info-transparent:hover{
+    background: #05c3fb !important;
+    color: #fff !important;
+    border: none !important;
+}
 .btn-red-transparent{
     background: #f900243d !important;
     color: #f90024 !important;
