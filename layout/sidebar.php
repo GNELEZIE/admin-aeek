@@ -58,6 +58,12 @@
                         Flash info
                     </a>
                 </li>
+                <li class="is-expanded">
+                    <a class="slide-item" href="<?=$domaine_admin?>/reunion">
+                        <i class="side-menu__icon fa fa-camera"></i>
+                       Réunion
+                    </a>
+                </li>
 
 
             </ul>

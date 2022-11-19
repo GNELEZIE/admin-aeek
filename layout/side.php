@@ -56,6 +56,12 @@
                 <span class="side-menu__label">Flash infos</span>
             </a>
         </li>
+        <li>
+            <a class="side-menu__item <?php if($lien == 'reunion'){echo 'current';} ;?>" href="<?=$domaine_admin?>/reunion">
+                <i class="side-menu__icon fa fa-tv"></i>
+                <span class="side-menu__label">Réunion</span>
+            </a>
+        </li>
 
         <li class="slide">
             <a class="side-menu__item <?php if($lien == 'emplois'){echo 'current';} ;?>" data-bs-toggle="slide" href="javascript:void(0)">

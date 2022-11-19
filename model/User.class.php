@@ -9,7 +9,14 @@ class User {
 
 
     // Read
-    public function getAllUser(){
+    public function getAllUsers(){
+        $query = "SELECT * FROM membre
+                  WHERE bloquer = 1 ORDER BY id_membre  DESC";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
+ public function getAllUser(){
         $query = "SELECT * FROM membre ORDER BY id_membre  DESC";
         $rs = $this->bdd->query($query);
 
