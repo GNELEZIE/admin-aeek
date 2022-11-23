@@ -148,7 +148,6 @@ require_once 'layout/head.php';
                             <tr class="border-bottom">
                                 <th class="wd-15p">Date de création</th>
                                 <th class="wd-15p">Auteur</th>
-                                <th class="wd-15p">Message</th>
                                 <th class="wd-15p">Réponse</th>
                                 <th class="wd-15p">Statut</th>
                                 <th class="text-center">Actions</th>
@@ -209,7 +208,7 @@ require_once 'layout/head.php';
             <div class="modal-header" style="border-bottom: 0 !important;">
                 <h3 class="modal-title">Commentaire de : <span id="nom"></span> </h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
-            <form method="post" id="comentUpdForm">
+            <form method="post" id="comentsUpdForm">
                 <div class="modal-body">
                     <div class="updSucces"></div>
                     <div class="updError"></div>
@@ -217,7 +216,7 @@ require_once 'layout/head.php';
                 <div class="row row-sm">
                     <div class="form-group text-left pl-2">
                         <label for="cat">Vous pouvez modifier le commentaire <i class="required"></i> </label>
-                        <textarea class="form-control" placeholder="Nom de la catégorie" rows="10" name="message" id="message" required></textarea>
+                        <textarea class="form-control" placeholder="Message" rows="10" name="message" id="message" required></textarea>
                         <input type="hidden" class="form-control" name="formkeys" value="<?= $token ?>">
                         <input type="hidden" class="form-control" name="idComment" id="idComment">
                     </div>
@@ -244,7 +243,7 @@ require_once 'layout/foot.php';
         tableComment = $('#tableComment').DataTable({
             "ajax":{
                 "type":"post",
-                "url":"<?=$domaine_admin?>/controller/commentaire.liste.php",
+                "url":"<?=$domaine_admin?>/controle/commentaire.liste",
                 "data":{
                     token:"<?=$token?>"
                 }
@@ -293,16 +292,16 @@ require_once 'layout/foot.php';
             $('#message').val(description);
         });
 
-        $('#comentUpdForm').submit(function(e){
+        $('#comentsUpdForm').submit(function(e){
             e.preventDefault();
             $('.load').html('<i class="loader-btn"></i>');
-            var value = document.getElementById('comentUpdForm');
-            var form = new FormData(value);
+            var values = document.getElementById('comentsUpdForm');
+            var forms = new FormData(values);
 
             $.ajax({
                 method: 'post',
-                url: '<?=$domaine_admin?>/controller/update.comment.php',
-                data: form,
+                url: '<?=$domaine_admin?>/controle/update.comment',
+                data: forms,
                 contentType:false,
                 cache:false,
                 processData:false,
@@ -313,8 +312,9 @@ require_once 'layout/foot.php';
                         tableComment.ajax.reload(null,false);
                         $('.load').html('<i class=""></i>');
                         $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Commentaire modifié avec succès !</div>');
-                    }else if(data.data_info == ''){
-
+                    }else if(data.data_info == '1'){
+                        $('.load').html('<i class=""></i>');
+                        $('.updSucces').html('<div class="alert alert-success" style="font-size: 14px" role="alert">Commentaire validé avec succès !</div>');
                     }
                     else {
                         $('.updError').html('<div class="alert alert-danger" style="font-size: 14px" role="alert">Une erreur s\'est produite lors de la modification du commentaire</div>');
@@ -337,7 +337,7 @@ require_once 'layout/foot.php';
 
             $.ajax({
                 method: 'post',
-                url: '<?=$domaine_admin?>/controller/save.reponse.php',
+                url: '<?=$domaine_admin?>/controle/save.reponse',
                 data: form,
                 contentType:false,
                 cache:false,
@@ -382,7 +382,7 @@ require_once 'layout/foot.php';
 
                 function(isConfirm){
                     if (isConfirm) {
-                        $.post('<?=$domaine_admin?>/controller/valid.comment.php', {id : id}, function (data) {
+                        $.post('<?=$domaine_admin?>/controle/valid.comment', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Opération effectuée avec succès!","", "success");
                                 tableComment.ajax.reload(null,false);
@@ -411,7 +411,7 @@ require_once 'layout/foot.php';
 
                 function(isConfirm){
                     if (isConfirm) {
-                        $.post('<?=$domaine_admin?>/controller/delete.comment.php', {id : id}, function (data) {
+                        $.post('<?=$domaine_admin?>/controle/delete.comment', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Opération effectuée avec succès!","", "success");
                                 tableComment.ajax.reload(null,false);

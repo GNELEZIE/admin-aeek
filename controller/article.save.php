@@ -40,7 +40,7 @@ if(isset($_SESSION['useraeek']) and isset($_POST['titre']) and isset($_POST['cat
 
     $save= $article->addArticle($dateGmt,$titre,$categorie,$summernote,$photo,$slug,$_SESSION['useraeek']['id_admin']);
     if($save > 0){
-        $success['message'] = 'Votre article a été publié avec succès <a href="'.$domaine.'/show/'.$slug.'" target="_blank">Voir l\'article</a>';
+        $success['message'] = 'Votre article a été publié avec succès <a href="'.$domaine.'/blog/'.$slug.'" target="_blank">Voir l\'article</a>';
         foreach ($_POST['tags'] as $value){
             $save= $article_tags->addArticle_tags($dateGmt,$save,$value);
         }

@@ -5,7 +5,7 @@ $file = explode('/',$slug);
 $filesName = strtolower(end($file));
 
 if(!file_exists('controller/'.$filesName.'.php')){
-    header('location:'.$domaine.'/error');
+    header('location:'.$domaine_admin.'/error');
 }else{
     require_once 'controller/'.$filesName.'.php';
 }
