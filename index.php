@@ -34,5 +34,5 @@ if(file_exists('views/'.$lien.'.php')){
     require_once 'views/users/'.$lien.'.php';
 }
 else{
-    header('location:'.$domaine.'/error');
+    header('location:'.$domaine_admin.'/error');
 }

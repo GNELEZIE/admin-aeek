@@ -301,6 +301,16 @@ table thead tr:first-child th, table thead tr:first-child td {
     color: #FFFFFF !important;
     border: none !important;
 }
+.btn-info-transparent{
+    background: #05c3fb29 !important;
+    color: #05c3fb !important;
+    border: none !important;
+}
+.btn-info-transparent:hover{
+    background: #05c3fb !important;
+    color: #fff !important;
+    border: none !important;
+}
 .btn-red-transparent{
     background: #f900243d !important;
     color: #f90024 !important;
@@ -324,6 +334,27 @@ table tr:hover{
     color: inherit !important;
 }
 
+.font-7{
+    font-size: 7px !important;
+}
+.font-8{
+    font-size: 8px !important;
+}
+.font-9{
+    font-size: 9px !important;
+}
+.font-10{
+    font-size: 10px !important;
+}
+.font-11{
+    font-size: 11px !important;
+}
+.font-12{
+    font-size: 12px !important;
+}
+.font-13{
+    font-size: 13px !important;
+}
 
 
 

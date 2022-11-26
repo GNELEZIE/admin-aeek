@@ -151,7 +151,27 @@
             /*color: #ff7729  !important;*/
         /*}*/
 
-
+.font-7{
+    font-size: 7px !important;
+}
+.font-8{
+    font-size: 8px !important;
+}
+.font-9{
+    font-size: 9px !important;
+}
+.font-10{
+    font-size: 10px !important;
+}
+.font-11{
+    font-size: 11px !important;
+}
+.font-12{
+    font-size: 12px !important;
+}
+.font-13{
+    font-size: 13px !important;
+}
 
     </style>
 </head>

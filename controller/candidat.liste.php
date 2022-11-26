@@ -11,6 +11,9 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
                                         <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="supprimer('.$data['id_candidat'].')">
                                             <span class="fe fe-trash-2"> </span>
                                         </a>
+                                        <a href="'.$domaine_admin.'/edit-candidat/'.$data['slug'].'" id="bDel" type="button" class="btn  btn-sm btn-info-transparent" >
+                                            <span class="fe fe-edit-2"> </span>
+                                        </a>
                                     </div>';
 
         $pho =  '<img src="'.$domaine.'/uploads/'.$data['photo'].'" class="img-cand">';

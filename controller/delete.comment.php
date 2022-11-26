@@ -1,12 +1,6 @@
 <?php
-session_start();
+
 if(isset($_SESSION['useraeek']) and isset($_POST['id'])){
-
-
-    //Include Connexion
-    include_once '../model/Connexion.class.php';
-    include_once "../model/Comment.class.php";
-    include_once "../model/Reponse.class.php";
 
     extract($_POST);
 

@@ -86,6 +86,22 @@ class Candidat {
 
     }
 
+    public function candidatUpdate($propriete1,$val1,$propriete2,$val2,$propriete3,$val3,$propriete4,$val4,$id){
+        $query = "UPDATE candidat
+                   Set $propriete1 =:val1,$propriete2 = :val2,$propriete3 = :val3, $propriete4 = :val4
+                   WHERE id_candidat = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "val1" => $val1,
+            "val2" => $val2,
+            "val3" => $val3,
+            "val4" => $val4,
+            "id" => $id
+        ));
+        $nb = $rs->rowCount();
+        return $nb;
+    }
+
     // Delete
     public function deleteCandidat($id){
 

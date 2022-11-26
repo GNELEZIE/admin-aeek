@@ -27,23 +27,29 @@
             </a>
         </li>
         <li>
-            <a class="side-menu__item <?php if($lien == 'vote'){echo 'current';} ;?>" href="<?=$domaine_admin?>/vote">
-                <i class="side-menu__icon fe fe-message-square"></i>
-                <span class="side-menu__label">Vote</span>
-            </a>
-        </li>
-        <li>
             <a class="side-menu__item <?php if($lien == 'commentaire'){echo 'current';} ;?>" href="<?=$domaine_admin?>/commentaire">
                 <i class="side-menu__icon fe fe-message-square"></i>
                 <span class="side-menu__label">Commentaire</span>
             </a>
         </li>
-        <li>
-            <a class="side-menu__item <?php if($lien == 'banniere'){echo 'current';} ;?>" href="<?=$domaine_admin?>/banniere">
-                <i class="side-menu__icon fe fe-square"></i>
-                <span class="side-menu__label">Bannière</span>
-            </a>
-        </li>
+        <?php  if($data['role'] !=0){
+            ?>
+            <li>
+                <a class="side-menu__item <?php if($lien == 'vote'){echo 'current';} ;?>" href="<?=$domaine_admin?>/vote">
+                    <i class="side-menu__icon fe fe-message-square"></i>
+                    <span class="side-menu__label">Vote</span>
+                </a>
+            </li>
+            <li>
+                <a class="side-menu__item <?php if($lien == 'banniere'){echo 'current';} ;?>" href="<?=$domaine_admin?>/banniere">
+                    <i class="side-menu__icon fe fe-square"></i>
+                    <span class="side-menu__label">Bannière</span>
+                </a>
+            </li>
+        <?php
+        }
+        ?>
+
         <li>
             <a class="side-menu__item <?php if($lien == 'gallerie'){echo 'current';} ;?>" href="<?=$domaine_admin?>/gallerie">
                 <i class="side-menu__icon fe fe-camera"></i>
@@ -56,56 +62,65 @@
                 <span class="side-menu__label">Flash infos</span>
             </a>
         </li>
+<<<<<<< HEAD
         <li>
             <a class="side-menu__item <?php if($lien == 'reunion'){echo 'current';} ;?>" href="<?=$domaine_admin?>/reunion">
                 <i class="side-menu__icon fa fa-tv"></i>
                 <span class="side-menu__label">Réunion</span>
             </a>
         </li>
+=======
+        <?php  if($data['role'] !=0){
+            ?>
+            <li class="slide">
+                <a class="side-menu__item <?php if($lien == 'emplois'){echo 'current';} ;?>" data-bs-toggle="slide" href="javascript:void(0)">
+                    <i class="side-menu__icon fe fe-briefcase"></i>
+                    <span class="side-menu__label">Offre d'emplois</span>
+                    <i class="angle fe fe-chevron-right"></i>
+                </a>
+                <ul class="slide-menu">
+                    <li>
+                        <a href="<?=$domaine_admin?>/emplois" class="slide-item  <?php if($lien == 'emplois' || $lien == 'offre-externe'){echo 'current';} ;?>">
+                            <i class="side-menu__icon fe fe-briefcase"></i>
+                            <span class="side-menu__label">La liste des offres</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?=$domaine_admin?>/offre-externe" class="slide-item  <?php if($lien == 'offre-externe'){echo 'current';} ;?>">
+                            <i class="side-menu__icon fe fe-briefcase"></i>
+                            <span class="side-menu__label">Offre exterieur</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="<?=$domaine_admin?>/gallerie" class="slide-item">
+                            <i class="side-menu__icon fe fe-briefcase"></i>
+                            <span class="side-menu__label">Offre interieur</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a class="side-menu__item <?php if($lien == 'inscrit'){echo 'current';} ;?>" href="<?=$domaine_admin?>/inscrit">
+                    <i class="side-menu__icon fe fe-user"></i>
+                    <span class="side-menu__label">Inscrits</span>
+                </a>
+            </li>
+            <li>
+                <a class="side-menu__item <?php if($lien == 'a-propos'){echo 'current';} ;?>" href="<?=$domaine_admin?>/a-propos">
+                    <i class="side-menu__icon fe fe-folder"></i>
+                    <span class="side-menu__label">A propos</span>
+                </a>
+            </li>
+        <?php
+        }
+        ?>
+>>>>>>> 22d09e74c0972a0fdc4ba44faddf3bd16e93c064
 
-        <li class="slide">
-            <a class="side-menu__item <?php if($lien == 'emplois'){echo 'current';} ;?>" data-bs-toggle="slide" href="javascript:void(0)">
-                <i class="side-menu__icon fe fe-briefcase"></i>
-                <span class="side-menu__label">Offre d'emplois</span>
-                <i class="angle fe fe-chevron-right"></i>
-            </a>
-            <ul class="slide-menu">
-                <li>
-                    <a href="<?=$domaine_admin?>/emplois" class="slide-item  <?php if($lien == 'emplois' || $lien == 'offre-externe'){echo 'current';} ;?>">
-                        <i class="side-menu__icon fe fe-briefcase"></i>
-                        <span class="side-menu__label">La liste des offres</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?=$domaine_admin?>/offre-externe" class="slide-item  <?php if($lien == 'offre-externe'){echo 'current';} ;?>">
-                        <i class="side-menu__icon fe fe-briefcase"></i>
-                        <span class="side-menu__label">Offre exterieur</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="<?=$domaine_admin?>/gallerie" class="slide-item">
-                        <i class="side-menu__icon fe fe-briefcase"></i>
-                        <span class="side-menu__label">Offre interieur</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li>
-            <a class="side-menu__item <?php if($lien == 'inscrit'){echo 'current';} ;?>" href="<?=$domaine_admin?>/inscrit">
-                <i class="side-menu__icon fe fe-user"></i>
-                <span class="side-menu__label">Inscrits</span>
-            </a>
-        </li>
-        <li>
-            <a class="side-menu__item <?php if($lien == 'a-propos'){echo 'current';} ;?>" href="<?=$domaine_admin?>/a-propos">
-                <i class="side-menu__icon fe fe-folder"></i>
-                <span class="side-menu__label">A propos</span>
-            </a>
-        </li>
 
     </ul>
-    <div class="slide-right" id="slide-right"><svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191"
-                                                   width="24" height="24" viewBox="0 0 24 24">
+    <div class="slide-right" id="slide-right">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="#7b8191" width="24" height="24" viewBox="0 0 24 24">
             <path d="M10.707 17.707 16.414 12l-5.707-5.707-1.414 1.414L13.586 12l-4.293 4.293z" />
-        </svg></div>
+        </svg>
+    </div>
 </div>

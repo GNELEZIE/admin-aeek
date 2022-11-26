@@ -1,15 +1,9 @@
 <?php
-session_start();
+
 $info = '';
 if(isset($_SESSION['useraeek']) and isset($_POST['idCommentR'])  and isset($_POST['reponses']) and isset($_POST['art_id']) and isset($_SESSION['myformkey']) and isset($_POST['formkey']) and $_SESSION['myformkey'] == $_POST['formkey']){
     extract($_POST);
-    //Include function
-    include_once "../function/function.php";
-//Include Connexion
-    include_once '../model/Connexion.class.php';
 
-// appelle des class
-    include_once '../model/Reponse.class.php';
 
     $reponses = htmlentities(trim(addslashes($reponses)));
     $idCommentR = htmlentities(trim(addslashes($idCommentR)));

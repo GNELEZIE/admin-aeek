@@ -174,7 +174,7 @@ require_once 'layout/head.php'
                 <?php
                 $com = $comment->getAllCommentCinq();
                 while($comments = $com->fetch()){
-                    $artLis = $article->getArticleById($comments['id_comment'])->fetch();
+                    $artLis = $article->getArticleById($comments['article_id'])->fetch();
                     ?>
 
                     <li class="d-sm-flex">
