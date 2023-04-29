@@ -82,6 +82,7 @@ require_once 'layout/head.php';
                         <table class="table text-nowrap border-bottom" id="tableCandidat">
                             <thead>
                             <tr class="border-bottom">
+                                <th class="wd-15p">Rang</th>
                                 <th class="wd-15p">Date</th>
                                 <th class="wd-15p">Nom & Prénom</th>
                                 <th class="wd-15p">Numéro</th>
@@ -123,8 +124,12 @@ require_once 'layout/foot.php';
                     token:"<?=$token?>"
                 }
             },
+            dom: 'Bfrtip',
+            buttons: [
+            'excel', 'pdf'
+        ],
             "ordering": false,
-            "pageLength": 10,
+            "pageLength": 50,
             "language" : {
                 "sProcessing": "Traitement en cours ...",
                 "sLengthMenu": "Afficher _MENU_ lignes",

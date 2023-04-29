@@ -37,7 +37,6 @@ require_once 'layout/head.php';
                                             <th class="wd-15p">Téléphone</th>
                                             <th class="wd-15p">Ville</th>
                                             <th class="wd-15p">Email</th>
-                                            <th class="wd-15p">Statut</th>
                                             <th class="text-center">Actions</th>
                                         </tr>
                                         </thead>
@@ -183,7 +182,7 @@ require_once 'layout/foot.php';
 
                 function(isConfirm){
                     if (isConfirm) {
-                        $.post('<?=$domaine_admin?>/controller/user.delete.php', {id : id}, function (data) {
+                        $.post('<?=$domaine_admin?>/controller/reunion.delete.php', {id : id}, function (data) {
                             if(data == "ok"){
                                 swal("Opération effectuée avec succès!","", "success");
                                 tableUsers.ajax.reload(null,false);
