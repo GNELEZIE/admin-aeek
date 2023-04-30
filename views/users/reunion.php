@@ -66,7 +66,7 @@ require_once 'layout/foot.php';
         tableUsers = $('#tableUsers').DataTable({
             "ajax":{
                 "type":"post",
-                "url":"<?=$domaine_admin?>/controller/reunion.liste.php",
+                "url":"<?=$domaine_admin?>/controle/reunion.liste",
                 "data":{
                     token:"<?=$token?>"
                 }

@@ -1,21 +1,11 @@
 <?php
-session_start();
 $arr_list = array('data' => array());
 if(isset($_SESSION['useraeek'])){
-// include function
-    include_once "../function/function.php";
 
-//Include Connexion
-    include_once '../model/Connexion.class.php';
-
-// appelle des class
-
-    include_once "../model/User.class.php";
 
     $liste = $user->getAllUserReunion();
 
     while($data = $liste->fetch()) {
-
 
         $nom = '<div class="user-info"> <span class="tb-lead">'.html_entity_decode(htmlentities($data["nom"])).'<span class="dot dot-warning d-md-none ml-1"></span>';
         $action = '<div class="btn-list text-center">
@@ -26,12 +16,12 @@ if(isset($_SESSION['useraeek'])){
                                     </div>';
 
         $arr_list['data'][] = array(
-            date_fr($data['date_membre']),
+            date_fr($data['date_reunion']),
             $nom,
-            $data['dial_phone'].' '.$data['phone'],
-            html_entity_decode(htmlentities($data["ville"])),
+            $data['ville'],
+            html_entity_decode(htmlentities($data["phone"])),
             $data['email'],
-           $action
+            $action
         );
     }
 }

@@ -10,11 +10,12 @@ class User {
 
     // Read
     public function getAllUserReunion(){
-        $query = "SELECT * FROM reunion ORDER BY id_reunion   DESC";
+        $query = "SELECT * FROM reunion ORDER BY id_reunion DESC";
         $rs = $this->bdd->query($query);
-
         return $rs;
     }
+
+
     public function getAllUsers(){
         $query = "SELECT * FROM membre
                   WHERE bloquer = 1 ORDER BY id_membre  DESC";
