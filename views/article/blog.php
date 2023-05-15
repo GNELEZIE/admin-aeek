@@ -130,7 +130,6 @@ require_once 'layout/head.php';
                                 <thead>
                                 <tr class="border-bottom">
                                     <th class="wd-15p">Date</th>
-                                    <th class="wd-15p">Titre</th>
                                     <th class="wd-15p">Catégorie</th>
                                     <th class="wd-15p">Statut</th>
                                     <th class="text-center">Actions</th>
@@ -167,7 +166,7 @@ require_once 'layout/foot.php';
         tableArticle = $('#tableArticle').DataTable({
             "ajax":{
                 "type":"post",
-                "url":"<?=$domaine_admin?>/controller/article.liste.php",
+                "url":"<?=$domaine_admin?>/controle/article.liste",
                 "data":{
                     token:"<?=$token?>"
                 }

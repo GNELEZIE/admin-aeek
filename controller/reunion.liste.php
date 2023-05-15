@@ -18,9 +18,9 @@ if(isset($_SESSION['useraeek'])){
         $arr_list['data'][] = array(
             date_fr($data['date_reunion']),
             $nom,
-            $data['ville'],
-            html_entity_decode(htmlentities($data["phone"])),
-            $data['email'],
+            $data['phone'],
+            html_entity_decode(htmlentities($data["ville"])),
+            html_entity_decode(htmlentities($data['email'])),
             $action
         );
     }
