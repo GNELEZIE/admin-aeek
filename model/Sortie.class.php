@@ -6,6 +6,48 @@ class Sortie {
 
 //Read
 
+//Table caofa
+
+    public function getAllCaofa(){
+        $query = "SELECT * FROM caofa ORDER BY id_caofa DESC";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
+
+    //Count
+    public function getNbrCaofa(){
+        $query = "SELECT COUNT(*) as nb FROM caofa";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
+
+    public function deleteCaofa($id){
+
+        $query = "DELETE  FROM caofa WHERE id_caofa = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function getAllInscript(){
         $query = "SELECT * FROM sortie ORDER BY id_sortie DESC";
         $rs = $this->bdd->query($query);

@@ -35,7 +35,15 @@ class Gallerie{
         return $rs;
     }
 
-
+    public function getBalerieBySlug($slugs){
+        $query = "SELECT * FROM gallerie
+        WHERE slug = :slugs";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "slugs" => $slugs
+        ));
+        return $rs;
+    }
    public function getEventBySlug($slugs){
         $query = "SELECT * FROM events
         WHERE slug = :slugs";
