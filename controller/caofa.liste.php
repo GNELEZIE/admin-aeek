@@ -10,7 +10,7 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
                                         <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="supprimer('.$data['id_caofa'].')">
                                             <span class="fe fe-trash-2"> </span>
                                         </a>
-                                        <a href="#modalCaofa"  class="btn btn-sm btn-green-transparent"  data-bs-toggle="modal" data-id="'.$data['id_caofa'].'" data-nom="'.$data['nom'].'" data-niveau="'.$data['niveau'].'" data-message="'.$data['message'].'"  data-target="#modalCaofa">
+                                        <a href="#modalCaofa"  class="btn btn-sm btn-green-transparent"  data-bs-toggle="modal" data-id="'.$data['id_caofa'].'" data-nom="'.html_entity_decode(stripslashes($data['nom'])).'" data-niveau="'.html_entity_decode(stripslashes($data['niveau'])).'" data-message="'.html_entity_decode(stripslashes($data['message'])).'"  data-target="#modalCaofa">
                                             <span class="fe fe-eye"> </span>
                                         </a>
                                     </div>';
