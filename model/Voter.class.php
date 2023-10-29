@@ -43,6 +43,25 @@ class Voter {
         return $rs;
     }
 
+// INNER JOIN
+
+    public function getAllVotants(){
+        $query = "SELECT * FROM voter
+                  INNER JOIN candidat ON id_candidat = candidat_id ORDER BY id_voter DESC";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
+
+    public function getAllVotant(){
+        $query = "SELECT * FROM voter
+                  INNER JOIN candidat ON id_candidat = candidat_id
+                  WHERE an = 23 ORDER id_voter DESC";
+        $rs = $this->bdd->query($query);
+
+        return $rs;
+    }
+
 
     //Count
     public function getNbrVote(){
@@ -53,18 +72,20 @@ class Voter {
         return $rs;
     }
 
-    // Verification valeur existant
-    public function verifUtilisateur($propriete,$val){
 
-        $query = "SELECT * FROM admin WHERE $propriete = :val";
+    // Delete
+    public function deleteVotant($id){
+
+        $query = "DELETE  FROM voter WHERE id_voter = :id";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
-            "val" => $val
+            "id" => $id
         ));
 
-        return $rs;
-    }
+        $nb = $rs->rowCount();
+        return $nb;
 
+    }
 
 
 

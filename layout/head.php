@@ -30,6 +30,40 @@
 td{
     vertical-align: middle !important;
 }
+.badge-disable{
+    background-color: rgba(192, 198, 205, 0.13);
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 5px;
+    vertical-align: middle;
+    border: none;
+}
+
+.badge-green{
+    color: #2ab57d;
+    background-color: rgba(42, 181, 125, 0.13);
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 5px;
+    vertical-align: middle;
+    border: none;
+}
+
+.badge-red{
+    color: #fd625e;
+    background-color: rgba(253, 98, 94, 0.13);
+    border-radius: 6px;
+    transition: all 0.2s ease-in-out;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 5px;
+    vertical-align: middle;
+    border: none;
+}
 .img-cand{
     border-radius: 50% !important;
     width: 66px !important;

@@ -16,7 +16,7 @@
             </a>
         </li>
         <li>
-            <a class="side-menu__item <?php if($lien == 'vote'){echo 'current';} ;?>" href="<?=$domaine_admin?>/vote">
+            <a class="side-menu__item <?php if($lien == 'vote'){echo 'current';} ;?> <?php if($lien == 'vote-liste'){echo 'current';} ;?>" href="<?=$domaine_admin?>/vote">
                 <i class="side-menu__icon fe fe-message-square"></i>
                 <span class="side-menu__label">PRIM'MA</span>
             </a>

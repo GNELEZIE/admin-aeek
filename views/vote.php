@@ -67,6 +67,7 @@ require_once 'layout/head.php';
                 </div>
                 <div class="card-btn pl-3" style="border-bottom: 0 !important; padding-left: 20px;">
                     <a href="#modalAddCat" class="btn-transparence-orange"  data-bs-effect="effect-sign" data-bs-toggle="modal"  style="padding: 7px 15px; border-radius: 3px;"> <i class="fa fa-plus"></i> Ajouter un candidat</a>
+                    <a href="<?=$domaine_admin?>/vote-liste" class="btn-green-transparent" style="padding: 7px 15px; border-radius: 3px;"> <i class="fa fa-book"></i> La liste des votants </a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -104,7 +105,8 @@ require_once 'layout/head.php';
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-demo p-5">
             <div class="modal-header" style="border-bottom: 0 !important;">
-                <h3 class="modal-title">Ajouter un candidat</h3><button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+                <h3 class="modal-title">Ajouter un candidat</h3>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
             </div>
                 <form method="post" id="CandForm" enctype="multipart/form-data">
                     <div class="card-body p-0">
