@@ -41,6 +41,11 @@
                 </a>
             </li>
             <li>
+                <a class="side-menu__item <?php if($lien == 'caofa'){echo 'current';} ;?>" href="<?=$domaine_admin?>/caofa"><i class="side-menu__icon fe fe-list"></i>
+                    <span class="side-menu__label">caofa</span>
+                </a>
+            </li>
+            <li>
                 <a class="side-menu__item <?php if($lien == 'banniere'){echo 'current';} ;?>" href="<?=$domaine_admin?>/banniere">
                     <i class="side-menu__icon fe fe-square"></i>
                     <span class="side-menu__label">Bannière</span>

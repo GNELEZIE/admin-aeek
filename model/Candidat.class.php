@@ -7,9 +7,9 @@ class Candidat {
 
 // Create
 
-    public function addCandidat($dateCand,$nom,$prenom,$slug,$fonction,$bio,$photo){
-        $query = "INSERT INTO candidat(date_candidat,nom,prenom,slug,fonction,bio,photo)
-            VALUES (:dateCand,:nom,:prenom,:slug,:fonction,:bio,:photo)";
+    public function addCandidat($dateCand,$nom,$prenom,$slug,$fonction,$bio,$photo,$an){
+        $query = "INSERT INTO candidat(date_candidat,nom,prenom,slug,fonction,bio,photo,an)
+            VALUES (:dateCand,:nom,:prenom,:slug,:fonction,:bio,:photo,:an)";
         $rs = $this->bdd->prepare($query);
         $rs->execute(array(
             "dateCand" => $dateCand,
@@ -18,7 +18,8 @@ class Candidat {
             "slug" => $slug,
             "fonction" => $fonction,
             "bio" => $bio,
-            "photo" => $photo
+            "photo" => $photo,
+            "an" => $an
 
         ));
         $nb = $rs->rowCount();
@@ -58,14 +59,28 @@ class Candidat {
         return $rs;
     }
     public function getAllCandidat(){
-        $query = "SELECT * FROM candidat ORDER BY nbvote DESC";
+        $query = "SELECT * FROM candidat
+                  WHERE an = 23";
         $rs = $this->bdd->query($query);
         return $rs;
     }
 
     //Count
+
+    public function getNbrVoteByCandidat($id){
+        $query = "SELECT COUNT(*) as nb FROM voter
+                  WHERE candidat_id =:id AND an = 23";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+
+        return $rs;
+    }
+
     public function getNbCandidat(){
-        $query = "SELECT COUNT(*) as nb FROM candidat";
+        $query = "SELECT COUNT(*) as nb FROM candidat
+                  WHERE an = 23";
         $rs = $this->bdd->query($query);
         return $rs;
     }

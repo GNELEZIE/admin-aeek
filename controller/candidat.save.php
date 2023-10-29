@@ -14,7 +14,7 @@ if(isset($_SESSION['useraeek'])   and isset($_SESSION['myformkey']) and isset($_
     $verifSlug = $candidat->verifCandidat($propriete1,$nom);
     $rsSlug = $verifSlug->fetch();
     $nbSlug =$verifSlug->rowCount();
-
+    $an = 23;
     if($nbSlug > 0){
         $slug = $slug.'-'.$nbSlug;
     }
@@ -31,7 +31,7 @@ if(isset($_SESSION['useraeek'])   and isset($_SESSION['myformkey']) and isset($_
             move_uploaded_file($tmp_name, $destination);
     }
 
-    $save = $candidat->addCandidat($dateGmt,$nom,$prenom,$slug,$fonction,$bio,$photo);
+    $save = $candidat->addCandidat($dateGmt,$nom,$prenom,$slug,$fonction,$bio,$photo,$an);
     if($save >0){
         $data_info = 'ok';
     }

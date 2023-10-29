@@ -3,7 +3,7 @@
 $arr_list = array('data' => array());
 if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_POST['token']) and $_SESSION['myformkey'] == $_POST['token']){
 
-    $listeCand= $candidat->getAllCandidat();
+    $listeCand = $candidat->getAllCandidat();
     $rang = 0;
     while($data = $listeCand->fetch()) {
         $rang ++;
@@ -17,8 +17,9 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
                                     </div>';
 
         $pho =  '<img src="'.$domaine.'/uploads/'.$data['photo'].'" class="img-cand">';
+        $voteByCandid = $candidat->getNbrVoteByCandidat($data['id_candidat'])->fetch();
         $voix =  '<a  id="bDel" type="button" class="btn  btn-sm btn-green-transparent">
-                                         '.$data['nbvote'].'
+                                         '.$voteByCandid['nb'].'
                                         </a>';
 
         $nom = html_entity_decode(stripslashes($data['nom'])).' '.html_entity_decode(stripslashes($data['prenom']));
@@ -27,6 +28,7 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
             $rang,
             $pho,
             $nom,
+            $data['dial_phone'].' '.$data['phone'],
             html_entity_decode(stripslashes($data['fonction'])),
             $voix,
             $action

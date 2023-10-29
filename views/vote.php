@@ -8,18 +8,8 @@ if(!isset($_SESSION['useraeek'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
-$nbV = $voter->getNbrVote();
-if($nbRvot = $nbV->fetch()){
-    $votants = $nbRvot['nb'];
-}else{
-    $votants =  0;
-}
-$nbC = $candidat->getNbCandidat();
-if($nbrCand = $nbC->fetch()){
-    $nbrCandidats = $nbrCand['nb'];
-}else{
-    $nbrCandidats =  0;
-}
+
+
 //add.categorie
 //categorie.liste
 //delete.categorie
@@ -44,7 +34,7 @@ require_once 'layout/head.php';
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="text-white">
-                                    <h2 class="mb-0 number-font"><?=$votants?></h2>
+                                    <h2 class="mb-0 number-font"><span class="getnbrevote"></span></h2>
                                     <p class="text-white mb-0">Votants</p>
                                 </div>
                                 <div class="ms-auto"> <i class="fa fa-user-o text-white fs-30 me-2 mt-2"></i> </div>
@@ -57,7 +47,7 @@ require_once 'layout/head.php';
                         <div class="card-body">
                             <div class="d-flex">
                                 <div class="text-white">
-                                    <h2 class="mb-0 number-font"><?=$nbrCandidats?></h2>
+                                    <h2 class="mb-0 number-font"><span class="getcandidat"></span></h2>
                                     <p class="text-white mb-0">Candidats</p>
                                 </div>
                                 <div class="ms-auto"> <i class="fa fa-user-o text-white fs-30 me-2 mt-2"></i> </div>
@@ -86,6 +76,7 @@ require_once 'layout/head.php';
                                 <th class="wd-15p">Rang</th>
                                 <th class="wd-15p">Photo</th>
                                 <th class="wd-15p">Nom & Prénom</th>
+                                <th class="wd-15p">Téléphone</th>
                                 <th class="wd-15p">Fonction</th>
                                 <th class="wd-15p">Voix</th>
                                 <th class="text-center">Actions</th>
@@ -121,23 +112,32 @@ require_once 'layout/head.php';
                         <div class="banError"></div>
                         <div class="row">
 
-                            <div class="form-group">
-                                <label for="nom" class="form-label">Nom</label>
-                                <input type="text" class="form-control input-style" name="nom" id="nom" placeholder="Nom">
-                                <input type="hidden" class="form-control " name="formkey" value="<?= $token ?>">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="nom" class="form-label">Nom</label>
+                                    <input type="text" class="form-control input-style" name="nom" id="nom" placeholder="Nom">
+                                    <input type="hidden" class="form-control " name="formkey" value="<?= $token ?>">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="prenom" class="form-label">Prenom </label>
-                                <input type="text" class="form-control input-style" name="prenom" id="prenom" placeholder="Prenom">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="prenom" class="form-label">Prenom </label>
+                                    <input type="text" class="form-control input-style" name="prenom" id="prenom" placeholder="Prenom">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="fonction" class="form-label">Fonction </label>
-                                <input type="text" class="form-control input-style" name="fonction" id="fonction" placeholder="Fonction">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="fonction" class="form-label">Fonction </label>
+                                    <input type="text" class="form-control input-style" name="fonction" id="fonction" placeholder="Fonction">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="bio" class="form-label">Biographie </label>
-                                <textarea   class="form-control input-style" name="bio" id="bio" placeholder="Biographie"></textarea>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="bio" class="form-label">Biographie </label>
+                                    <textarea   class="form-control input-style" name="bio" id="bio" placeholder="Biographie"></textarea>
+                                </div>
                             </div>
+
                         </div>
 
                         <div class="form-group">
@@ -168,7 +168,37 @@ require_once 'layout/foot.php';
 
 <script>
     var tableCandidat;
+
     $(document).ready(function() {
+        chargeVote();
+        chargeCandidat();
+        function chargeVote(){
+            $.ajax({
+                type: 'post',
+                data: {
+                    token: "<?=$token?>"
+                },
+                url: '<?=$domaine_admin?>/controle/getnbrevote',
+                dataType: 'json',
+                success: function(data){
+                    $('.getnbrevote').html(data.getnbrevote);
+                }
+            });
+        }
+
+        function chargeCandidat(){
+            $.ajax({
+                type: 'post',
+                data: {
+                    token: "<?=$token?>"
+                },
+                url: '<?=$domaine_admin?>/controle/getcandidat',
+                dataType: 'json',
+                success: function(data){
+                    $('.getcandidat').html(data.getcandidat);
+                }
+            });
+        }
 
         tableCandidat = $('#tableCandidat').DataTable({
             "ajax":{
@@ -274,6 +304,8 @@ require_once 'layout/foot.php';
                 success: function(data){
 
                     if(data.data_info == "ok"){
+                        chargeVote();
+                        chargeCandidat();
                         $('.loadCandidat').html('');
                         $('#nom').val('');
                         $('#prenom').val('');
@@ -319,6 +351,8 @@ require_once 'layout/foot.php';
                             if(data == "ok"){
                                 swal("Suppression effectuée avec succès!","", "success");
                                 tableCandidat.ajax.reload(null,false);
+                                chargeVote();
+                                chargeCandidat();
                             }else{
                                 swal("Impossible de supprimer!", "Une erreur s'est produite lors du traitement des données.", "error");
                             }

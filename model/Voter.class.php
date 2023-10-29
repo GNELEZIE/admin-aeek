@@ -46,7 +46,8 @@ class Voter {
 
     //Count
     public function getNbrVote(){
-        $query = "SELECT COUNT(*) as nb FROM voter";
+        $query = "SELECT COUNT(*) as nb FROM voter
+                  WHERE an = 23";
         $rs = $this->bdd->query($query);
 
         return $rs;

@@ -16,10 +16,12 @@
             </a>
         </li>
         <li>
-            <a class="side-menu__item <?php if($lien == 'caofa'){echo 'current';} ;?>" href="<?=$domaine_admin?>/caofa"><i class="side-menu__icon fe fe-list"></i>
-                <span class="side-menu__label">caofa</span>
+            <a class="side-menu__item <?php if($lien == 'vote'){echo 'current';} ;?>" href="<?=$domaine_admin?>/vote">
+                <i class="side-menu__icon fe fe-message-square"></i>
+                <span class="side-menu__label">PRIM'MA</span>
             </a>
         </li>
+
         <li>
             <a class="side-menu__item <?php if($lien == 'tag'){echo 'current';} ;?>" href="<?=$domaine_admin?>/tag"><i class="side-menu__icon fe fe-tag"></i>
                 <span class="side-menu__label">Tag</span>
