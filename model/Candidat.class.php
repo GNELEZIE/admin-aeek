@@ -86,6 +86,24 @@ class Candidat {
     }
 
     //Update
+    public function updateVote2($vote,$id){
+        $query = "UPDATE candidat
+            SET nbvote = :vote
+            WHERE id_candidat = :id ";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "vote" => $vote,
+            "id" => $id
+        ));
+
+        $nb = $rs->rowCount();
+        return $nb;
+
+    }
+
+
+
+
     public function updateVote($vote,$id){
         $query = "UPDATE candidat
             SET nbvote = :vote

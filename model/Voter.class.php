@@ -45,6 +45,22 @@ class Voter {
 
 // INNER JOIN
 
+
+    public function getCandidatByVotantId($id){
+        $query = "SELECT * FROM voter
+                  INNER JOIN candidat ON id_candidat = candidat_id
+                  WHERE id_voter = :id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+
+        return $rs;
+
+    }
+
+
+
     public function getAllVotants(){
         $query = "SELECT * FROM voter
                   INNER JOIN candidat ON id_candidat = candidat_id ORDER BY id_voter DESC";

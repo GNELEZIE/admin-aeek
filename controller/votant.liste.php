@@ -18,9 +18,10 @@ $arr_list = array('data' => array());
         $prenom = '<span class="badge-green">'. html_entity_decode(stripslashes($data['prenom'])).'</span>';
 
         $arr_list['data'][] = array(
-            date_time_fr($data['date_vote']),
-            html_entity_decode(stripslashes($data['nom'])),
-            $data['dial_phone'].' '.$data['dial_phone'],
+            date_fr($data['date_vote']),
+            html_entity_decode(stripslashes($data['ip'])),
+            html_entity_decode(stripslashes($data['nom_votant'])),
+            $data['dial_votant'].' '.$data['phone_votant'],
             $prenom,
             $action
 

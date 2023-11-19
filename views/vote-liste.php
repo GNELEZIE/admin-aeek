@@ -42,6 +42,7 @@ require_once 'layout/head.php';
                                         <thead>
                                         <tr class="border-bottom">
                                             <th class="wd-15p">Date</th>
+                                            <th class="wd-15p">IP</th>
                                             <th class="wd-15p">Nom & Prénom</th>
                                             <th class="wd-15p">Téléphone</th>
                                             <th class="wd-15p">Candidat</th>
