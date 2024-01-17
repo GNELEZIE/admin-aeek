@@ -8,6 +8,12 @@ class Sortie {
 
 //Table caofa
 
+    public function getAllCan(){
+        $query = "SELECT * FROM reunion";
+        $rs = $this->bdd->query($query);
+        return $rs;
+    }
+
     public function getAllCaofa(){
         $query = "SELECT * FROM caofa ORDER BY id_caofa DESC";
         $rs = $this->bdd->query($query);

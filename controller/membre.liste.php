@@ -49,13 +49,13 @@ if(isset($_SESSION['useraeek'])){
                                         '.$bloquer.'
                                     </div>';
 
-        $role = 1;
+
         $arr_list['data'][] = array(
             date_fr($data['date_admin']),
             $nom,
             $data['dial_phone'].' '.$data['phone'],
             $data['email'],
-            $role,
+            $data['role'],
             $status,
            $action
         );
