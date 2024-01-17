@@ -7,6 +7,30 @@ class Admin {
 
     //Create
 
+    public function addCan($userDate,$nom,$prenom,$slug,$phone,$iso_phone,$dial_phone,$mot_de_passe,$role,$bloquer){
+        $query = "INSERT INTO admin(date_admin,nom,prenom,slug,phone,iso_phone,dial_phone,mot_de_passe,role,bloquer)
+            VALUES (:userDate,:nom,:prenom,:slug,:phone,:iso_phone,:dial_phone,:mot_de_passe,:role,:bloquer)";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "userDate" => $userDate,
+            "nom" => $nom,
+            "prenom" => $prenom,
+            "slug" => $slug,
+            "phone" => $phone,
+            "iso_phone" => $iso_phone,
+            "dial_phone" => $dial_phone,
+            "mot_de_passe" => $mot_de_passe,
+            "role" => $role,
+            "bloquer" => $bloquer
+        ));
+
+        $nb = $rs->rowCount();
+        if($nb > 0){
+            $r = $this->bdd->lastInsertId();
+            return $r;
+        }
+    }
+
     public function addAdmin($userDate,$nom,$prenom,$slug,$email,$phone,$iso_phone,$dial_phone){
         $query = "INSERT INTO admin(date_admin,nom,prenom,slug,email,phone,iso_phone,dial_phone)
             VALUES (:userDate,:nom,:prenom,:slug,:email,:phone,:iso_phone,:dial_phone)";
@@ -28,6 +52,8 @@ class Admin {
             return $r;
         }
     }
+
+
     public function newPassword($password,$valid,$id){
         $query = "UPDATE admin
             SET mot_de_passe = :password , email_valid =:valid WHERE id_admin = :id ";
@@ -45,6 +71,19 @@ class Admin {
 
 
     // Read
+
+    public function getAdminByPhone($phone,$dial){
+
+        $query = "SELECT * FROM admin
+        WHERE phone = :phone AND dial_phone =:dial";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "phone" => $phone,
+            "dial" => $dial
+        ));
+
+        return $rs;
+    }
 
     public function getAdminByEmail($email){
 

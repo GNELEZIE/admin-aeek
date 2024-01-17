@@ -190,20 +190,13 @@ require_once 'layout/head.php';
                                 <input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" required>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="form-label-group">
-                                <label class="form-label" for="email">Email <i class="required"></i></label>
-                            </div>
-                            <div class="form-control-wrap">
-                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
-                            </div>
-                        </div>
                         <label for="role" class="col-md-3 form-label m-0 p-0 pb-2">Rôle</label>
                         <div class="">
                             <select name="role" id="role" class="form-control form-select select2 input-style" data-bs-placeholder="Select Country">
                                 <option value="1">Admin</option>
                                 <option value="2">Editeur</option>
                                 <option value="3">Membre</option>
+                                <option value="4">Candidat</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -225,6 +218,65 @@ require_once 'layout/head.php';
                 </div>
             </div>
         </div>
+<!--        <div class="modal fade" id="modalAddMembre">-->
+<!--            <div class="modal-dialog modal-dialog-centered" role="document">-->
+<!--                <div class="modal-content modal-content-demo p-5">-->
+<!--                    <div class="modal-header" style="border-bottom: 0 !important;">-->
+<!--                     <h2>Ajouter un membre</h2>-->
+<!--                    </div>-->
+<!--                    <form method="post" id="addMembreForm">-->
+<!--                        <div class="form-group">-->
+<!--                            <div class="form-label-group">-->
+<!--                                <label class="form-label" for="nom">Nom  <i class="required"></i></label>-->
+<!--                            </div>-->
+<!--                            <div class="form-control-wrap">-->
+<!--                                <input type="text" class="form-control" id="nom" name="nom" placeholder="nom" required>-->
+<!--                                <input type="hidden" class="form-control" name="formkey" value="--><?//=$token?><!--">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <div class="form-label-group">-->
+<!--                                <label class="form-label" for="prenom">Prénom <i class="required"></i></label>-->
+<!--                            </div>-->
+<!--                            <div class="form-control-wrap">-->
+<!--                                <input type="text" class="form-control" id="prenom" name="prenom" placeholder="prenom" required>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <div class="form-label-group">-->
+<!--                                <label class="form-label" for="email">Email <i class="required"></i></label>-->
+<!--                            </div>-->
+<!--                            <div class="form-control-wrap">-->
+<!--                                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <label for="role" class="col-md-3 form-label m-0 p-0 pb-2">Rôle</label>-->
+<!--                        <div class="">-->
+<!--                            <select name="role" id="role" class="form-control form-select select2 input-style" data-bs-placeholder="Select Country">-->
+<!--                                <option value="1">Admin</option>-->
+<!--                                <option value="2">Editeur</option>-->
+<!--                                <option value="3">Membre</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div class="form-group">-->
+<!--                            <div class="form-label-group">-->
+<!--                                <label class="form-label" for="phone">Téléphone <i class="required"></i></label>-->
+<!--                            </div>-->
+<!--                            <div class="form-control-wrap">-->
+<!--                                <input type="tel" class="form-control" name="phone" id="phone" value="" required>-->
+<!--                                <input type="hidden"  name="isoPhone" id="isoPhone" value="value="">-->
+<!--                                <input type="hidden"  name="dialPhone" id="dialPhone" value="">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-group text-center">-->
+<!--                            <button class="btn btn-green-transparent"> <i class="load"></i> Ajouter un membre</button>-->
+<!--                            <a href="javascript:void(0);" class="btn btn-red-transparent" data-bs-dismiss="modal">Annuler</a>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!---->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="modal fade" id="modalUpdComment">
             <div class="modal-dialog modal-dialog-centered text-center" role="document">
                 <div class="modal-content modal-content-demo p-5">
@@ -272,7 +324,7 @@ require_once 'layout/foot.php';
 
             $.ajax({
                 method: 'post',
-                url: '<?=$domaine_admin?>/controller/admin.inscription.php',
+                url: '<?=$domaine_admin?>/controller/can.inscription.php',
                 data: form,
                 contentType:false,
                 cache:false,
@@ -285,18 +337,12 @@ require_once 'layout/foot.php';
                         $('.load').html('');
                         $(".reloaded").load(location.href + " .reloaded");
                         swal("Succès !","Le membre a été ajouté avec succès","success");
-                        $('#email').val('');
                         $('#nom').val('');
                         $('#prenom').val('');
                         $('#isoPhone').val('');
                         $('#dialPhone').val('');
                     }else if(data.data_info == 1){
-                        swal("Oups !","Votre adresse email n\'est pas correct !","error");
-                        $('.load').html('');
-
-                    }else if(data.data_info == 2){
-
-                        swal("Oups !","Votre adresse email existe déjà !","error");
+                        swal("Oups !","Ce numéro de téléphone existe déjà !","error");
                         $('.load').html('');
 
                     }else {

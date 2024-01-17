@@ -5,7 +5,7 @@ if(isset($doc[1])){
     $return = $doc[0];
 }
 if(!isset($_SESSION['useraeek'])){
-    header('location:'.$domaine_admin.'/login?return='.$return);
+    header('location:'.$domaine_admin.'/connexion?return='.$return);
     exit();
 }
 require_once 'controller/admin.update.php';

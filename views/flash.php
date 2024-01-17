@@ -8,6 +8,10 @@ if(!isset($_SESSION['useraeek'])){
     header('location:'.$domaine_admin.'/login');
     exit();
 }
+if($_SESSION['useraeek']['role'] == 4){
+    header('location:'.$domaine_admin.'/can-2023');
+    exit();
+}
 //add.categorie
 //categorie.liste
 //delete.categorie

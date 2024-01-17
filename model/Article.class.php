@@ -67,11 +67,35 @@ class Article{
 
     //Count
 
+    public function getAllNbrArticleByUser($id){
+        $query = "SELECT COUNT(*) as nb FROM article
+                   WHERE user_id =:id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+        return $rs;
+    }
+
+    public function getAllNbrArticleByUserAndComment($id){
+        $query = "SELECT COUNT(*) as nb FROM comment
+                  INNER JOIN article  ON id_article = article_id
+                   WHERE user_id =:id";
+        $rs = $this->bdd->prepare($query);
+        $rs->execute(array(
+            "id" => $id
+        ));
+        return $rs;
+    }
+
     public function getAllNbrArticle(){
         $query = "SELECT COUNT(*) as nb FROM article";
         $rs = $this->bdd->query($query);
         return $rs;
     }
+
+
+
 
 //Update
     public function updateArticle($etat,$id){

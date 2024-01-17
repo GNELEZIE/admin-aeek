@@ -9,7 +9,10 @@ if(!isset($_SESSION['useraeek'])){
     exit();
 }
 
-
+if($_SESSION['useraeek']['role'] == 4){
+    header('location:'.$domaine_admin.'/can-2023');
+    exit();
+}
 
 
 $allVis = $compter->getAllVus();

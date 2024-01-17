@@ -8,6 +8,10 @@ if(!isset($_SESSION['useraeek'])){
     header('location:'.$domaine_admin.'/login?return='.$return);
     exit();
 }
+if($_SESSION['useraeek']['role'] == 4){
+    header('location:'.$domaine_admin.'/can-2023');
+    exit();
+}
 if(isset($doc[1]) and !isset($doc[2])) {
 
     $liste = $events->getEventBySlug($doc[1]);

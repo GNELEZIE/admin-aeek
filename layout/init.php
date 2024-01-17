@@ -38,8 +38,9 @@ include_once 'model/Sortie.class.php';
 
 
  if(isset($_COOKIE['aeekcookie']) AND !isset($_SESSION['useraeek'])){
-    $email = my_decrypt($_COOKIE['useraeek']);
-    $result = $admin->getAdminByEmail($email);
+     $onPhone = my_decrypt($_COOKIE['useraeek']);
+     $userPhone = explode('-',$onPhone);
+     $result = $admin->getAdminByPhone($userPhone[1],$userPhone[0]);
     if($data = $result->fetch()){
         if($data['bloquer'] == 1){
             $_SESSION['useraeek'] = $data;

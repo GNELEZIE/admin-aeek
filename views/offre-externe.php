@@ -15,7 +15,10 @@ require_once 'controller/emplois.save.php';
 $token = openssl_random_pseudo_bytes(16);
 $token = bin2hex($token);
 $_SESSION['myformkey'] = $token;
-
+if($_SESSION['useraeek']['role'] == 4){
+    header('location:'.$domaine_admin.'/can-2023');
+    exit();
+}
 require_once 'layout/head.php';
 ?>
 <div class="container mt-5 main-content app-content mt-0" style="margin-left: 260px !important;">

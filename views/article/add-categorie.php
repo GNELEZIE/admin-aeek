@@ -5,9 +5,14 @@ if(isset($doc[1])){
     $return = $doc[0];
 }
 if(!isset($_SESSION['useraeek'])){
-    header('location:'.$domaine_admin.'/login?return='.$return);
+    header('location:'.$domaine_admin.'/connexion?return='.$return);
     exit();
 }
+if($_SESSION['useraeek']['role'] == 4){
+    header('location:'.$domaine_admin.'/can-2023');
+    exit();
+}
+
 //add.categorie
 //categorie.liste
 //delete.categorie

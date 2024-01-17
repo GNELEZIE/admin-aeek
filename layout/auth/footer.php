@@ -11,6 +11,7 @@
 <script src="<?=$asset?>/plugins/p-scroll/perfect-scrollbar.js"></script>
 <script src="<?=$asset?>/js/themeColors.js"></script>
 <script src="<?=$asset?>/js/custom.js"></script>
+<script src="<?=$asset?>/plugins/intltelinput/js/intlTelInput.min.js"></script>
 </body>
 
 </html>

@@ -21,7 +21,18 @@
     <link href="<?=$asset?>/css/skin-modes.css" rel="stylesheet" />
     <link href="<?=$asset?>/css/icons.css" rel="stylesheet" />
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="<?=$asset?>/colors/color1.css" />
+    <link rel="stylesheet" href="<?=$asset?>/plugins/intltelinput/css/intlTelInput.min.css"/>
     <style>
+
+        .inputStyle{
+            height: 40px;
+            border: 2px solid #b7dedd;
+            border-radius: 9px;
+        }
+
+        .iti{
+            width: 100% !important;
+        }
 
         .bgimg2{
             background: url("<?=$assets?>/media/bg-login.jpg") !important;
@@ -48,6 +59,13 @@
             animation: spinner-border .75s linear infinite;
             align-self: center;
         }
+
+        @media(max-width: 767px) {
+            .offset-4 {
+                margin-left: 0 !important;
+            }
+        }
+
     </style>
 </head>
 

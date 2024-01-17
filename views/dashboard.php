@@ -5,11 +5,14 @@ if(isset($doc[1])){
     $return = $doc[0];
 }
 if(!isset($_SESSION['useraeek'])){
-    header('location:'.$domaine_admin.'/login');
+    header('location:'.$domaine_admin.'/connexion');
     exit();
 }
 
-
+if($_SESSION['useraeek']['role'] == 4){
+    header('location:'.$domaine_admin.'/can-2023');
+    exit();
+}
 
 
 $allVis = $compter->getAllVus();
