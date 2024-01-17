@@ -25,6 +25,7 @@ require_once 'layout/head.php';
                         <div class="card">
                             <div class="card-header" style="    border-bottom: 0 !important;">
                                 <h3 class="card-title">CAN 2023</h3>
+                                <a href="<?=$domaine_admin?>/liste" class="btn-transparence-orange" style="padding: 7px 15px; border-radius: 3px;" target="_blank"> <i class="fa fa-print"></i> Imprimer la liste</a>
                             </div>
 
                             <div class="card-body">

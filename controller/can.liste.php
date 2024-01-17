@@ -16,10 +16,10 @@ if(isset($_SESSION['useraeek'])){
                                     </div>';
 
         $arr_list['data'][] = array(
-            date_fr($data['date_reunion']),
+            date_time_fr($data['date_reunion']),
             $nom,
             $data['phone'],
-            html_entity_decode(htmlentities($data['email'])),
+            html_entity_decode(htmlentities($data['ville'])),
             $action
         );
     }
