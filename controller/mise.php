@@ -21,7 +21,7 @@ while($dat = $ve->fetch()){
     if($verif->fetch()){
 
     }else{
-        $password = 'AEKK@2024';
+        $password = 'AEEK@2024';
         $options = ['cost' => 12];
         $mdpCript = password_hash($password,PASSWORD_BCRYPT,$options);
         $idUser = $admin->addCan($date,$dat['nom'],$dat['prenom'],$slug,$dat['phone'],'ci',225,$mdpCript,4,1);

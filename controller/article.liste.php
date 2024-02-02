@@ -32,7 +32,7 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
                                         <a href="javascript:void(0);" id="bDel" type="button" class="btn  btn-sm btn-red-transparent" onclick="supprimer('.$data['id_article'].')">
                                             <span class="fe fe-trash-2"> </span>
                                         </a>
-                                          <a href="'.$domaine.'/show/'.$data['slug'].'" id="bDel" class="btn  btn-sm btn-transparence-info" target="_blank">
+                                          <a href="'.$domaine.'/blog/'.$data['slug'].'" id="bDel" class="btn  btn-sm btn-transparence-info" target="_blank">
                                             <span class="fe fe-eye"> </span>
                                         </a>
                                     </div>';
