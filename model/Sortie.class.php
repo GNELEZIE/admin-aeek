@@ -55,14 +55,14 @@ class Sortie {
 
 
     public function getAllInscript(){
-        $query = "SELECT * FROM sortie ORDER BY id_sortie DESC";
+        $query = "SELECT * FROM sortie WHERE an = 2025  ORDER BY id_sortie DESC";
         $rs = $this->bdd->query($query);
         return $rs;
     }
 
     //Count
     public function getNbrSortie(){
-        $query = "SELECT COUNT(*) as nb FROM sortie";
+        $query = "SELECT COUNT(*) as nb FROM sortie WHERE an = 2025 ";
         $rs = $this->bdd->query($query);
 
         return $rs;

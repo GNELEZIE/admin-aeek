@@ -27,12 +27,12 @@
                     <span class="side-menu__label">Catégorie</span>
                 </a>
             </li>
-            <li>
-                <a class="side-menu__item <?php if($lien == 'vote'){echo 'current';} ;?> <?php if($lien == 'vote-liste'){echo 'current';} ;?>" href="<?=$domaine_admin?>/vote">
-                    <i class="side-menu__icon fe fe-message-square"></i>
-                    <span class="side-menu__label">PRIM'MA</span>
-                </a>
-            </li>
+<!--            <li>-->
+<!--                <a class="side-menu__item --><?php //if($lien == 'vote'){echo 'current';} ;?><!-- --><?php //if($lien == 'vote-liste'){echo 'current';} ;?><!--" href="--><?//=$domaine_admin?><!--/vote">-->
+<!--                    <i class="side-menu__icon fe fe-message-square"></i>-->
+<!--                    <span class="side-menu__label">PRIM'MA</span>-->
+<!--                </a>-->
+<!--            </li>-->
 
             <li>
                 <a class="side-menu__item <?php if($lien == 'tag'){echo 'current';} ;?>" href="<?=$domaine_admin?>/tag"><i class="side-menu__icon fe fe-tag"></i>
@@ -76,18 +76,18 @@
                 </a>
             </li>
             <li>
-                <a class="side-menu__item <?php if($lien == 'can-2023'){echo 'current';} ;?>" href="<?=$domaine_admin?>/can-2023">
+                <a class="side-menu__item <?php if($lien == 'sortie-2025'){echo 'current';} ;?>" href="<?=$domaine_admin?>/sortie-2025">
                     <i class="side-menu__icon fa fa-tv"></i>
-                    <span class="side-menu__label">CAN 2023</span>
+                    <span class="side-menu__label">Sortie 2025</span>
                 </a>
             </li>
 
-            <li>
-                <a class="side-menu__item <?php if($lien == 'can'){echo 'current';} ;?>" href="<?=$domaine_admin?>/can">
-                    <i class="side-menu__icon fa fa-tv"></i>
-                    <span class="side-menu__label">CAN</span>
-                </a>
-            </li>
+<!--            <li>-->
+<!--                <a class="side-menu__item --><?php //if($lien == 'can'){echo 'current';} ;?><!--" href="--><?//=$domaine_admin?><!--/can">-->
+<!--                    <i class="side-menu__icon fa fa-tv"></i>-->
+<!--                    <span class="side-menu__label">CAN</span>-->
+<!--                </a>-->
+<!--            </li>-->
         <?php
         }
         ?>

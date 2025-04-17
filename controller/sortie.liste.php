@@ -13,10 +13,10 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
                                         </a>
                                     </div>';
 
-        if($data['membre'] == 'Oui'){
-            $mbre =  '<a  id="bDel" type="button" class="btn  btn-sm btn-info-transparent">'.$data['membre'].'</a>';
+        if($data['pay'] == 0){
+            $mbre =  '<a  id="bDel" type="button" class="btn  btn-sm btn-red-transparent">Non</a>';
         }else{
-            $mbre =  '<a  id="bDel" type="button" class="btn  btn-sm btn-red-transparent">'.$data['membre'].'</a>';
+            $mbre =  '<a  id="bDel" type="button" class="btn  btn-sm btn-green-transparent">Oui</a>';
         }
 
 
@@ -24,7 +24,6 @@ if(isset($_SESSION['useraeek']) and isset($_SESSION['myformkey']) and isset($_PO
 
 
         $arr_list['data'][] = array(
-            $nbs,
             date_time_fr($data['date_sortie']),
             html_entity_decode(stripslashes($data['nom'])),
             html_entity_decode(stripslashes($data['phone'])),
